@@ -1,0 +1,309 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\ape.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:ape.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\entities\\usuarioperfil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:entities\\usuarioperfil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\entities\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:entities\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\entities\\perfil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:entities\\perfil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\dtos\\usuariosimplesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:dtos\\usuariosimplesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\dtos\\usuarioalteradodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:dtos\\usuarioalteradodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\dtos\\perfildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:dtos\\perfildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\dtos\\novasenhadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:dtos\\novasenhadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\database\\dbape.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:database\\dbape.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\properties\\servicedependencies.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:properties\\servicedependencies.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|c:\\users\\081210009\\pictures\\github\\ape-api\\ape\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{D2EF28AA-6C44-48B9-B16E-2E269E6AB223}|Ape.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Ape",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Ape.csproj",
+              "RelativeDocumentMoniker": "Ape.csproj",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Ape.csproj",
+              "RelativeToolTip": "Ape.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-28T01:10:47.752Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAIwFkAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:28.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-28T01:10:26.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UsuarioPerfil.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Entities\\UsuarioPerfil.cs",
+              "RelativeDocumentMoniker": "Entities\\UsuarioPerfil.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Entities\\UsuarioPerfil.cs",
+              "RelativeToolTip": "Entities\\UsuarioPerfil.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:18.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-28T01:10:17.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Entities\\Usuario.cs",
+              "RelativeDocumentMoniker": "Entities\\Usuario.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Entities\\Usuario.cs",
+              "RelativeToolTip": "Entities\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:16.335Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Perfil.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Entities\\Perfil.cs",
+              "RelativeDocumentMoniker": "Entities\\Perfil.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Entities\\Perfil.cs",
+              "RelativeToolTip": "Entities\\Perfil.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:15.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UsuarioSimplesDto.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\UsuarioSimplesDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UsuarioSimplesDto.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\UsuarioSimplesDto.cs",
+              "RelativeToolTip": "Dtos\\UsuarioSimplesDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:13.104Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UsuarioDto.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\UsuarioDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UsuarioDto.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\UsuarioDto.cs",
+              "RelativeToolTip": "Dtos\\UsuarioDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:12.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UsuarioAlteradoDto.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\UsuarioAlteradoDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\UsuarioAlteradoDto.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\UsuarioAlteradoDto.cs",
+              "RelativeToolTip": "Dtos\\UsuarioAlteradoDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:12.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PerfilDto.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\PerfilDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\PerfilDto.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\PerfilDto.cs",
+              "RelativeToolTip": "Dtos\\PerfilDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:11.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "NovaSenhaDto.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\NovaSenhaDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\NovaSenhaDto.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\NovaSenhaDto.cs",
+              "RelativeToolTip": "Dtos\\NovaSenhaDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:10.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\LoginDto.cs",
+              "RelativeDocumentMoniker": "Dtos\\LoginDto.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Dtos\\LoginDto.cs",
+              "RelativeToolTip": "Dtos\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:09.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "DbApe.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Database\\DbApe.cs",
+              "RelativeDocumentMoniker": "Database\\DbApe.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Database\\DbApe.cs",
+              "RelativeToolTip": "Database\\DbApe.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T01:10:04.808Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "serviceDependencies.json",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Properties\\serviceDependencies.json",
+              "RelativeDocumentMoniker": "Properties\\serviceDependencies.json",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Properties\\serviceDependencies.json",
+              "RelativeToolTip": "Properties\\serviceDependencies.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-28T01:09:56.912Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-28T01:09:54.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "Controllers\\LoginController.cs",
+              "ViewState": "AgIAAOEAAAAAAAAAAAAAAPQAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-28T00:57:19.925Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
