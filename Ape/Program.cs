@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Ape.Database;
 using System.Text;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +56,17 @@ var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings_Ape
 
 builder.Services.AddDbContext<DbApe>(options =>
     options.UseSqlServer(connectionString)); // Configura o DbContext para usar o SQL Server
+
+// Configura a conexão com o MongoDB acessando os dados do banco no AppSettings
+builder.Services.Configure<MongoDbSettings>(
+    builder.Configuration.GetSection("MongoDbSettings"));
+
+builder.Services.AddSingleton<IMongoClient>(s =>
+{
+    var settings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
+    return new MongoClient(settings.ConnectionString);
+});
+
 
 // Configuração do CORS (Cross-Origin Resource Sharing) para permitir requisições de qualquer origem
 builder.Services.AddCors(options =>

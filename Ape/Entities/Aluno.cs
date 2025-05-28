@@ -1,9 +1,9 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
 namespace Ape.Entities
 {
-    public class Usuario
+    public class Aluno
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -11,5 +11,6 @@ namespace Ape.Entities
 
         public string Nome { get; set; }
         public string Email { get; set; }
+        public Personal Personal { get; set; }
     }
 }

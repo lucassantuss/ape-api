@@ -15,6 +15,22 @@
           }
         }
       },
+      "DnsClient/1.6.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.Registry": "5.0.0"
+        },
+        "compile": {
+          "lib/net5.0/DnsClient.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/DnsClient.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
@@ -1381,7 +1397,7 @@
           }
         }
       },
-      "Microsoft.NETCore.Platforms/3.1.0": {
+      "Microsoft.NETCore.Platforms/5.0.0": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -1403,14 +1419,14 @@
           }
         }
       },
-      "Microsoft.Win32.Registry/4.7.0": {
+      "Microsoft.Win32.Registry/5.0.0": {
         "type": "package",
         "dependencies": {
-          "System.Security.AccessControl": "4.7.0",
-          "System.Security.Principal.Windows": "4.7.0"
+          "System.Security.AccessControl": "5.0.0",
+          "System.Security.Principal.Windows": "5.0.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {
+          "ref/netstandard2.0/Microsoft.Win32.Registry.dll": {
             "related": ".xml"
           }
         },
@@ -1420,10 +1436,6 @@
           }
         },
         "runtimeTargets": {
-          "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
-            "assetType": "runtime",
-            "rid": "unix"
-          },
           "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll": {
             "assetType": "runtime",
             "rid": "win"
@@ -1449,6 +1461,67 @@
           "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll": {
             "assetType": "runtime",
             "rid": "win"
+          }
+        }
+      },
+      "MongoDB.Bson/3.4.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "5.0.0"
+        },
+        "compile": {
+          "lib/net6.0/MongoDB.Bson.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/MongoDB.Bson.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MongoDB.Driver/3.4.0": {
+        "type": "package",
+        "dependencies": {
+          "DnsClient": "1.6.1",
+          "Microsoft.Extensions.Logging.Abstractions": "2.0.0",
+          "MongoDB.Bson": "3.4.0",
+          "SharpCompress": "0.30.1",
+          "Snappier": "1.0.0",
+          "System.Buffers": "4.5.1",
+          "ZstdSharp.Port": "0.7.3"
+        },
+        "compile": {
+          "lib/net6.0/MongoDB.Driver.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/MongoDB.Driver.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "SharpCompress/0.30.1": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/SharpCompress.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/SharpCompress.dll": {}
+        }
+      },
+      "Snappier/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Snappier.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Snappier.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -1725,14 +1798,14 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "System.Security.AccessControl/4.7.0": {
+      "System.Security.AccessControl/5.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "3.1.0",
-          "System.Security.Principal.Windows": "4.7.0"
+          "Microsoft.NETCore.Platforms": "5.0.0",
+          "System.Security.Principal.Windows": "5.0.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {
+          "ref/netstandard2.0/System.Security.AccessControl.dll": {
             "related": ".xml"
           }
         },
@@ -1926,6 +1999,15 @@
             "rid": "win"
           }
         }
+      },
+      "ZstdSharp.Port/0.7.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/ZstdSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/ZstdSharp.dll": {}
+        }
       }
     }
   },
@@ -1959,6 +2041,30 @@
         "lib/netstandard2.1/BCrypt.Net-Next.dll",
         "lib/netstandard2.1/BCrypt.Net-Next.xml",
         "readme.md"
+      ]
+    },
+    "DnsClient/1.6.1": {
+      "sha512": "4H/f2uYJOZ+YObZjpY9ABrKZI+JNw3uizp6oMzTXwDw6F+2qIPhpRl/1t68O/6e98+vqNiYGu+lswmwdYUy3gg==",
+      "type": "package",
+      "path": "dnsclient/1.6.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dnsclient.1.6.1.nupkg.sha512",
+        "dnsclient.nuspec",
+        "icon.png",
+        "lib/net45/DnsClient.dll",
+        "lib/net45/DnsClient.xml",
+        "lib/net471/DnsClient.dll",
+        "lib/net471/DnsClient.xml",
+        "lib/net5.0/DnsClient.dll",
+        "lib/net5.0/DnsClient.xml",
+        "lib/netstandard1.3/DnsClient.dll",
+        "lib/netstandard1.3/DnsClient.xml",
+        "lib/netstandard2.0/DnsClient.dll",
+        "lib/netstandard2.0/DnsClient.xml",
+        "lib/netstandard2.1/DnsClient.dll",
+        "lib/netstandard2.1/DnsClient.xml"
       ]
     },
     "Humanizer.Core/2.8.26": {
@@ -3842,17 +3948,18 @@
         "microsoft.net.http.headers.nuspec"
       ]
     },
-    "Microsoft.NETCore.Platforms/3.1.0": {
-      "sha512": "z7aeg8oHln2CuNulfhiLYxCVMPEwBl3rzicjvIX+4sUuCwvXw5oXQEtbiU2c0z4qYL5L3Kmx0mMA/+t/SbY67w==",
+    "Microsoft.NETCore.Platforms/5.0.0": {
+      "sha512": "VyPlqzH2wavqquTcYpkIIAQ6WdenuKoFN0BdYBbCWsclXacSOHNQn66Gt4z5NBqEYW0FAPm5rlvki9ZiCij5xQ==",
       "type": "package",
-      "path": "microsoft.netcore.platforms/3.1.0",
+      "path": "microsoft.netcore.platforms/5.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+        "microsoft.netcore.platforms.5.0.0.nupkg.sha512",
         "microsoft.netcore.platforms.nuspec",
         "runtime.json",
         "useSharedDesignerContext.txt",
@@ -3876,13 +3983,14 @@
         "microsoft.openapi.nuspec"
       ]
     },
-    "Microsoft.Win32.Registry/4.7.0": {
-      "sha512": "KSrRMb5vNi0CWSGG1++id2ZOs/1QhRqROt+qgbEAdQuGjGrFcl4AOl4/exGPUYz2wUnU42nvJqon1T3U0kPXLA==",
+    "Microsoft.Win32.Registry/5.0.0": {
+      "sha512": "dDoKi0PnDz31yAyETfRntsLArTlVAVzUzCIvvEDsDsucrl33Dl8pIJG06ePTJTI3tGpeyHS9Cq7Foc/s4EeKcg==",
       "type": "package",
-      "path": "microsoft.win32.registry/4.7.0",
+      "path": "microsoft.win32.registry/5.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net46/Microsoft.Win32.Registry.dll",
@@ -3891,13 +3999,11 @@
         "lib/netstandard1.3/Microsoft.Win32.Registry.dll",
         "lib/netstandard2.0/Microsoft.Win32.Registry.dll",
         "lib/netstandard2.0/Microsoft.Win32.Registry.xml",
-        "microsoft.win32.registry.4.7.0.nupkg.sha512",
+        "microsoft.win32.registry.5.0.0.nupkg.sha512",
         "microsoft.win32.registry.nuspec",
         "ref/net46/Microsoft.Win32.Registry.dll",
         "ref/net461/Microsoft.Win32.Registry.dll",
         "ref/net461/Microsoft.Win32.Registry.xml",
-        "ref/net472/Microsoft.Win32.Registry.dll",
-        "ref/net472/Microsoft.Win32.Registry.xml",
         "ref/netstandard1.3/Microsoft.Win32.Registry.dll",
         "ref/netstandard1.3/Microsoft.Win32.Registry.xml",
         "ref/netstandard1.3/de/Microsoft.Win32.Registry.xml",
@@ -3911,8 +4017,6 @@
         "ref/netstandard1.3/zh-hant/Microsoft.Win32.Registry.xml",
         "ref/netstandard2.0/Microsoft.Win32.Registry.dll",
         "ref/netstandard2.0/Microsoft.Win32.Registry.xml",
-        "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
-        "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.xml",
         "runtimes/win/lib/net46/Microsoft.Win32.Registry.dll",
         "runtimes/win/lib/net461/Microsoft.Win32.Registry.dll",
         "runtimes/win/lib/net461/Microsoft.Win32.Registry.xml",
@@ -3950,6 +4054,80 @@
         "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "MongoDB.Bson/3.4.0": {
+      "sha512": "0fBbXqO/ADhWLcgq0cUNizcKEFAuz5klxUc5CWTWV8vdnlOl5QTeAI7Kh64bCoz654ZN7WWOjz9WRw0QGHcqQA==",
+      "type": "package",
+      "path": "mongodb.bson/3.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net472/MongoDB.Bson.dll",
+        "lib/net472/MongoDB.Bson.xml",
+        "lib/net6.0/MongoDB.Bson.dll",
+        "lib/net6.0/MongoDB.Bson.xml",
+        "lib/netstandard2.1/MongoDB.Bson.dll",
+        "lib/netstandard2.1/MongoDB.Bson.xml",
+        "mongodb.bson.3.4.0.nupkg.sha512",
+        "mongodb.bson.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "MongoDB.Driver/3.4.0": {
+      "sha512": "+8vGdlbbzfPfQzCI00nPX59vH+5Nfumb2lyXf7xdIcAa05JPBdXFc/vWw0rPQOqIWYWfTmvQsxUgUXyzk0AKGw==",
+      "type": "package",
+      "path": "mongodb.driver/3.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net472/MongoDB.Driver.dll",
+        "lib/net472/MongoDB.Driver.xml",
+        "lib/net6.0/MongoDB.Driver.dll",
+        "lib/net6.0/MongoDB.Driver.xml",
+        "lib/netstandard2.1/MongoDB.Driver.dll",
+        "lib/netstandard2.1/MongoDB.Driver.xml",
+        "mongodb.driver.3.4.0.nupkg.sha512",
+        "mongodb.driver.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "SharpCompress/0.30.1": {
+      "sha512": "XqD4TpfyYGa7QTPzaGlMVbcecKnXy4YmYLDWrU+JIj7IuRNl7DH2END+Ll7ekWIY8o3dAMWLFDE1xdhfIWD1nw==",
+      "type": "package",
+      "path": "sharpcompress/0.30.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/SharpCompress.dll",
+        "lib/net5.0/SharpCompress.dll",
+        "lib/netcoreapp3.1/SharpCompress.dll",
+        "lib/netstandard2.0/SharpCompress.dll",
+        "lib/netstandard2.1/SharpCompress.dll",
+        "sharpcompress.0.30.1.nupkg.sha512",
+        "sharpcompress.nuspec"
+      ]
+    },
+    "Snappier/1.0.0": {
+      "sha512": "rFtK2KEI9hIe8gtx3a0YDXdHOpedIf9wYCEYtBEmtlyiWVX3XlCNV03JrmmAi/Cdfn7dxK+k0sjjcLv4fpHnqA==",
+      "type": "package",
+      "path": "snappier/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "COPYING.txt",
+        "lib/net5.0/Snappier.dll",
+        "lib/net5.0/Snappier.xml",
+        "lib/netcoreapp3.0/Snappier.dll",
+        "lib/netcoreapp3.0/Snappier.xml",
+        "lib/netstandard2.0/Snappier.dll",
+        "lib/netstandard2.0/Snappier.xml",
+        "lib/netstandard2.1/Snappier.dll",
+        "lib/netstandard2.1/Snappier.xml",
+        "snappier.1.0.0.nupkg.sha512",
+        "snappier.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/6.5.0": {
@@ -4383,13 +4561,14 @@
         "system.runtime.compilerservices.unsafe.nuspec"
       ]
     },
-    "System.Security.AccessControl/4.7.0": {
-      "sha512": "JECvTt5aFF3WT3gHpfofL2MNNP6v84sxtXxpqhLBCcDRzqsPBmHhQ6shv4DwwN2tRlzsUxtb3G9M3763rbXKDg==",
+    "System.Security.AccessControl/5.0.0": {
+      "sha512": "dagJ1mHZO3Ani8GH0PHpPEe/oYO+rVdbQjvjJkBRNQkX4t0r1iaeGn8+/ybkSLEan3/slM0t59SVdHzuHf2jmw==",
       "type": "package",
-      "path": "system.security.accesscontrol/4.7.0",
+      "path": "system.security.accesscontrol/5.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/net46/System.Security.AccessControl.dll",
@@ -4423,7 +4602,7 @@
         "runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.xml",
         "runtimes/win/lib/netstandard1.3/System.Security.AccessControl.dll",
         "runtimes/win/lib/uap10.0.16299/_._",
-        "system.security.accesscontrol.4.7.0.nupkg.sha512",
+        "system.security.accesscontrol.5.0.0.nupkg.sha512",
         "system.security.accesscontrol.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -4825,6 +5004,24 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "ZstdSharp.Port/0.7.3": {
+      "sha512": "U9Ix4l4cl58Kzz1rJzj5hoVTjmbx1qGMwzAcbv1j/d3NzrFaESIurQyg+ow4mivCgkE3S413y+U9k4WdnEIkRA==",
+      "type": "package",
+      "path": "zstdsharp.port/0.7.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/ZstdSharp.dll",
+        "lib/net5.0/ZstdSharp.dll",
+        "lib/net6.0/ZstdSharp.dll",
+        "lib/net7.0/ZstdSharp.dll",
+        "lib/netcoreapp3.1/ZstdSharp.dll",
+        "lib/netstandard2.0/ZstdSharp.dll",
+        "lib/netstandard2.1/ZstdSharp.dll",
+        "zstdsharp.port.0.7.3.nupkg.sha512",
+        "zstdsharp.port.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
@@ -4836,28 +5033,29 @@
       "Microsoft.EntityFrameworkCore.InMemory >= 6.0.33",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.33",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.33",
+      "MongoDB.Driver >= 3.4.0",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "System.IdentityModel.Tokens.Jwt >= 6.36.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\081210009\\.nuget\\packages\\": {},
+    "C:\\Users\\Johns\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Ape.csproj",
+      "projectUniqueName": "C:\\Users\\Johns\\Documents\\Faculdade\\TCC\\ape-api\\Ape\\Ape.csproj",
       "projectName": "Ape",
-      "projectPath": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\Ape.csproj",
-      "packagesPath": "C:\\Users\\081210009\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\081210009\\Pictures\\GITHUB\\ape-api\\Ape\\obj\\",
+      "projectPath": "C:\\Users\\Johns\\Documents\\Faculdade\\TCC\\ape-api\\Ape\\Ape.csproj",
+      "packagesPath": "C:\\Users\\Johns\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Johns\\Documents\\Faculdade\\TCC\\ape-api\\Ape\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\081210009\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Johns\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4866,7 +5064,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4884,7 +5081,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net6.0": {
@@ -4920,6 +5118,10 @@
             "target": "Package",
             "version": "[6.0.33, )"
           },
+          "MongoDB.Driver": {
+            "target": "Package",
+            "version": "[3.4.0, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.5.0, )"
@@ -4940,24 +5142,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.36, 6.0.36]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[6.0.36, 6.0.36]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.36, 6.0.36]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.36, 6.0.36]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4966,7 +5150,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
