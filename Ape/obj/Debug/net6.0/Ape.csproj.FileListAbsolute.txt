@@ -212,3 +212,9 @@ C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\obj\Debug\net6.0\refint\Ape.d
 C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\obj\Debug\net6.0\Ape.pdb
 C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\obj\Debug\net6.0\Ape.genruntimeconfig.cache
 C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\obj\Debug\net6.0\ref\Ape.dll
+C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\bin\Debug\net6.0\DnsClient.dll
+C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\bin\Debug\net6.0\MongoDB.Bson.dll
+C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\bin\Debug\net6.0\MongoDB.Driver.dll
+C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\bin\Debug\net6.0\SharpCompress.dll
+C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\bin\Debug\net6.0\Snappier.dll
+C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\bin\Debug\net6.0\ZstdSharp.dll
