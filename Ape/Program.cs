@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -5,6 +6,8 @@ using Microsoft.OpenApi.Models;
 using Ape.Database;
 using System.Text;
 using MongoDB.Driver;
+using Ape.Entity;
+using Ape.Bll;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,19 +57,50 @@ builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1.0", new OpenApiInfo { Tit
 var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings_Ape")
     ?? builder.Configuration.GetConnectionString("Ape");
 
-builder.Services.AddDbContext<DbApe>(options =>
-    options.UseSqlServer(connectionString)); // Configura o DbContext para usar o SQL Server
+// builder.Services.AddDbContext<DbApe>(options => options.UseSqlServer(connectionString)); // Configura o DbContext para usar o SQL Server
 
-// Configura a conexão com o MongoDB acessando os dados do banco no AppSettings
-builder.Services.Configure<MongoDbSettings>(
-    builder.Configuration.GetSection("MongoDbSettings"));
-
-builder.Services.AddSingleton<IMongoClient>(s =>
+// Adiciona o user-secrets apenas em ambiente de DESENVOLVIMENTO
+// Comandos:
+// dotnet user-secrets init
+// dotnet user-secrets set "MongoDB:ConnectionString" "inserir-string-de-conexao-do-mongoDB"
+// dotnet user-secrets set "MongoDB:Database" "inserir-db-mongoDB" 
+if (builder.Environment.IsDevelopment())
 {
-    var settings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
+    builder.Configuration.AddUserSecrets<Program>();
+}
+
+// Carregar configurações do appsettings.json // variáveis de ambiente
+builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
+
+// MongoClient singleton
+builder.Services.AddSingleton<MongoClient>(sp =>
+{
+    var settings = sp.GetRequiredService<IOptions<MongoDBSettings>>().Value;
     return new MongoClient(settings.ConnectionString);
 });
 
+// Banco de dados
+builder.Services.AddSingleton(sp =>
+{
+    var settings = sp.GetRequiredService<IOptions<MongoDBSettings>>().Value;
+    var client = sp.GetRequiredService<MongoClient>();
+    return client.GetDatabase(settings.Database);
+});
+
+// Injeção das Coleções
+builder.Services.AddSingleton<IMongoCollection<Personal>>(sp =>
+    sp.GetRequiredService<IMongoDatabase>().GetCollection<Personal>("collection_personal"));
+
+builder.Services.AddSingleton<IMongoCollection<Aluno>>(sp =>
+    sp.GetRequiredService<IMongoDatabase>().GetCollection<Aluno>("collection_aluno"));
+
+builder.Services.AddSingleton<IMongoCollection<Exercicio>>(sp =>
+    sp.GetRequiredService<IMongoDatabase>().GetCollection<Exercicio>("collection_exercicio"));
+
+// Serviços
+builder.Services.AddSingleton<AlunoBll>();
+builder.Services.AddSingleton<ExercicioBll>();
+builder.Services.AddSingleton<PersonalBll>();
 
 // Configuração do CORS (Cross-Origin Resource Sharing) para permitir requisições de qualquer origem
 builder.Services.AddCors(options =>

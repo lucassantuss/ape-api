@@ -1,4 +1,4 @@
-﻿namespace Ape.Entities
+﻿namespace Ape.Entity
 {
     public class Exercicio
     {

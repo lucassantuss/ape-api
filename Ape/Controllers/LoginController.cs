@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Ape.Database;
 using Ape.Dtos;
-using Ape.Entities;
+using Ape.Entity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
+using Ape.Bll;
 
 namespace Ape.Controllers
 {
@@ -18,27 +19,36 @@ namespace Ape.Controllers
         #region Variáveis e Construtor
 
         // Campos privados que armazenam a instância do banco de dados e as configurações
-        private readonly DbApe _dbApe;
-        private readonly IConfiguration _configuration;
+        private readonly ILogger<LoginController> logger;
+        private readonly PersonalBll personalBll;
 
         // Construtor da controller que injeta as dependências de configuração e contexto do banco
-        public LoginController(IConfiguration configuration, DbApe context)
+        public LoginController(ILogger<LoginController> _logger, PersonalBll _personalBll)
         {
-            _configuration = configuration;
-            _dbApe = context;
+            logger = _logger;
+            personalBll = _personalBll;
         }
 
         #endregion
 
         #region Login
 
-        [HttpGet]
-        public IActionResult Entrar(string username, string password, string tipo)
+        [HttpPost("Entrar")]
+        public IActionResult Entrar([FromBody] LoginDto login)
         {
-            if(username == "cr7")
+            if (login.Usuario == "cr7")
                 return Ok();
             else
                 return NotFound();
+
+            if(login.TipoUsuario == "aluno")
+            {
+
+            }
+            else if(login.TipoUsuario == "personal")
+            {
+
+            }
         }
 
         #endregion

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ape.Entities
+namespace Ape.Entity
 {
     [Table("UsuarioPerfil", Schema = "acesso")]
     public class UsuarioPerfil

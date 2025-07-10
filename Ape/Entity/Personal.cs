@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace Ape.Entities
+namespace Ape.Entity
 {
     public class Personal
     {

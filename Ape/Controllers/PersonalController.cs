@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Ape.Database;
 using Ape.Dtos;
-using Ape.Entities;
+using Ape.Entity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
 using MongoDB.Driver;
-using Microsoft.EntityFrameworkCore;
+using Ape.Bll;
 
 namespace Ape.Controllers
 {
@@ -18,14 +18,14 @@ namespace Ape.Controllers
     public class PersonalController : ControllerBase
     {
         #region Variáveis e Construtor
-
-        // Campos privados que armazenam a instância do banco de dados
-        private readonly MongoDbContext dbApe;
+        private readonly ILogger<PersonalController> logger;
+        private readonly PersonalBll personalBll;
 
         // Construtor da controller que injeta as dependências de configuração e contexto do banco
-        public PersonalController(MongoDbContext dbApe)
+        public PersonalController(ILogger<PersonalController> _logger, PersonalBll _personalBll)
         {
-            this.dbApe = dbApe;
+            logger = _logger;
+            personalBll = _personalBll;
         }
 
         #endregion
@@ -36,97 +36,97 @@ namespace Ape.Controllers
 
         #region Pesquisa Personal
 
-        [HttpGet("PesquisarPersonal")]
-        public ActionResult<List<Personal>> PesquisarPersonal(Personal personal)
-        {
-            try
-            {
-                if (personal.Nome != null)
-                {
-                    return dbApe.Personal.Find(personal.Nome).ToList();
-                }
-                return dbApe.Personal.Find(_ => true).ToList();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        //[HttpGet("PesquisarPersonal")]
+        //public ActionResult<List<Personal>> PesquisarPersonal(Personal personal)
+        //{
+        //    try
+        //    {
+        //        if (personal.Nome != null)
+        //        {
+        //            return dbApe.Personal.Find(personal.Nome).ToList();
+        //        }
+        //        return dbApe.Personal.Find(_ => true).ToList();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
 
         #endregion
 
-        [HttpGet("PesquisarPersonalPorId/{id}")]
-        public ActionResult<Personal> PesquisarPersonalPorId(string id)
-        {
-            try
-            {
-                Personal personal = dbApe.Personal.Find(p => p.Id == id).FirstOrDefault();
-                if (personal == null)
-                    return NotFound("Personal não encontrado.");
-                else
-                    return personal;
-            }
-            catch(Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        //[HttpGet("PesquisarPersonalPorId/{id}")]
+        //public ActionResult<Personal> PesquisarPersonalPorId(string id)
+        //{
+        //    try
+        //    {
+        //        Personal personal = dbApe.Personal.Find(p => p.Id == id).FirstOrDefault();
+        //        if (personal == null)
+        //            return NotFound("Personal não encontrado.");
+        //        else
+        //            return personal;
+        //    }
+        //    catch(Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
 
-        [HttpPost("CriarPersonal")]
-        public ActionResult<Personal> CriarPersonal(Personal personal)
-        {
-            try
-            {
-                dbApe.Personal.InsertOne(personal);
-                return CreatedAtAction(nameof(PesquisarPersonalPorId), new { id = personal.Id }, personal);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        //[HttpPost("CriarPersonal")]
+        //public ActionResult<Personal> CriarPersonal(Personal personal)
+        //{
+        //    try
+        //    {
+        //        dbApe.Personal.InsertOne(personal);
+        //        return CreatedAtAction(nameof(PesquisarPersonalPorId), new { id = personal.Id }, personal);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
 
-        [HttpPut("AtualizarPersonal")]
-        public ActionResult AtualizarPersonal(Personal dtoPersonal)
-        {
-            try
-            {
-                Personal personal = dbApe.Personal.Find(dtoPersonal.Id).FirstOrDefault();
-                if(personal == null)
-                    return NotFound("Personal não encontrado.");
-                else
-                {
-                    dbApe.Personal.ReplaceOne(p => p.Id == dtoPersonal.Id, dtoPersonal);
-                    return NoContent();
-                }
+        //[HttpPut("AtualizarPersonal")]
+        //public ActionResult AtualizarPersonal(Personal dtoPersonal)
+        //{
+        //    try
+        //    {
+        //        Personal personal = dbApe.Personal.Find(dtoPersonal.Id).FirstOrDefault();
+        //        if(personal == null)
+        //            return NotFound("Personal não encontrado.");
+        //        else
+        //        {
+        //            dbApe.Personal.ReplaceOne(p => p.Id == dtoPersonal.Id, dtoPersonal);
+        //            return NoContent();
+        //        }
 
-            }
-            catch(Exception e)
-            {
-                throw new Exception(e.Message);
-            }       
-        }
+        //    }
+        //    catch(Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }       
+        //}
 
-        [HttpDelete("DeletarPersonal")]
-        public ActionResult DeletarPersonal(Personal dtoPersonal)
-        {
-            try
-            {
-                Personal personal = dbApe.Personal.Find(dtoPersonal.Id).FirstOrDefault();
-                if (personal == null)
-                    return NotFound("Personal não encontrado.");
-                else
-                {
-                    dbApe.Personal.DeleteOne(p => p.Id == dtoPersonal.Id);
-                    return NoContent();
-                }
+        //[HttpDelete("DeletarPersonal")]
+        //public ActionResult DeletarPersonal(Personal dtoPersonal)
+        //{
+        //    try
+        //    {
+        //        Personal personal = dbApe.Personal.Find(dtoPersonal.Id).FirstOrDefault();
+        //        if (personal == null)
+        //            return NotFound("Personal não encontrado.");
+        //        else
+        //        {
+        //            dbApe.Personal.DeleteOne(p => p.Id == dtoPersonal.Id);
+        //            return NoContent();
+        //        }
 
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
 
         #endregion
 

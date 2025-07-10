@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Ape.Database;
 using Ape.Dtos;
-using Ape.Entities;
+using Ape.Entity;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
 using MongoDB.Driver;
 using Microsoft.EntityFrameworkCore;
+using Ape.Bll;
 
 namespace Ape.Controllers
 {
@@ -18,14 +19,14 @@ namespace Ape.Controllers
     public class AlunoController : ControllerBase
     {
         #region Variáveis e Construtor
-
-        // Campos privados que armazenam a instância do banco de dados
-        private readonly MongoDbContext dbApe;
+        private readonly ILogger<AlunoController> logger;
+        private readonly AlunoBll alunoBll;
 
         // Construtor da controller que injeta as dependências de configuração e contexto do banco
-        public AlunoController(MongoDbContext dbApe)
+        public AlunoController(ILogger<AlunoController> _logger, AlunoBll _alunoBll)
         {
-            this.dbApe = dbApe;
+            logger = _logger;
+            alunoBll = _alunoBll;
         }
 
         #endregion
@@ -55,78 +56,78 @@ namespace Ape.Controllers
 
         #endregion
 
-        [HttpGet("PesquisarAlunoPorId/{id}")]
-        public ActionResult<Aluno> PesquisarAlunoPorId(string id)
-        {
-            try
-            {
-                Aluno Aluno = dbApe.Aluno.Find(p => p.Id == id).FirstOrDefault();
-                if (Aluno == null)
-                    return NotFound("Aluno não encontrado.");
-                else
-                    return Aluno;
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        //[HttpGet("PesquisarAlunoPorId/{id}")]
+        //public ActionResult<Aluno> PesquisarAlunoPorId(string id)
+        //{
+        //    try
+        //    {
+        //        Aluno Aluno = dbApe.Aluno.Find(p => p.Id == id).FirstOrDefault();
+        //        if (Aluno == null)
+        //            return NotFound("Aluno não encontrado.");
+        //        else
+        //            return Aluno;
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
 
-        [HttpPost("CriarAluno")]
-        public ActionResult<Aluno> CriarAluno(Aluno Aluno)
-        {
-            try
-            {
-                dbApe.Aluno.InsertOne(Aluno);
-                return CreatedAtAction(nameof(PesquisarAlunoPorId), new { id = Aluno.Id }, Aluno);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        //[HttpPost("CriarAluno")]
+        //public ActionResult<Aluno> CriarAluno(Aluno Aluno)
+        //{
+        //    try
+        //    {
+        //        dbApe.Aluno.InsertOne(Aluno);
+        //        return CreatedAtAction(nameof(PesquisarAlunoPorId), new { id = Aluno.Id }, Aluno);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
 
-        [HttpPut("AtualizarAluno")]
-        public ActionResult AtualizarAluno(Aluno dtoAluno)
-        {
-            try
-            {
-                Aluno Aluno = dbApe.Aluno.Find(dtoAluno.Id).FirstOrDefault();
-                if (Aluno == null)
-                    return NotFound("Aluno não encontrado.");
-                else
-                {
-                    dbApe.Aluno.ReplaceOne(p => p.Id == dtoAluno.Id, dtoAluno);
-                    return NoContent();
-                }
+        //[HttpPut("AtualizarAluno")]
+        //public ActionResult AtualizarAluno(Aluno dtoAluno)
+        //{
+        //    try
+        //    {
+        //        Aluno Aluno = dbApe.Aluno.Find(dtoAluno.Id).FirstOrDefault();
+        //        if (Aluno == null)
+        //            return NotFound("Aluno não encontrado.");
+        //        else
+        //        {
+        //            dbApe.Aluno.ReplaceOne(p => p.Id == dtoAluno.Id, dtoAluno);
+        //            return NoContent();
+        //        }
 
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
 
-        [HttpDelete("DeletarAluno")]
-        public ActionResult DeletarAluno(Aluno dtoAluno)
-        {
-            try
-            {
-                Aluno Aluno = dbApe.Aluno.Find(dtoAluno.Id).FirstOrDefault();
-                if (Aluno == null)
-                    return NotFound("Aluno não encontrado.");
-                else
-                {
-                    dbApe.Aluno.DeleteOne(p => p.Id == dtoAluno.Id);
-                    return NoContent();
-                }
+        //[HttpDelete("DeletarAluno")]
+        //public ActionResult DeletarAluno(Aluno dtoAluno)
+        //{
+        //    try
+        //    {
+        //        Aluno Aluno = dbApe.Aluno.Find(dtoAluno.Id).FirstOrDefault();
+        //        if (Aluno == null)
+        //            return NotFound("Aluno não encontrado.");
+        //        else
+        //        {
+        //            dbApe.Aluno.DeleteOne(p => p.Id == dtoAluno.Id);
+        //            return NoContent();
+        //        }
 
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //}
 
         #endregion
 
