@@ -40,18 +40,7 @@ namespace Ape.Controllers
         [HttpGet("PesquisarAluno")]
         public ActionResult<List<Aluno>> PesquisarAluno(Aluno Aluno)
         {
-            try
-            {
-                if (Aluno.Nome != null)
-                {
-                    return dbApe.Aluno.Find(Aluno.Nome).ToList();
-                }
-                return dbApe.Aluno.Find(_ => true).ToList();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            return new List<Aluno>();
         }
 
         #endregion
