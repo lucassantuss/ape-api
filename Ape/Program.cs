@@ -111,7 +111,7 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("http://localhost:3000",
                            "http://localhost:5288",
                            "https://ape-web.vercel.app",
-                           "https://ape.azurewebsites.net",
+                           "https://ape-api.azurewebsites.net/",
                            "https://ape-dev.azurewebsites.net/")
               .AllowAnyMethod()
               .AllowAnyHeader()

@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: PRD - Build and deploy ASP.Net Core app to Azure Web App - APE
+name: APE PRD - Build and deploy ASP.Net Core app to Azure Web App
 
 on:
   push:
@@ -14,20 +11,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Set up .NET Core
+      - name: Configurar .NET 6
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
 
-      - name: Build with dotnet
+      - name: Build do projeto
         run: dotnet build Ape/Ape.csproj --configuration Release
 
-      - name: dotnet publish
+      - name: Publicar artefatos
         run: dotnet publish Ape/Ape.csproj -c Release -o ape
 
-      - name: Upload artifact for deployment job
+      - name: Upload dos artefatos para job de deploy
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
@@ -43,16 +41,21 @@ jobs:
       id-token: write
 
     steps:
-      - name: Download artifact from build job
+      - name: Baixar artefatos do build
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
-      - name: Deploy to Azure Web App
+
+      - name: Login no Azure com OIDC
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_6D5627D5066040F7AFB2F4DD2DEBEEBD }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CACA0AAC479F466BA77E8FFFE2D326F2 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6189CFB15F414C01B249D44427952D92 }}
+
+      - name: Deploy no Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'ape'
-          slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0D984D5BC37E43AA9DFEA450090C2E04 }}
