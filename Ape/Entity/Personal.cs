@@ -18,16 +18,19 @@ namespace Ape.Entity
         [BsonElement("Email")]
         public string Email { get; set; }
 
+        [BsonElement("Senha")]
+        public string Senha { get; set; }
+
         [BsonElement("CPF")]
         public string CPF { get; set; }
 
-        [BsonElement("Cidade")]
-        public string Cidade { get; set; }
+        [BsonElement("CREF")]
+        public string CREF { get; set; }
 
         [BsonElement("Estado")]
         public string Estado { get; set; }
 
-        [BsonElement("CREF")]
-        public string CREF { get; set; }
+        [BsonElement("Cidade")]
+        public string Cidade { get; set; }
     }
 }

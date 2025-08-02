@@ -38,9 +38,41 @@ namespace Ape.Controllers
         #region Pesquisa Aluno
 
         [HttpGet("PesquisarAluno")]
-        public ActionResult<List<Aluno>> PesquisarAluno(Aluno Aluno)
+        public ActionResult<List<Aluno>> PesquisarAluno(AlunoDto alunoDto)
         {
-            return new List<Aluno>();
+            List<Aluno> aluno = new List<Aluno>();
+            if (alunoDto == null)
+                aluno = alunoBll.PesquisarAluno(alunoDto);
+            return aluno;
+        }
+
+        #endregion
+
+        #region Criar Aluno
+
+        [HttpPost("CriarAluno")]
+        public RetornoAcaoDto CriarAluno([FromBody] AlunoDto alunoDto)
+        {
+            Console.WriteLine("passei aqui!!!!!!!");
+            try
+            {
+                RetornoAcaoDto retorno = new RetornoAcaoDto();
+                if (alunoDto != null)
+                {
+                    alunoBll.CriarAluno(alunoDto);
+                }
+                else
+                {
+                    retorno.Mensagem = "Falha ao criar o usuário";
+                    retorno.Sucesso = false;
+                }
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao criar aluno: " + ex.Message);
+                throw new Exception(ex.Message);
+            }
         }
 
         #endregion

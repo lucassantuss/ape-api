@@ -16,12 +16,12 @@ namespace Ape.Bll
             client = new HttpClient();
         }
 
-        public Aluno PesquisarAluno(AlunoDto alunoDto)
+        public List<Aluno> PesquisarAluno(AlunoDto alunoDto)
         {
             try
             {
-                Aluno aluno = new Aluno();
-                aluno = database.Find(f => f.Usuario == alunoDto.Usuario).FirstOrDefault();
+                List<Aluno> aluno = new List<Aluno>();
+                aluno = database.Find(f => f.Usuario == alunoDto.Usuario).ToList();
                 return aluno;
             }
             catch(Exception erro)
@@ -35,7 +35,7 @@ namespace Ape.Bll
             try
             {
                 RetornoAcaoDto retorno = new RetornoAcaoDto();
-                Aluno aluno = database.Find(f => f.Usuario == alunoDto.Usuario && f.Senha == alunoDto.Senha).FirstOrDefault();
+                Aluno aluno = database.Find(f => (f.Usuario == alunoDto.Usuario || f.Email == alunoDto.Email) && f.Senha == alunoDto.Senha).FirstOrDefault();
                 if(aluno != null)
                 {
                     retorno.Mensagem = "Acesso autorizado!";
@@ -52,24 +52,21 @@ namespace Ape.Bll
             {
                 throw new Exception(erro.Message);
             }
-        }
+        }  
 
+        // TESTAR METODO DE CRIAÇÃO PARA O ALUNO E FINALZIAR O PERSONAL
         public RetornoAcaoDto CriarAluno(AlunoDto alunoDto)
         {
             RetornoAcaoDto retorno = new RetornoAcaoDto();
             try
             {
-                Aluno aluno = database.Find(u => u.Usuario == alunoDto.Usuario && u.Email == alunoDto.Email).FirstOrDefault();
-                if (aluno == null)
+                Aluno aluno = ConverterAlunoDto(alunoDto);
+                RetornoAcaoDto validaCadastro = ValidarCadastro(aluno);
+                if (validaCadastro.Sucesso)
                 {
                     database.InsertOne(aluno);
                     retorno.Mensagem = "Aluno criado com sucesso";
                     retorno.Sucesso = true;
-                }
-                else
-                {
-                    retorno.Mensagem = "Aluno já existente";
-                    retorno.Sucesso = false;
                 }
                 return retorno;
             }
@@ -88,6 +85,7 @@ namespace Ape.Bll
             entidade.Nome = dto.Nome;
             entidade.Usuario = dto.Usuario;
             entidade.Email = dto.Email;
+            entidade.CPF = dto.CPF;
             entidade.Senha = dto.Senha;
             entidade.Personal = dto.Personal;
             return entidade;
@@ -101,9 +99,49 @@ namespace Ape.Bll
             dto.Nome = entidade.Nome;
             dto.Usuario = entidade.Usuario;
             dto.Email = entidade.Email;
+            dto.CPF = entidade.CPF;
             dto.Senha = entidade.Senha;
             dto.Personal = entidade.Personal;
             return dto;
+        }
+
+        private RetornoAcaoDto ValidarCadastro(Aluno aluno)
+        {
+            try
+            {
+                RetornoAcaoDto retorno = new RetornoAcaoDto();
+                bool validaUsuario = database.Find(f => f.Usuario == aluno.Usuario) != null;
+                bool validaEmail = database.Find(f => f.Email == aluno.Email) != null;
+                bool validaCpf = database.Find(f => f.CPF == aluno.CPF) != null;
+
+                if (!validaUsuario)
+                {
+                    retorno.Mensagem = "Usuário já cadastrado no sistema";
+                    retorno.Sucesso = false;
+                    return retorno;
+                }
+                else if (!validaEmail)
+                {
+                    retorno.Mensagem = "Email já cadastrado no sistema";
+                    retorno.Sucesso = false;
+                    return retorno;
+                }
+                else if (!validaCpf)
+                {
+                    retorno.Mensagem = "CPF já cadastrado no sistema";
+                    retorno.Sucesso = false;
+                    return retorno;
+                }
+
+                retorno.Mensagem = "Usuário válido";
+                retorno.Sucesso = true;
+
+                return retorno;
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
         }
     }
 }

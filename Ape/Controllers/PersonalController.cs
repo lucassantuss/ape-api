@@ -77,8 +77,7 @@ namespace Ape.Controllers
         //{
         //    try
         //    {
-        //        dbApe.Personal.InsertOne(personal);
-        //        return CreatedAtAction(nameof(PesquisarPersonalPorId), new { id = personal.Id }, personal);
+                
         //    }
         //    catch (Exception e)
         //    {

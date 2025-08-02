@@ -6,13 +6,27 @@ namespace Ape.Bll
 {
     public class PersonalBll
     {
-        private readonly IMongoCollection<Personal> database;
-        private readonly HttpClient client;
+        private readonly IMongoCollection<Personal> _database;
+        private readonly HttpClient _client;
 
-        public PersonalBll(IMongoCollection<Personal> _database)
+        public PersonalBll(IMongoCollection<Personal> database)
         {
-            database = _database;
-            client = new HttpClient();
+            _database = database;
+            _client = new HttpClient();
+        }
+
+        public Personal PesquisarPersonal(PersonalDto personalDto)
+        {
+            try
+            {
+                Personal personal = new Personal();
+                personal = _database.Find(f => f.Usuario == personal.Usuario).FirstOrDefault();
+                return personal;
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
         }
     }
 }

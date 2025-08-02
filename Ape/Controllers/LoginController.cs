@@ -44,8 +44,8 @@ namespace Ape.Controllers
             {
                 AlunoDto dto = new AlunoDto();
                 dto.Usuario = login.Usuario;
-                Aluno aluno = _alunoBll.PesquisarAluno(dto);
-                if (aluno != null && aluno.Senha == login.Senha)
+                List<Aluno> aluno = _alunoBll.PesquisarAluno(dto);
+                if (aluno != null && (aluno[0].Usuario == login.Usuario && aluno[0].Senha == login.Senha))
                 {
                     // Cria um manipulador de token JWT
                     var tokenHandler = new JwtSecurityTokenHandler();
@@ -58,8 +58,8 @@ namespace Ape.Controllers
                     {
                         Subject = new ClaimsIdentity(new Claim[]
                         {
-                                new Claim(ClaimTypes.NameIdentifier, aluno.Id), // ID do usuário wsfsd
-                                new Claim(ClaimTypes.Name, aluno.Usuario) // Login do usuário
+                                new Claim(ClaimTypes.NameIdentifier, aluno[0].Id), // ID do usuário wsfsd
+                                new Claim(ClaimTypes.Name, aluno[0].Usuario) // Login do usuário
                         }),
                         Expires = DateTime.UtcNow.AddHours(2), // Define a expiração do token para 2 horas
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature) // Configura a assinatura com a chave secreta
@@ -70,7 +70,7 @@ namespace Ape.Controllers
                     var tokenString = tokenHandler.WriteToken(token); // Converte o token para string
 
                     // Retorna o Id do Usuário e o token JWT gerado como resposta
-                    return Ok(new { redirectTo = "minhaconta/index", idUser = aluno.Id, token = tokenString });
+                    return Ok(new { redirectTo = "minhaconta/index", idUser = aluno[0].Id, token = tokenString });
                 }
                 else
                 {
@@ -81,7 +81,7 @@ namespace Ape.Controllers
             {
                 AlunoDto dto = new AlunoDto();
                 dto.Usuario = login.Usuario;
-                Aluno aluno = _alunoBll.PesquisarAluno(dto);
+                List<Aluno> aluno = _alunoBll.PesquisarAluno(dto);
                 if (aluno != null)
                     return Ok(new { redirectTo = "/dashboard" }); // Caminho do frontend
                 else

@@ -217,3 +217,4 @@ C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\obj\Debug\net6.0\refint\Ape.d
 C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\obj\Debug\net6.0\Ape.pdb
 C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\obj\Debug\net6.0\Ape.genruntimeconfig.cache
 C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\obj\Debug\net6.0\ref\Ape.dll
+C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
