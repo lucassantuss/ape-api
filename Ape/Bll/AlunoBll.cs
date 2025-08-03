@@ -1,7 +1,7 @@
-using System;
 using MongoDB.Driver;
 using Ape.Entity;
 using Ape.Dtos;
+using Ape.Bll.Conversores;
 
 namespace Ape.Bll
 {
@@ -22,11 +22,36 @@ namespace Ape.Bll
             {
                 List<Aluno> aluno = new List<Aluno>();
                 aluno = database.Find(f => f.Usuario == alunoDto.Usuario).ToList();
+
                 return aluno;
             }
-            catch(Exception erro)
+            catch (Exception erro)
             {
                 throw new Exception(erro.Message);
+            }
+        }
+
+        public RetornoAcaoDto CriarAluno(AlunoDto alunoDto)
+        {
+            RetornoAcaoDto retorno = new RetornoAcaoDto();
+
+            try
+            {
+                Aluno aluno = new ConversorAluno().ConverterAlunoDto(alunoDto);
+                RetornoAcaoDto validaCadastro = ValidarCadastro(aluno);
+
+                if (validaCadastro.Sucesso)
+                {
+                    database.InsertOne(aluno);
+                    retorno.Mensagem = "Aluno criado com sucesso";
+                    retorno.Sucesso = true;
+                }
+
+                return retorno;
+            }
+            catch
+            {
+                throw new ArgumentException("Não foi possível criar o aluno");
             }
         }
 
@@ -35,8 +60,12 @@ namespace Ape.Bll
             try
             {
                 RetornoAcaoDto retorno = new RetornoAcaoDto();
-                Aluno aluno = database.Find(f => (f.Usuario == alunoDto.Usuario || f.Email == alunoDto.Email) && f.Senha == alunoDto.Senha).FirstOrDefault();
-                if(aluno != null)
+
+                Aluno aluno = database.Find(f => (f.Usuario == alunoDto.Usuario || 
+                                                  f.Email == alunoDto.Email) && 
+                                                  f.Senha == alunoDto.Senha).FirstOrDefault();
+
+                if (aluno != null)
                 {
                     retorno.Mensagem = "Acesso autorizado!";
                     retorno.Sucesso = true;
@@ -46,63 +75,13 @@ namespace Ape.Bll
                     retorno.Mensagem = "Acesso não autorizado!";
                     retorno.Sucesso = false;
                 }
+
                 return retorno;
             }
             catch (Exception erro)
             {
                 throw new Exception(erro.Message);
             }
-        }  
-
-        // TESTAR METODO DE CRIAÇÃO PARA O ALUNO E FINALZIAR O PERSONAL
-        public RetornoAcaoDto CriarAluno(AlunoDto alunoDto)
-        {
-            RetornoAcaoDto retorno = new RetornoAcaoDto();
-            try
-            {
-                Aluno aluno = ConverterAlunoDto(alunoDto);
-                RetornoAcaoDto validaCadastro = ValidarCadastro(aluno);
-                if (validaCadastro.Sucesso)
-                {
-                    database.InsertOne(aluno);
-                    retorno.Mensagem = "Aluno criado com sucesso";
-                    retorno.Sucesso = true;
-                }
-                return retorno;
-            }
-            catch
-            {
-                throw new ArgumentException("Não foi possível criar o aluno");
-            }
-
-        }
-
-        private Aluno ConverterAlunoDto(AlunoDto dto)
-        {
-            Aluno entidade = new Aluno();
-            entidade.Id = dto.Id;
-            entidade.Usuario = dto.Usuario;
-            entidade.Nome = dto.Nome;
-            entidade.Usuario = dto.Usuario;
-            entidade.Email = dto.Email;
-            entidade.CPF = dto.CPF;
-            entidade.Senha = dto.Senha;
-            entidade.Personal = dto.Personal;
-            return entidade;
-        }
-
-        private AlunoDto ConverterAluno(Aluno entidade)
-        {
-            AlunoDto dto = new AlunoDto();
-            dto.Id = entidade.Id;
-            dto.Usuario = entidade.Usuario;
-            dto.Nome = entidade.Nome;
-            dto.Usuario = entidade.Usuario;
-            dto.Email = entidade.Email;
-            dto.CPF = entidade.CPF;
-            dto.Senha = entidade.Senha;
-            dto.Personal = entidade.Personal;
-            return dto;
         }
 
         private RetornoAcaoDto ValidarCadastro(Aluno aluno)
@@ -110,6 +89,7 @@ namespace Ape.Bll
             try
             {
                 RetornoAcaoDto retorno = new RetornoAcaoDto();
+
                 bool validaUsuario = database.Find(f => f.Usuario == aluno.Usuario) != null;
                 bool validaEmail = database.Find(f => f.Email == aluno.Email) != null;
                 bool validaCpf = database.Find(f => f.CPF == aluno.CPF) != null;
@@ -143,5 +123,13 @@ namespace Ape.Bll
                 throw new Exception(erro.Message);
             }
         }
+
+        // TODO Métodos para criar
+
+        // Redefinir Senha Aluno
+        // Pesquisar Aluno Por Usuario
+        // Pesquisar Aluno Por Id
+        // Alterar Aluno
+        // Excluir Aluno
     }
 }

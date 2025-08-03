@@ -1,6 +1,3 @@
-using Ape.Dtos;
-using Ape.Entity;
-
 namespace Ape.Dtos
 {
     public class AlunoDto

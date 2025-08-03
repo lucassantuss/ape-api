@@ -1,5 +1,4 @@
-﻿using System;
-using Ape.Entity;
+﻿using Ape.Entity;
 using MongoDB.Driver;
 
 namespace Ape.Bll
@@ -21,6 +20,7 @@ namespace Ape.Bll
             {
                 Personal personal = new Personal();
                 personal = _database.Find(f => f.Usuario == personal.Usuario).FirstOrDefault();
+
                 return personal;
             }
             catch (Exception erro)
@@ -28,5 +28,17 @@ namespace Ape.Bll
                 throw new Exception(erro.Message);
             }
         }
+
+        // TODO Métodos para criar
+
+        // Criar Personal
+        // Redefinir Senha Personal
+        // Pesquisar Personal Por Usuario
+        // Pesquisar Personal Por Id
+        // Pesquisar Personal Por Aluno
+        // Pesquisar Alunos do Personal
+
+        // Alterar Personal
+        // Excluir Personal
     }
 }

@@ -15,11 +15,11 @@ namespace Ape.Entity
         [BsonElement("Usuario")]
         public string Usuario { get; set; }
 
-        [BsonElement("Email")]
-        public string Email { get; set; }
-
         [BsonElement("Senha")]
         public string Senha { get; set; }
+
+        [BsonElement("Email")]
+        public string Email { get; set; }
 
         [BsonElement("CPF")]
         public string CPF { get; set; }
