@@ -40,11 +40,11 @@ namespace Ape.Bll
                 Aluno aluno = new ConversorAluno().ConverterAlunoDto(alunoDto);
                 RetornoAcaoDto validaCadastro = ValidarCadastro(aluno);
 
-                if (validaCadastro.Sucesso)
+                if (validaCadastro.Resultado)
                 {
                     database.InsertOne(aluno);
                     retorno.Mensagem = "Aluno criado com sucesso";
-                    retorno.Sucesso = true;
+                    retorno.Resultado = true;
                 }
 
                 return retorno;
@@ -68,12 +68,12 @@ namespace Ape.Bll
                 if (aluno != null)
                 {
                     retorno.Mensagem = "Acesso autorizado!";
-                    retorno.Sucesso = true;
+                    retorno.Resultado = true;
                 }
                 else
                 {
                     retorno.Mensagem = "Acesso não autorizado!";
-                    retorno.Sucesso = false;
+                    retorno.Resultado = false;
                 }
 
                 return retorno;
@@ -97,24 +97,24 @@ namespace Ape.Bll
                 if (!validaUsuario)
                 {
                     retorno.Mensagem = "Usuário já cadastrado no sistema";
-                    retorno.Sucesso = false;
+                    retorno.Resultado = false;
                     return retorno;
                 }
                 else if (!validaEmail)
                 {
                     retorno.Mensagem = "Email já cadastrado no sistema";
-                    retorno.Sucesso = false;
+                    retorno.Resultado = false;
                     return retorno;
                 }
                 else if (!validaCpf)
                 {
                     retorno.Mensagem = "CPF já cadastrado no sistema";
-                    retorno.Sucesso = false;
+                    retorno.Resultado = false;
                     return retorno;
                 }
 
                 retorno.Mensagem = "Usuário válido";
-                retorno.Sucesso = true;
+                retorno.Resultado = true;
 
                 return retorno;
             }
