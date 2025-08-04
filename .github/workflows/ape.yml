@@ -37,8 +37,6 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write
 
     steps:
       - name: Baixar artefatos do build
@@ -46,16 +44,10 @@ jobs:
         with:
           name: .net-app
 
-      - name: Login no Azure com OIDC
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_6D5627D5066040F7AFB2F4DD2DEBEEBD }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CACA0AAC479F466BA77E8FFFE2D326F2 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6189CFB15F414C01B249D44427952D92 }}
-
       - name: Deploy no Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'ape'
           package: .
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_APE }}

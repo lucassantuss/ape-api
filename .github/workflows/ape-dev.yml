@@ -40,25 +40,17 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write
 
     steps:
-      - name: Baixar artefato do job de build
+      - name: Baixar artefatos do build
         uses: actions/download-artifact@v4
         with:
           name: .net-app
 
-      - name: Login no Azure com OIDC
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_2B3558BE022246288EC535A3FE6CB6E7 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B440CBE08A9441B68FA3B56E3875DC90 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_BEBAB417AC004C33ADCFEC068F0272ED }}
-
-      - name: Deploy para Azure Web App
+      - name: Deploy no Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'ape-dev'
           package: .
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE_APE_DEV }}
