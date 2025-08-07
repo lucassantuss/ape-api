@@ -1,7 +1,5 @@
-﻿using System;
-
-public class RetornoAcaoDto
+﻿public class RetornoAcaoDto
 {
     public string Mensagem { get; set; }
-    public bool Sucesso { get; set; }
+    public bool Resultado { get; set; }
 }
