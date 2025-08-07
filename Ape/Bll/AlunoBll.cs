@@ -65,14 +65,14 @@ namespace Ape.Bll
                 if (validaCadastro.Sucesso)
                 {
                     database.InsertOne(aluno);
-                    retorno.Mensagem = "Aluno criado com sucesso";
-                    retorno.Sucesso = true;
                 }
+                retorno.Mensagem = validaCadastro.Mensagem;
+                retorno.Sucesso = validaCadastro.Sucesso;
                 return retorno;
             }
-            catch
+            catch(Exception ex)
             {
-                throw new ArgumentException("Não foi possível criar o aluno");
+                throw new ArgumentException(ex.Message);
             }
 
         }
@@ -80,28 +80,28 @@ namespace Ape.Bll
         private Aluno ConverterAlunoDto(AlunoDto dto)
         {
             Aluno entidade = new Aluno();
-            entidade.Id = dto.Id;
+            //entidade.Id = dto.Id.ToString();
             entidade.Usuario = dto.Usuario;
             entidade.Nome = dto.Nome;
             entidade.Usuario = dto.Usuario;
             entidade.Email = dto.Email;
             entidade.CPF = dto.CPF;
             entidade.Senha = dto.Senha;
-            entidade.Personal = dto.Personal;
+            entidade.IdPersonal = dto.IdPersonal.ToString();
             return entidade;
         }
 
         private AlunoDto ConverterAluno(Aluno entidade)
         {
             AlunoDto dto = new AlunoDto();
-            dto.Id = entidade.Id;
+            //dto.Id = int.Parse(entidade.Id);
             dto.Usuario = entidade.Usuario;
             dto.Nome = entidade.Nome;
             dto.Usuario = entidade.Usuario;
             dto.Email = entidade.Email;
             dto.CPF = entidade.CPF;
             dto.Senha = entidade.Senha;
-            dto.Personal = entidade.Personal;
+            dto.IdPersonal = int.Parse(entidade.IdPersonal);
             return dto;
         }
 
@@ -114,19 +114,19 @@ namespace Ape.Bll
                 bool validaEmail = database.Find(f => f.Email == aluno.Email) != null;
                 bool validaCpf = database.Find(f => f.CPF == aluno.CPF) != null;
 
-                if (!validaUsuario)
+                if (validaUsuario)
                 {
                     retorno.Mensagem = "Usuário já cadastrado no sistema";
                     retorno.Sucesso = false;
                     return retorno;
                 }
-                else if (!validaEmail)
+                else if (validaEmail)
                 {
                     retorno.Mensagem = "Email já cadastrado no sistema";
                     retorno.Sucesso = false;
                     return retorno;
                 }
-                else if (!validaCpf)
+                else if (validaCpf)
                 {
                     retorno.Mensagem = "CPF já cadastrado no sistema";
                     retorno.Sucesso = false;

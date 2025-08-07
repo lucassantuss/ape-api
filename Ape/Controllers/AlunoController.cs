@@ -53,26 +53,17 @@ namespace Ape.Controllers
         [HttpPost("CriarAluno")]
         public RetornoAcaoDto CriarAluno([FromBody] AlunoDto alunoDto)
         {
-            Console.WriteLine("passei aqui!!!!!!!");
-            try
+            RetornoAcaoDto retorno = new RetornoAcaoDto();
+            if (alunoDto != null)
             {
-                RetornoAcaoDto retorno = new RetornoAcaoDto();
-                if (alunoDto != null)
-                {
-                    alunoBll.CriarAluno(alunoDto);
-                }
-                else
-                {
-                    retorno.Mensagem = "Falha ao criar o usuário";
-                    retorno.Sucesso = false;
-                }
-                return retorno;
+                retorno = alunoBll.CriarAluno(alunoDto);
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine("Erro ao criar aluno: " + ex.Message);
-                throw new Exception(ex.Message);
+                retorno.Mensagem = "Falha ao criar o usuário";
+                retorno.Sucesso = false;
             }
+            return retorno;
         }
 
         #endregion

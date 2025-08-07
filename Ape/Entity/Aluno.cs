@@ -25,6 +25,6 @@ namespace Ape.Entity
         public string CPF { get; set; }
 
         [BsonElement("Personal")]
-        public Personal Personal { get; set; }
+        public string IdPersonal { get; set; }
     }
 }
