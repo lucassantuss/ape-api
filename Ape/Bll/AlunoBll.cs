@@ -45,7 +45,7 @@ namespace Ape.Bll
                     database.InsertOne(aluno);
                 }
                 retorno.Mensagem = validaCadastro.Mensagem;
-                retorno.Sucesso = validaCadastro.Sucesso;
+                retorno.Resultado = validaCadastro.Resultado;
                 return retorno;
             }
             catch(Exception ex)
@@ -54,35 +54,33 @@ namespace Ape.Bll
             }
         }
 
-        }
+        //private Aluno ConverterAlunoDto(AlunoDto dto)
+        //{
+        //    Aluno entidade = new Aluno();
+        //    //entidade.Id = dto.Id.ToString();
+        //    entidade.Usuario = dto.Usuario;
+        //    entidade.Nome = dto.Nome;
+        //    entidade.Usuario = dto.Usuario;
+        //    entidade.Email = dto.Email;
+        //    entidade.CPF = dto.CPF;
+        //    entidade.Senha = dto.Senha;
+        //    entidade.IdPersonal = dto.IdPersonal.ToString();
+        //    return entidade;
+        //}
 
-        private Aluno ConverterAlunoDto(AlunoDto dto)
-        {
-            Aluno entidade = new Aluno();
-            //entidade.Id = dto.Id.ToString();
-            entidade.Usuario = dto.Usuario;
-            entidade.Nome = dto.Nome;
-            entidade.Usuario = dto.Usuario;
-            entidade.Email = dto.Email;
-            entidade.CPF = dto.CPF;
-            entidade.Senha = dto.Senha;
-            entidade.IdPersonal = dto.IdPersonal.ToString();
-            return entidade;
-        }
-
-        private AlunoDto ConverterAluno(Aluno entidade)
-        {
-            AlunoDto dto = new AlunoDto();
-            //dto.Id = int.Parse(entidade.Id);
-            dto.Usuario = entidade.Usuario;
-            dto.Nome = entidade.Nome;
-            dto.Usuario = entidade.Usuario;
-            dto.Email = entidade.Email;
-            dto.CPF = entidade.CPF;
-            dto.Senha = entidade.Senha;
-            dto.IdPersonal = int.Parse(entidade.IdPersonal);
-            return dto;
-        }
+        //private AlunoDto ConverterAluno(Aluno entidade)
+        //{
+        //    AlunoDto dto = new AlunoDto();
+        //    //dto.Id = int.Parse(entidade.Id);
+        //    dto.Usuario = entidade.Usuario;
+        //    dto.Nome = entidade.Nome;
+        //    dto.Usuario = entidade.Usuario;
+        //    dto.Email = entidade.Email;
+        //    dto.CPF = entidade.CPF;
+        //    dto.Senha = entidade.Senha;
+        //    dto.IdPersonal = int.Parse(entidade.IdPersonal);
+        //    return dto;
+        //}
 
         private RetornoAcaoDto ValidarCadastro(Aluno aluno)
         {

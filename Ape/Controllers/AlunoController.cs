@@ -46,7 +46,7 @@ namespace Ape.Controllers
             else
             {
                 retorno.Mensagem = "Falha ao criar o usuário";
-                retorno.Sucesso = false;
+                retorno.Resultado = false;
             }
             return retorno;
         }
