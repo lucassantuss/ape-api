@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Ape.Bll;
 using Ape.Dtos;
-using Ape.Entity;
-using Ape.Bll;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Ape.Controllers
 {
@@ -9,48 +8,77 @@ namespace Ape.Controllers
     [ApiController]
     public class AlunoController : ControllerBase
     {
-        #region Variáveis e Construtor
-        private readonly ILogger<AlunoController> logger;
-        private readonly AlunoBll alunoBll;
+        private readonly AlunoBll _alunoBll;
 
-        // Construtor da controller que injeta as dependências de configuração e contexto do banco
-        public AlunoController(ILogger<AlunoController> _logger, AlunoBll _alunoBll)
+        public AlunoController(AlunoBll alunoBll)
         {
-            logger = _logger;
-            alunoBll = _alunoBll;
+            _alunoBll = alunoBll;
         }
 
-        #endregion
-
-        #region Login - Métodos
-
-        [HttpGet("PesquisarAluno")]
-        public ActionResult<List<Aluno>> PesquisarAluno(AlunoDto alunoDto)
+        // Criar um novo aluno
+        [HttpPost("Criar")]
+        public IActionResult Criar([FromBody] AlunoDto dto)
         {
-            List<Aluno> aluno = new List<Aluno>();
+            var resultado = _alunoBll.CriarAluno(dto);
+            if (resultado.Resultado)
+                return Ok(resultado);
 
-            if (alunoDto == null)
-                aluno = alunoBll.PesquisarAluno(alunoDto);
-
-            return aluno;
+            return BadRequest(resultado);
         }
 
-        [HttpPost("CriarAluno")]
-        public RetornoAcaoDto CriarAluno([FromBody] AlunoDto alunoDto)
+        // Redefinir senha de um aluno
+        [HttpPut("RedefinirSenha")]
+        public IActionResult RedefinirSenha([FromQuery] string usuario, [FromQuery] string novaSenha)
         {
-            RetornoAcaoDto retorno = new RetornoAcaoDto();
-            if (alunoDto != null)
-            {
-                retorno = alunoBll.CriarAluno(alunoDto);
-            }
-            else
-            {
-                retorno.Mensagem = "Falha ao criar o usuário";
-                retorno.Resultado = false;
-            }
-            return retorno;
+            var resultado = _alunoBll.RedefinirSenha(usuario, novaSenha);
+            if (resultado.Resultado)
+                return Ok(resultado);
+
+            return BadRequest(resultado);
         }
 
-        #endregion
+        // Pesquisar aluno por usuário
+        [HttpGet("PesquisarPorUsuario/{usuario}")]
+        public IActionResult PesquisarPorUsuario(string usuario)
+        {
+            var aluno = _alunoBll.PesquisarAlunoPorUsuario(usuario);
+            if (aluno == null)
+                return NotFound(new { mensagem = "Aluno não encontrado." });
+
+            return Ok(aluno);
+        }
+
+        // Pesquisar aluno por ID
+        [HttpGet("PesquisarPorId/{id}")]
+        public IActionResult PesquisarPorId(string id)
+        {
+            var aluno = _alunoBll.PesquisarAlunoPorId(id);
+            if (aluno == null)
+                return NotFound(new { mensagem = "Aluno não encontrado." });
+
+            return Ok(aluno);
+        }
+
+        // Alterar aluno
+        [HttpPut("Alterar")]
+        public IActionResult Alterar([FromBody] AlunoDto dto)
+        {
+            var resultado = _alunoBll.AlterarAluno(dto);
+            if (resultado.Resultado)
+                return Ok(resultado);
+
+            return BadRequest(resultado);
+        }
+
+        // Excluir aluno por ID
+        [HttpDelete("Excluir/{id}")]
+        public IActionResult Excluir(string id)
+        {
+            var resultado = _alunoBll.ExcluirAluno(id);
+            if (resultado.Resultado)
+                return Ok(resultado);
+
+            return BadRequest(resultado);
+        }
     }
 }

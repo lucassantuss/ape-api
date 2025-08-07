@@ -7,21 +7,22 @@ namespace Ape.Bll
 {
     public class AlunoBll
     {
-        private readonly IMongoCollection<Aluno> database;
-        private readonly HttpClient client;
+        private readonly IMongoCollection<Aluno> _database;
+        private readonly HttpClient _client;
 
-        public AlunoBll(IMongoCollection<Aluno> _database)
+        public AlunoBll(IMongoCollection<Aluno> database)
         {
-            database = _database;
-            client = new HttpClient();
+            _database = database;
+            _client = new HttpClient();
         }
 
+        // Pesquisar Aluno
         public List<Aluno> PesquisarAluno(AlunoDto alunoDto)
         {
             try
             {
                 List<Aluno> aluno = new List<Aluno>();
-                aluno = database.Find(f => f.Usuario == alunoDto.Usuario).ToList();
+                aluno = _database.Find(f => f.Usuario == alunoDto.Usuario).ToList();
 
                 return aluno;
             }
@@ -31,6 +32,7 @@ namespace Ape.Bll
             }
         }
 
+        // Criar Aluno
         public RetornoAcaoDto CriarAluno(AlunoDto alunoDto)
         {
             RetornoAcaoDto retorno = new RetornoAcaoDto();
@@ -42,7 +44,7 @@ namespace Ape.Bll
 
                 if (validaCadastro.Resultado)
                 {
-                    database.InsertOne(aluno);
+                    _database.InsertOne(aluno);
                 }
                 retorno.Mensagem = validaCadastro.Mensagem;
                 retorno.Resultado = validaCadastro.Resultado;
@@ -54,43 +56,16 @@ namespace Ape.Bll
             }
         }
 
-        //private Aluno ConverterAlunoDto(AlunoDto dto)
-        //{
-        //    Aluno entidade = new Aluno();
-        //    //entidade.Id = dto.Id.ToString();
-        //    entidade.Usuario = dto.Usuario;
-        //    entidade.Nome = dto.Nome;
-        //    entidade.Usuario = dto.Usuario;
-        //    entidade.Email = dto.Email;
-        //    entidade.CPF = dto.CPF;
-        //    entidade.Senha = dto.Senha;
-        //    entidade.IdPersonal = dto.IdPersonal.ToString();
-        //    return entidade;
-        //}
-
-        //private AlunoDto ConverterAluno(Aluno entidade)
-        //{
-        //    AlunoDto dto = new AlunoDto();
-        //    //dto.Id = int.Parse(entidade.Id);
-        //    dto.Usuario = entidade.Usuario;
-        //    dto.Nome = entidade.Nome;
-        //    dto.Usuario = entidade.Usuario;
-        //    dto.Email = entidade.Email;
-        //    dto.CPF = entidade.CPF;
-        //    dto.Senha = entidade.Senha;
-        //    dto.IdPersonal = int.Parse(entidade.IdPersonal);
-        //    return dto;
-        //}
-
+        // Validar Cadastro
         private RetornoAcaoDto ValidarCadastro(Aluno aluno)
         {
             try
             {
                 RetornoAcaoDto retorno = new RetornoAcaoDto();
 
-                bool validaUsuario = database.Find(f => f.Usuario == aluno.Usuario) != null;
-                bool validaEmail = database.Find(f => f.Email == aluno.Email) != null;
-                bool validaCpf = database.Find(f => f.CPF == aluno.CPF) != null;
+                bool validaUsuario = _database.Find(f => f.Usuario == aluno.Usuario) != null;
+                bool validaEmail = _database.Find(f => f.Email == aluno.Email) != null;
+                bool validaCpf = _database.Find(f => f.CPF == aluno.CPF) != null;
 
                 if (validaUsuario)
                 {
@@ -122,12 +97,123 @@ namespace Ape.Bll
             }
         }
 
-        // TODO Métodos para criar
-
         // Redefinir Senha Aluno
+        public RetornoAcaoDto RedefinirSenha(string usuario, string novaSenha)
+        {
+            RetornoAcaoDto retorno = new RetornoAcaoDto();
+            try
+            {
+                var aluno = _database.Find(f => f.Usuario == usuario).FirstOrDefault();
+                if (aluno == null)
+                {
+                    retorno.Mensagem = "Aluno não encontrado.";
+                    retorno.Resultado = false;
+                    return retorno;
+                }
+
+                var update = Builders<Aluno>.Update.Set(a => a.Senha, novaSenha);
+                _database.UpdateOne(a => a.Id == aluno.Id, update);
+
+                retorno.Mensagem = "Senha redefinida com sucesso.";
+                retorno.Resultado = true;
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         // Pesquisar Aluno Por Usuario
+        public AlunoDto PesquisarAlunoPorUsuario(string usuario)
+        {
+            try
+            {
+                var aluno = _database.Find(f => f.Usuario == usuario).FirstOrDefault();
+                if (aluno == null)
+                    return null;
+
+                return new ConversorAluno().ConverterAluno(aluno);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         // Pesquisar Aluno Por Id
+        public AlunoDto PesquisarAlunoPorId(string id)
+        {
+            try
+            {
+                var aluno = _database.Find(f => f.Id == id).FirstOrDefault();
+                if (aluno == null)
+                    return null;
+
+                return new ConversorAluno().ConverterAluno(aluno);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         // Alterar Aluno
+        public RetornoAcaoDto AlterarAluno(AlunoDto alunoDto)
+        {
+            RetornoAcaoDto retorno = new RetornoAcaoDto();
+            try
+            {
+                var alunoExistente = _database.Find(f => f.Id == alunoDto.IdPersonal.ToString()).FirstOrDefault();
+                if (alunoExistente == null)
+                {
+                    retorno.Mensagem = "Aluno não encontrado para alteração.";
+                    retorno.Resultado = false;
+                    return retorno;
+                }
+
+                var update = Builders<Aluno>.Update
+                    .Set(a => a.Nome, alunoDto.Nome)
+                    .Set(a => a.Usuario, alunoDto.Usuario)
+                    .Set(a => a.Email, alunoDto.Email)
+                    .Set(a => a.CPF, alunoDto.CPF)
+                    .Set(a => a.Senha, alunoDto.Senha)
+                    .Set(a => a.IdPersonal, alunoDto.IdPersonal.ToString());
+
+                _database.UpdateOne(a => a.Id == alunoExistente.Id, update);
+
+                retorno.Mensagem = "Aluno alterado com sucesso.";
+                retorno.Resultado = true;
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         // Excluir Aluno
+        public RetornoAcaoDto ExcluirAluno(string id)
+        {
+            RetornoAcaoDto retorno = new RetornoAcaoDto();
+            try
+            {
+                var result = _database.DeleteOne(f => f.Id == id);
+                if (result.DeletedCount == 0)
+                {
+                    retorno.Mensagem = "Aluno não encontrado para exclusão.";
+                    retorno.Resultado = false;
+                    return retorno;
+                }
+
+                retorno.Mensagem = "Aluno excluído com sucesso.";
+                retorno.Resultado = true;
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
