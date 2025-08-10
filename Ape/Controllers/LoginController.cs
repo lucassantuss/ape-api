@@ -42,7 +42,7 @@ namespace Ape.Controllers
                 AlunoDto dto = new AlunoDto();
                 dto.Usuario = login.Usuario;
                 List<Aluno> aluno = _alunoBll.PesquisarAluno(dto);
-                if (aluno != null && 
+                if (aluno != null && aluno.Count > 0 &&
                    (aluno[0].Usuario == login.Usuario && 
                     aluno[0].Senha == login.Senha))
                 {
