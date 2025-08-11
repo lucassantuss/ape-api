@@ -103,19 +103,23 @@ builder.Services.AddSingleton<ExercicioBll>();
 builder.Services.AddSingleton<PersonalBll>();
 
 // Configuração do CORS (Cross-Origin Resource Sharing) para permitir requisições de qualquer origem
+var allowedOrigins = new[] {
+    "http://localhost:3000",
+    "http://localhost:5288",
+    "https://ape-web.vercel.app",
+    "https://ape-api.azurewebsites.net",
+    "https://ape-dev.azurewebsites.net"
+};
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigins",
-    policy =>
+    options.AddPolicy("AllowSpecificOrigins", builder =>
     {
-        policy.WithOrigins("http://localhost:3000",
-                           "http://localhost:5288",
-                           "https://ape-web.vercel.app",
-                           "https://ape-api.azurewebsites.net/",
-                           "https://ape-dev.azurewebsites.net/")
-              .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials();
+        builder
+          .SetIsOriginAllowed(origin => allowedOrigins.Contains(origin))
+          .AllowAnyMethod()
+          .AllowAnyHeader()
+          .AllowCredentials();
     });
 });
 
