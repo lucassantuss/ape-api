@@ -20,6 +20,7 @@ namespace Ape.Controllers
         public IActionResult Criar([FromBody] AlunoDto dto)
         {
             var resultado = _alunoBll.CriarAluno(dto);
+
             if (resultado.Resultado)
                 return Ok(resultado);
 

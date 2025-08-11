@@ -17,7 +17,7 @@ namespace Ape.Bll
         }
 
         // Pesquisar Aluno
-        public List<Aluno> PesquisarAluno(AlunoDto alunoDto)
+        public List<Aluno> PesquisarAluno(LoginDto alunoDto)
         {
             try
             {
@@ -63,9 +63,9 @@ namespace Ape.Bll
             {
                 RetornoAcaoDto retorno = new RetornoAcaoDto();
 
-                bool validaUsuario = _database.Find(f => f.Usuario == aluno.Usuario) != null;
-                bool validaEmail = _database.Find(f => f.Email == aluno.Email) != null;
-                bool validaCpf = _database.Find(f => f.CPF == aluno.CPF) != null;
+                bool validaUsuario = _database.Find(f => f.Usuario == aluno.Usuario).Any();
+                bool validaEmail = _database.Find(f => f.Email == aluno.Email).Any();
+                bool validaCpf = _database.Find(f => f.CPF == aluno.CPF).Any();
 
                 if (validaUsuario)
                 {

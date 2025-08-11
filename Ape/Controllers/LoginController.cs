@@ -39,9 +39,10 @@ namespace Ape.Controllers
         {
             if (login.TipoUsuario == "aluno")
             {
-                AlunoDto dto = new AlunoDto();
+                LoginDto dto = new LoginDto();
                 dto.Usuario = login.Usuario;
                 List<Aluno> aluno = _alunoBll.PesquisarAluno(dto);
+
                 if (aluno != null && aluno.Count > 0 &&
                    (aluno[0].Usuario == login.Usuario && 
                     aluno[0].Senha == login.Senha))
@@ -78,9 +79,10 @@ namespace Ape.Controllers
             }
             else if (login.TipoUsuario == "personal")
             {
-                AlunoDto dto = new AlunoDto();
+                LoginDto dto = new LoginDto();
                 dto.Usuario = login.Usuario;
                 List<Aluno> aluno = _alunoBll.PesquisarAluno(dto);
+
                 if (aluno != null)
                     return Ok(new { redirectTo = "/dashboard" }); // Caminho do frontend
                 else
