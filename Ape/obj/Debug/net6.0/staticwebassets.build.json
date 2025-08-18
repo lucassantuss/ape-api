@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "CMkXVCZ9VMuDrM72Luh0EMlPIqYZdccPUmb9pGFS01Y=",
+  "Hash": "ZgRM5x790R7HF8wougMWZaqW3jQe1MRlagQZ1qodOWg=",
   "Source": "Ape",
   "BasePath": "_content/Ape",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
