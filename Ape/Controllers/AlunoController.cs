@@ -16,7 +16,7 @@ namespace Ape.Controllers
         }
 
         // Criar um novo aluno
-        [HttpPost("Criar")]
+        [HttpPost]
         public IActionResult Criar([FromBody] AlunoDto dto)
         {
             var resultado = _alunoBll.CriarAluno(dto);
@@ -28,8 +28,8 @@ namespace Ape.Controllers
         }
 
         // Redefinir senha de um aluno
-        [HttpPut("RedefinirSenha")]
-        public IActionResult RedefinirSenha([FromQuery] string usuario, [FromQuery] string novaSenha)
+        [HttpPut("{usuario}/senha")]
+        public IActionResult RedefinirSenha(string usuario, [FromQuery] string novaSenha)
         {
             var resultado = _alunoBll.RedefinirSenha(usuario, novaSenha);
             if (resultado.Resultado)
@@ -39,7 +39,7 @@ namespace Ape.Controllers
         }
 
         // Pesquisar aluno por usuário
-        [HttpGet("PesquisarPorUsuario/{usuario}")]
+        [HttpGet("usuario/{usuario}")]
         public IActionResult PesquisarPorUsuario(string usuario)
         {
             var aluno = _alunoBll.PesquisarAlunoPorUsuario(usuario);
@@ -50,7 +50,7 @@ namespace Ape.Controllers
         }
 
         // Pesquisar aluno por ID
-        [HttpGet("PesquisarPorId/{id}")]
+        [HttpGet("{id}")]
         public IActionResult PesquisarPorId(string id)
         {
             var aluno = _alunoBll.PesquisarAlunoPorId(id);
@@ -61,10 +61,10 @@ namespace Ape.Controllers
         }
 
         // Alterar aluno
-        [HttpPut("Alterar")]
-        public IActionResult Alterar([FromBody] AlunoDto dto)
+        [HttpPut("{id}")]
+        public IActionResult Alterar(string id, [FromBody] AlunoDto dto)
         {
-            var resultado = _alunoBll.AlterarAluno(dto);
+            var resultado = _alunoBll.AlterarAluno(id, dto);
             if (resultado.Resultado)
                 return Ok(resultado);
 
@@ -72,7 +72,7 @@ namespace Ape.Controllers
         }
 
         // Excluir aluno por ID
-        [HttpDelete("Excluir/{id}")]
+        [HttpDelete("{id}")]
         public IActionResult Excluir(string id)
         {
             var resultado = _alunoBll.ExcluirAluno(id);

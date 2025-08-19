@@ -22,7 +22,9 @@ namespace Ape.Bll
             try
             {
                 List<Aluno> aluno = new List<Aluno>();
-                aluno = _database.Find(f => f.Usuario == alunoDto.Usuario).ToList();
+                aluno = _database
+                    .Find(f => f.Usuario.ToUpper() == alunoDto.Usuario.ToUpper())
+                    .ToList();
 
                 return aluno;
             }
@@ -159,12 +161,12 @@ namespace Ape.Bll
         }
 
         // Alterar Aluno
-        public RetornoAcaoDto AlterarAluno(AlunoDto alunoDto)
+        public RetornoAcaoDto AlterarAluno(string id, AlunoDto alunoDto)
         {
             RetornoAcaoDto retorno = new RetornoAcaoDto();
             try
             {
-                var alunoExistente = _database.Find(f => f.Id == alunoDto.IdPersonal.ToString()).FirstOrDefault();
+                var alunoExistente = _database.Find(f => f.Id == id).FirstOrDefault();
                 if (alunoExistente == null)
                 {
                     retorno.Mensagem = "Aluno não encontrado para alteração.";
@@ -188,7 +190,9 @@ namespace Ape.Bll
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                retorno.Mensagem = $"Erro ao alterar aluno: {ex.Message}";
+                retorno.Resultado = false;
+                return retorno;
             }
         }
 

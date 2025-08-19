@@ -443,3 +443,9 @@ C:\Users\081210009\Documents\GitHub\ape-api\Ape\obj\Debug\net6.0\refint\Ape.dll
 C:\Users\081210009\Documents\GitHub\ape-api\Ape\obj\Debug\net6.0\Ape.pdb
 C:\Users\081210009\Documents\GitHub\ape-api\Ape\obj\Debug\net6.0\Ape.genruntimeconfig.cache
 C:\Users\081210009\Documents\GitHub\ape-api\Ape\obj\Debug\net6.0\ref\Ape.dll
+C:\Users\081210009\Pictures\GITHUB\ape-api\Ape\bin\Debug\net6.0\DnsClient.dll
+C:\Users\081210009\Pictures\GITHUB\ape-api\Ape\bin\Debug\net6.0\MongoDB.Bson.dll
+C:\Users\081210009\Pictures\GITHUB\ape-api\Ape\bin\Debug\net6.0\MongoDB.Driver.dll
+C:\Users\081210009\Pictures\GITHUB\ape-api\Ape\bin\Debug\net6.0\SharpCompress.dll
+C:\Users\081210009\Pictures\GITHUB\ape-api\Ape\bin\Debug\net6.0\Snappier.dll
+C:\Users\081210009\Pictures\GITHUB\ape-api\Ape\bin\Debug\net6.0\ZstdSharp.dll
