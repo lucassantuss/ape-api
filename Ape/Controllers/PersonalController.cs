@@ -18,7 +18,13 @@ namespace Ape.Controllers
             _alunosCollection = alunosCollection;
         }
 
-        // Criar personal
+        /// <summary>
+        /// Cria um novo personal trainer.
+        /// </summary>
+        /// <param name="dto">Dados do personal a ser criado.</param>
+        /// <returns>Resultado da operação (sucesso ou erro).</returns>
+        /// <response code="200">Personal criado com sucesso.</response>
+        /// <response code="400">Erro ao criar personal.</response>
         [HttpPost]
         public IActionResult Criar([FromBody] PersonalDto dto)
         {
@@ -26,7 +32,11 @@ namespace Ape.Controllers
             return resultado.Resultado ? Ok(resultado) : BadRequest(resultado);
         }
 
-        // Pesquisar todos
+        /// <summary>
+        /// Lista todos os personais cadastrados.
+        /// </summary>
+        /// <returns>Lista de personais.</returns>
+        /// <response code="200">Lista retornada com sucesso.</response>
         [HttpGet]
         public IActionResult Listar()
         {
@@ -34,7 +44,13 @@ namespace Ape.Controllers
             return Ok(lista);
         }
 
-        // Pesquisar por ID
+        /// <summary>
+        /// Pesquisa um personal pelo seu ID.
+        /// </summary>
+        /// <param name="id">ID do personal.</param>
+        /// <returns>Dados do personal encontrado.</returns>
+        /// <response code="200">Personal encontrado.</response>
+        /// <response code="404">Personal não encontrado.</response>
         [HttpGet("{id}")]
         public IActionResult PesquisarPorId(string id)
         {
@@ -44,7 +60,13 @@ namespace Ape.Controllers
                 : Ok(personal);
         }
 
-        // Pesquisar por usuário
+        /// <summary>
+        /// Pesquisa um personal pelo nome de usuário.
+        /// </summary>
+        /// <param name="usuario">Usuário do personal.</param>
+        /// <returns>Dados do personal encontrado.</returns>
+        /// <response code="200">Personal encontrado.</response>
+        /// <response code="404">Personal não encontrado.</response>
         [HttpGet("usuario/{usuario}")]
         public IActionResult PesquisarPorUsuario(string usuario)
         {
@@ -54,7 +76,14 @@ namespace Ape.Controllers
                 : Ok(personal);
         }
 
-        // Alterar personal
+        /// <summary>
+        /// Altera os dados de um personal existente.
+        /// </summary>
+        /// <param name="id">ID do personal.</param>
+        /// <param name="dto">Dados atualizados do personal.</param>
+        /// <returns>Resultado da operação (sucesso ou erro).</returns>
+        /// <response code="200">Personal alterado com sucesso.</response>
+        /// <response code="400">Erro ao alterar personal.</response>
         [HttpPut("{id}")]
         public IActionResult Alterar(string id, [FromBody] PersonalDto dto)
         {
@@ -62,7 +91,13 @@ namespace Ape.Controllers
             return resultado.Resultado ? Ok(resultado) : BadRequest(resultado);
         }
 
-        // Excluir personal
+        /// <summary>
+        /// Exclui um personal pelo ID.
+        /// </summary>
+        /// <param name="id">ID do personal.</param>
+        /// <returns>Resultado da operação.</returns>
+        /// <response code="200">Personal excluído com sucesso.</response>
+        /// <response code="400">Erro ao excluir personal.</response>
         [HttpDelete("{id}")]
         public IActionResult Excluir(string id)
         {
@@ -70,7 +105,14 @@ namespace Ape.Controllers
             return resultado.Resultado ? Ok(resultado) : BadRequest(resultado);
         }
 
-        // Redefinir senha (ação específica → mantenho separado)
+        /// <summary>
+        /// Redefine a senha de um personal.
+        /// </summary>
+        /// <param name="usuario">Usuário do personal.</param>
+        /// <param name="novaSenha">Nova senha do personal (via query string).</param>
+        /// <returns>Resultado da operação.</returns>
+        /// <response code="200">Senha redefinida com sucesso.</response>
+        /// <response code="400">Erro ao redefinir senha.</response>
         [HttpPut("{usuario}/senha")]
         public IActionResult RedefinirSenha(string usuario, [FromQuery] string novaSenha)
         {
@@ -78,7 +120,12 @@ namespace Ape.Controllers
             return resultado.Resultado ? Ok(resultado) : BadRequest(resultado);
         }
 
-        // Listar alunos de um personal
+        /// <summary>
+        /// Lista todos os alunos vinculados a um personal.
+        /// </summary>
+        /// <param name="idPersonal">ID do personal.</param>
+        /// <returns>Lista de alunos do personal.</returns>
+        /// <response code="200">Lista retornada com sucesso.</response>
         [HttpGet("{idPersonal}/alunos")]
         public IActionResult ListarAlunos(string idPersonal)
         {
@@ -86,7 +133,13 @@ namespace Ape.Controllers
             return Ok(alunos);
         }
 
-        // Pesquisar personal de um aluno
+        /// <summary>
+        /// Pesquisa o personal associado a um aluno.
+        /// </summary>
+        /// <param name="idAluno">ID do aluno.</param>
+        /// <returns>Dados do personal vinculado.</returns>
+        /// <response code="200">Personal encontrado.</response>
+        /// <response code="404">Nenhum personal vinculado a este aluno.</response>
         [HttpGet("aluno/{idAluno}")]
         public IActionResult PesquisarPorAluno(string idAluno)
         {

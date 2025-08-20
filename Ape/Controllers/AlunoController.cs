@@ -15,7 +15,13 @@ namespace Ape.Controllers
             _alunoBll = alunoBll;
         }
 
-        // Criar um novo aluno
+        /// <summary>
+        /// Cria um novo aluno no sistema.
+        /// </summary>
+        /// <param name="dto">Dados do aluno (usuário, senha, nome, e-mail, etc).</param>
+        /// <returns>Retorna sucesso ou erro com mensagem.</returns>
+        /// <response code="200">Aluno criado com sucesso.</response>
+        /// <response code="400">Erro ao criar aluno (ex: usuário já existe).</response>
         [HttpPost]
         public IActionResult Criar([FromBody] AlunoDto dto)
         {
@@ -27,7 +33,14 @@ namespace Ape.Controllers
             return BadRequest(resultado);
         }
 
-        // Redefinir senha de um aluno
+        /// <summary>
+        /// Redefine a senha de um aluno.
+        /// </summary>
+        /// <param name="usuario">Nome de usuário do aluno.</param>
+        /// <param name="novaSenha">Nova senha.</param>
+        /// <returns>Retorna sucesso ou erro.</returns>
+        /// <response code="200">Senha redefinida com sucesso.</response>
+        /// <response code="400">Erro ao redefinir senha.</response>
         [HttpPut("{usuario}/senha")]
         public IActionResult RedefinirSenha(string usuario, [FromQuery] string novaSenha)
         {
@@ -38,7 +51,13 @@ namespace Ape.Controllers
             return BadRequest(resultado);
         }
 
-        // Pesquisar aluno por usuário
+        /// <summary>
+        /// Pesquisa um aluno pelo nome de usuário.
+        /// </summary>
+        /// <param name="usuario">Usuário do aluno.</param>
+        /// <returns>Retorna os dados do aluno.</returns>
+        /// <response code="200">Aluno encontrado.</response>
+        /// <response code="404">Aluno não encontrado.</response>
         [HttpGet("usuario/{usuario}")]
         public IActionResult PesquisarPorUsuario(string usuario)
         {
@@ -49,7 +68,13 @@ namespace Ape.Controllers
             return Ok(aluno);
         }
 
-        // Pesquisar aluno por ID
+        /// <summary>
+        /// Pesquisa um aluno pelo ID.
+        /// </summary>
+        /// <param name="id">ID do aluno.</param>
+        /// <returns>Retorna os dados do aluno.</returns>
+        /// <response code="200">Aluno encontrado.</response>
+        /// <response code="404">Aluno não encontrado.</response>
         [HttpGet("{id}")]
         public IActionResult PesquisarPorId(string id)
         {
@@ -60,7 +85,14 @@ namespace Ape.Controllers
             return Ok(aluno);
         }
 
-        // Alterar aluno
+        /// <summary>
+        /// Altera os dados de um aluno.
+        /// </summary>
+        /// <param name="id">ID do aluno.</param>
+        /// <param name="dto">Novos dados do aluno.</param>
+        /// <returns>Retorna sucesso ou erro.</returns>
+        /// <response code="200">Aluno atualizado com sucesso.</response>
+        /// <response code="400">Erro ao atualizar aluno.</response>
         [HttpPut("{id}")]
         public IActionResult Alterar(string id, [FromBody] AlunoDto dto)
         {
@@ -71,7 +103,13 @@ namespace Ape.Controllers
             return BadRequest(resultado);
         }
 
-        // Excluir aluno por ID
+        /// <summary>
+        /// Exclui um aluno pelo ID.
+        /// </summary>
+        /// <param name="id">ID do aluno.</param>
+        /// <returns>Retorna sucesso ou erro.</returns>
+        /// <response code="200">Aluno excluído com sucesso.</response>
+        /// <response code="400">Erro ao excluir aluno.</response>
         [HttpDelete("{id}")]
         public IActionResult Excluir(string id)
         {

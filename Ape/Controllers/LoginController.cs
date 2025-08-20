@@ -34,6 +34,15 @@ namespace Ape.Controllers
 
         #region Login
 
+        /// <summary>
+        /// Realiza o login de um usuário (Aluno ou Personal).
+        /// </summary>
+        /// <param name="login">Objeto contendo usuário, senha e tipo de usuário ("aluno" ou "personal").</param>
+        /// <returns>
+        /// Retorna um token JWT para alunos ou um redirecionamento para o dashboard no caso de personal trainers.
+        /// </returns>
+        /// <response code="200">Login realizado com sucesso.</response>
+        /// <response code="401">Usuário ou senha inválidos.</response>
         [HttpPost("Entrar")]
         public IActionResult Entrar([FromBody] LoginDto login)
         {
@@ -70,7 +79,7 @@ namespace Ape.Controllers
                     var tokenString = tokenHandler.WriteToken(token); // Converte o token para string
 
                     // Retorna o Id do Usuário e o token JWT gerado como resposta
-                    return Ok(new { redirectTo = "minhaconta/index", idUser = aluno[0].Id, token = tokenString });
+                    return Ok(new { idUser = aluno[0].Id, token = tokenString });
                 }
                 else
                 {
