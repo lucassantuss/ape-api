@@ -104,7 +104,7 @@ namespace Ape.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Alterar(string id, [FromBody] AlunoDto dto)
+        public IActionResult Alterar(string id, [FromBody] AlterarAlunoDto dto)
         {
             var resultado = _alunoBll.AlterarAluno(id, dto);
             if (resultado.Resultado)

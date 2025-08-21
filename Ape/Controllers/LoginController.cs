@@ -44,6 +44,8 @@ namespace Ape.Controllers
         /// <response code="200">Login realizado com sucesso.</response>
         /// <response code="401">Usuário ou senha inválidos.</response>
         [HttpPost("Entrar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Entrar([FromBody] LoginDto login)
         {
             if (login.TipoUsuario == "aluno")
@@ -93,7 +95,7 @@ namespace Ape.Controllers
                 List<Aluno> aluno = _alunoBll.PesquisarAluno(dto);
 
                 if (aluno != null)
-                    return Ok(new { redirectTo = "/dashboard" }); // Caminho do frontend
+                    return Ok();
                 else
                     return Unauthorized(new { message = "Usuário ou senha inválidos." });
             }

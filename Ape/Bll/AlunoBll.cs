@@ -161,7 +161,7 @@ namespace Ape.Bll
         }
 
         // Alterar Aluno
-        public RetornoAcaoDto AlterarAluno(string id, AlunoDto alunoDto)
+        public RetornoAcaoDto AlterarAluno(string id, AlterarAlunoDto alunoDto)
         {
             RetornoAcaoDto retorno = new RetornoAcaoDto();
             try
@@ -179,7 +179,6 @@ namespace Ape.Bll
                     .Set(a => a.Usuario, alunoDto.Usuario)
                     .Set(a => a.Email, alunoDto.Email)
                     .Set(a => a.CPF, alunoDto.CPF)
-                    .Set(a => a.Senha, alunoDto.Senha)
                     .Set(a => a.IdPersonal, alunoDto.IdPersonal.ToString());
 
                 _database.UpdateOne(a => a.Id == alunoExistente.Id, update);

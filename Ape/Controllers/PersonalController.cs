@@ -1,4 +1,5 @@
 ﻿using Ape.Bll;
+using Ape.Dtos;
 using Ape.Entity;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
@@ -94,7 +95,7 @@ namespace Ape.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Alterar(string id, [FromBody] PersonalDto dto)
+        public IActionResult Alterar(string id, [FromBody] AlterarPersonalDto dto)
         {
             var resultado = _personalBll.AlterarPersonal(id, dto);
             return resultado.Resultado ? Ok(resultado) : BadRequest(resultado);

@@ -1,4 +1,5 @@
-﻿using Ape.Entity;
+﻿using Ape.Dtos;
+using Ape.Entity;
 using MongoDB.Driver;
 
 namespace Ape.Bll
@@ -97,7 +98,7 @@ namespace Ape.Bll
         }
 
         // Alterar Personal
-        public RetornoAcaoDto AlterarPersonal(string id, PersonalDto dto)
+        public RetornoAcaoDto AlterarPersonal(string id, AlterarPersonalDto dto)
         {
             var retorno = new RetornoAcaoDto();
             try
@@ -114,7 +115,6 @@ namespace Ape.Bll
                     .Set(p => p.Nome, dto.Nome)
                     .Set(p => p.Usuario, dto.Usuario)
                     .Set(p => p.Email, dto.Email)
-                    .Set(p => p.Senha, dto.Senha)
                     .Set(p => p.CPF, dto.CPF)
                     .Set(p => p.CREF, dto.CREF)
                     .Set(p => p.Estado, dto.Estado)
