@@ -26,6 +26,8 @@ namespace Ape.Controllers
         /// <response code="200">Personal criado com sucesso.</response>
         /// <response code="400">Erro ao criar personal.</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Criar([FromBody] PersonalDto dto)
         {
             var resultado = _personalBll.CriarPersonal(dto);
@@ -38,6 +40,7 @@ namespace Ape.Controllers
         /// <returns>Lista de personais.</returns>
         /// <response code="200">Lista retornada com sucesso.</response>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Listar()
         {
             var lista = _personalBll.ListarPersonais();
@@ -52,6 +55,8 @@ namespace Ape.Controllers
         /// <response code="200">Personal encontrado.</response>
         /// <response code="404">Personal não encontrado.</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorId(string id)
         {
             var personal = _personalBll.PesquisarPersonalPorId(id);
@@ -68,6 +73,8 @@ namespace Ape.Controllers
         /// <response code="200">Personal encontrado.</response>
         /// <response code="404">Personal não encontrado.</response>
         [HttpGet("usuario/{usuario}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorUsuario(string usuario)
         {
             var personal = _personalBll.PesquisarPersonalPorUsuario(usuario);
@@ -85,6 +92,8 @@ namespace Ape.Controllers
         /// <response code="200">Personal alterado com sucesso.</response>
         /// <response code="400">Erro ao alterar personal.</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Alterar(string id, [FromBody] PersonalDto dto)
         {
             var resultado = _personalBll.AlterarPersonal(id, dto);
@@ -99,6 +108,8 @@ namespace Ape.Controllers
         /// <response code="200">Personal excluído com sucesso.</response>
         /// <response code="400">Erro ao excluir personal.</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Excluir(string id)
         {
             var resultado = _personalBll.ExcluirPersonal(id);
@@ -114,6 +125,8 @@ namespace Ape.Controllers
         /// <response code="200">Senha redefinida com sucesso.</response>
         /// <response code="400">Erro ao redefinir senha.</response>
         [HttpPut("{usuario}/senha")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult RedefinirSenha(string usuario, [FromQuery] string novaSenha)
         {
             var resultado = _personalBll.RedefinirSenha(usuario, novaSenha);
@@ -127,6 +140,7 @@ namespace Ape.Controllers
         /// <returns>Lista de alunos do personal.</returns>
         /// <response code="200">Lista retornada com sucesso.</response>
         [HttpGet("{idPersonal}/alunos")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult ListarAlunos(string idPersonal)
         {
             var alunos = _personalBll.PesquisarAlunosDoPersonal(idPersonal, _alunosCollection);
@@ -141,6 +155,8 @@ namespace Ape.Controllers
         /// <response code="200">Personal encontrado.</response>
         /// <response code="404">Nenhum personal vinculado a este aluno.</response>
         [HttpGet("aluno/{idAluno}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorAluno(string idAluno)
         {
             var personal = _personalBll.PesquisarPersonalPorAluno(idAluno, _alunosCollection);

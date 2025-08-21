@@ -8,6 +8,7 @@ using System.Text;
 using MongoDB.Driver;
 using Ape.Entity;
 using Ape.Bll;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,7 +52,21 @@ builder.Services.AddControllers(); // Adiciona suporte para controllers
 builder.Services.AddEndpointsApiExplorer(); // Adiciona o serviço para geração automática de endpoints para a documentação
 
 // Configuração do Swagger para gerar a documentação da API
-builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1.0", new OpenApiInfo { Title = "APE WebAPI", Version = "v1.0" }); });
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1.0",
+        new OpenApiInfo
+        {
+            Title = "APE WebAPI",
+            Description = "Essa é a API utilizada no sistema APE",
+            Version = "v1.0"
+        }
+    );
+
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
 // Configura a conexão com o banco de dados usando a string de conexão obtida das variáveis de ambiente ou do arquivo de configuração
 var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings_Ape")

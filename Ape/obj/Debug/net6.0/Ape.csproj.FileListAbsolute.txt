@@ -449,3 +449,5 @@ C:\Users\081210009\Pictures\GITHUB\ape-api\Ape\bin\Debug\net6.0\MongoDB.Driver.d
 C:\Users\081210009\Pictures\GITHUB\ape-api\Ape\bin\Debug\net6.0\SharpCompress.dll
 C:\Users\081210009\Pictures\GITHUB\ape-api\Ape\bin\Debug\net6.0\Snappier.dll
 C:\Users\081210009\Pictures\GITHUB\ape-api\Ape\bin\Debug\net6.0\ZstdSharp.dll
+C:\GITHUB\ape-api\Ape\bin\Debug\net6.0\Ape.xml
+C:\GITHUB\ape-api\Ape\obj\Debug\net6.0\Ape.xml

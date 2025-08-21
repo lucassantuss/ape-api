@@ -23,6 +23,8 @@ namespace Ape.Controllers
         /// <response code="200">Aluno criado com sucesso.</response>
         /// <response code="400">Erro ao criar aluno (ex: usuário já existe).</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Criar([FromBody] AlunoDto dto)
         {
             var resultado = _alunoBll.CriarAluno(dto);
@@ -42,6 +44,8 @@ namespace Ape.Controllers
         /// <response code="200">Senha redefinida com sucesso.</response>
         /// <response code="400">Erro ao redefinir senha.</response>
         [HttpPut("{usuario}/senha")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult RedefinirSenha(string usuario, [FromQuery] string novaSenha)
         {
             var resultado = _alunoBll.RedefinirSenha(usuario, novaSenha);
@@ -59,6 +63,8 @@ namespace Ape.Controllers
         /// <response code="200">Aluno encontrado.</response>
         /// <response code="404">Aluno não encontrado.</response>
         [HttpGet("usuario/{usuario}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorUsuario(string usuario)
         {
             var aluno = _alunoBll.PesquisarAlunoPorUsuario(usuario);
@@ -76,6 +82,8 @@ namespace Ape.Controllers
         /// <response code="200">Aluno encontrado.</response>
         /// <response code="404">Aluno não encontrado.</response>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorId(string id)
         {
             var aluno = _alunoBll.PesquisarAlunoPorId(id);
@@ -94,6 +102,8 @@ namespace Ape.Controllers
         /// <response code="200">Aluno atualizado com sucesso.</response>
         /// <response code="400">Erro ao atualizar aluno.</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Alterar(string id, [FromBody] AlunoDto dto)
         {
             var resultado = _alunoBll.AlterarAluno(id, dto);
@@ -111,6 +121,8 @@ namespace Ape.Controllers
         /// <response code="200">Aluno excluído com sucesso.</response>
         /// <response code="400">Erro ao excluir aluno.</response>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Excluir(string id)
         {
             var resultado = _alunoBll.ExcluirAluno(id);
