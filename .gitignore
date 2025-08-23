@@ -482,3 +482,24 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+Ape/Ape.csproj
+Ape/obj/Ape.csproj.nuget.dgspec.json
+Ape/obj/Ape.csproj.nuget.g.props
+Ape/obj/Debug/net6.0/Ape.AssemblyInfo.cs
+Ape/obj/Debug/net6.0/Ape.AssemblyInfoInputs.cache
+Ape/obj/Debug/net6.0/Ape.assets.cache
+Ape/obj/Debug/net6.0/Ape.csproj.CoreCompileInputs.cache
+Ape/obj/Debug/net6.0/Ape.csproj.FileListAbsolute.txt
+Ape/obj/Debug/net6.0/Ape.dll
+Ape/obj/Debug/net6.0/Ape.GeneratedMSBuildEditorConfig.editorconfig
+Ape/obj/Debug/net6.0/Ape.genruntimeconfig.cache
+Ape/obj/Debug/net6.0/Ape.MvcApplicationPartsAssemblyInfo.cs
+Ape/obj/Debug/net6.0/Ape.pdb
+Ape/obj/Debug/net6.0/Ape.sourcelink.json
+Ape/obj/Debug/net6.0/apphost.exe
+Ape/obj/Debug/net6.0/ref/Ape.dll
+Ape/obj/Debug/net6.0/refint/Ape.dll
+Ape/obj/Debug/net6.0/staticwebassets.build.json
+Ape/obj/Debug/net6.0/staticwebassets/msbuild.build.Ape.props
+Ape/obj/project.assets.json
+Ape/obj/project.nuget.cache
