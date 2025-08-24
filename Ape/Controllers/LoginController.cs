@@ -55,7 +55,7 @@ namespace Ape.Controllers
                 List<Aluno> aluno = _alunoBll.PesquisarAluno(dto);
 
                 if (aluno != null && aluno.Count > 0 &&
-                   (aluno[0].Usuario == login.Usuario && 
+                   (aluno[0].Usuario.ToUpper() == login.Usuario.ToUpper() && 
                     aluno[0].Senha == login.Senha))
                 {
                     // Cria um manipulador de token JWT
