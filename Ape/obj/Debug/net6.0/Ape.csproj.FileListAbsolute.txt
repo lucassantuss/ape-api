@@ -453,3 +453,5 @@ C:\Users\081210009\Documents\GitHub\ape-api\Ape\obj\Debug\net6.0\Ape.xml
 C:\Users\081210009\Documents\GitHub\ape-api\Ape\obj\Debug\net6.0\Ape.pdb
 C:\Users\081210009\Documents\GitHub\ape-api\Ape\obj\Debug\net6.0\Ape.genruntimeconfig.cache
 C:\Users\081210009\Documents\GitHub\ape-api\Ape\obj\Debug\net6.0\ref\Ape.dll
+C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\bin\Debug\net6.0\Ape.xml
+C:\Users\Johns\Documents\Faculdade\TCC\ape-api\Ape\obj\Debug\net6.0\Ape.xml
