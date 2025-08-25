@@ -1,6 +1,7 @@
 ﻿using Ape.Bll;
 using Ape.Dtos;
 using Ape.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 
@@ -8,6 +9,7 @@ namespace Ape.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class PersonalController : ControllerBase
     {
         private readonly PersonalBll _personalBll;

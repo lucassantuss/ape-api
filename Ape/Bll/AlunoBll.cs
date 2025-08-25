@@ -16,17 +16,83 @@ namespace Ape.Bll
             _client = new HttpClient();
         }
 
-        // Pesquisar Aluno
-        public List<Aluno> PesquisarAluno(LoginDto alunoDto)
+        // Pesquisar Aluno por Usuário
+        public List<AlunoPesquisaDto> PesquisarAlunoPorUsuario(string usuario)
         {
             try
             {
-                List<Aluno> aluno = new List<Aluno>();
-                aluno = _database
-                    .Find(f => f.Usuario.ToUpper() == alunoDto.Usuario.ToUpper())
-                    .ToList();
+                return _database
+                    .Find(f => f.Usuario.ToUpper() == usuario.ToUpper())
+                    .Project(xs => new AlunoPesquisaDto
+                    {
+                        Id = xs.Id,
+                        Usuario = xs.Usuario,
+                        Nome = xs.Nome,
+                        Email = xs.Email,
+                        CPF = xs.CPF,                        
+                        Estado = xs.Estado,
+                        Cidade = xs.Cidade,
 
-                return aluno;
+                        IdPersonal = xs.IdPersonal,
+                        //NomePersonal = xs.NomePersonal
+                    })
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao pesquisar aluno por usuário: " + ex.Message, ex);
+            }
+        }
+
+        // Pesquisar Aluno Por Id
+        public AlunoPesquisaDto PesquisarAlunoPorId(string id)
+        {
+            try
+            {
+                return _database
+                    .Find(f => f.Id == id)
+                    .Project(xs => new AlunoPesquisaDto
+                    {
+                        Id = xs.Id,
+                        Usuario = xs.Usuario,
+                        Nome = xs.Nome,
+                        Email = xs.Email,
+                        CPF = xs.CPF,
+                        Estado = xs.Estado,
+                        Cidade = xs.Cidade,
+
+                        IdPersonal = xs.IdPersonal,
+                        //NomePersonal = xs.NomePersonal
+                    })
+                    .FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        // Pesquisa Aluno para Login (Usuário + Senha)
+        public AlunoPesquisaDto PesquisarAlunoLogin(string usuario, string senha)
+        {
+            try
+            {
+                return _database
+                    .Find(f => f.Usuario.ToUpper() == usuario.ToUpper() && f.Senha == senha)
+                    .Project(xs => new AlunoPesquisaDto
+                    {
+                        Id = xs.Id,
+                        Usuario = xs.Usuario,
+                        Nome = xs.Nome,
+                        Email = xs.Email,
+                        CPF = xs.CPF,
+                        Estado = xs.Estado,
+                        Cidade = xs.Cidade,
+
+                        IdPersonal = xs.IdPersonal,
+                        //NomePersonal = xs.NomePersonal
+                    })
+                    .FirstOrDefault();
             }
             catch (Exception erro)
             {
@@ -119,40 +185,6 @@ namespace Ape.Bll
                 retorno.Mensagem = "Senha redefinida com sucesso.";
                 retorno.Resultado = true;
                 return retorno;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        // Pesquisar Aluno Por Usuario
-        public AlunoDto PesquisarAlunoPorUsuario(string usuario)
-        {
-            try
-            {
-                var aluno = _database.Find(f => f.Usuario == usuario).FirstOrDefault();
-                if (aluno == null)
-                    return null;
-
-                return new ConversorAluno().ConverterAluno(aluno);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        // Pesquisar Aluno Por Id
-        public AlunoDto PesquisarAlunoPorId(string id)
-        {
-            try
-            {
-                var aluno = _database.Find(f => f.Id == id).FirstOrDefault();
-                if (aluno == null)
-                    return null;
-
-                return new ConversorAluno().ConverterAluno(aluno);
             }
             catch (Exception ex)
             {

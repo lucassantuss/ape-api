@@ -1,11 +1,13 @@
 ﻿using Ape.Bll;
 using Ape.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ape.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class AlunoController : ControllerBase
     {
         private readonly AlunoBll _alunoBll;

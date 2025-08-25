@@ -54,18 +54,48 @@ builder.Services.AddEndpointsApiExplorer(); // Adiciona o serviço para geração a
 // Configuração do Swagger para gerar a documentação da API
 builder.Services.AddSwaggerGen(c =>
 {
+    // Cria um documento Swagger (OpenAPI) com informações básicas da API
     c.SwaggerDoc("v1.0",
         new OpenApiInfo
         {
-            Title = "APE WebAPI",
-            Description = "Essa é a API utilizada no sistema APE",
-            Version = "v1.0"
+            Title = "APE WebAPI", // Título da API que aparecerá na UI do Swagger
+            Description = "API utilizada no sistema APE", // Descrição da API
+            Version = "v1.0" // Versão da API
         }
     );
 
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
+    // Configura o esquema de segurança para autenticação via JWT
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization", // Nome do cabeçalho onde o token será enviado
+        Type = SecuritySchemeType.ApiKey, // Tipo ApiKey indica que será passado via header
+        Scheme = "Bearer", // Esquema de autenticação: Bearer Token
+        BearerFormat = "JWT", // Formato esperado do token
+        In = ParameterLocation.Header, // Define que o token virá no cabeçalho da requisição
+        Description = "Insira o token JWT no campo abaixo:\n\nExemplo: Bearer {seu token}" // Instrução que aparecerá no Swagger UI
+    });
+
+    // Exige que todas as operações utilizem o esquema de segurança configurado acima
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme, // Informa que é um esquema de segurança definido
+                    Id = "Bearer" // Nome do esquema (mesmo definido acima)
+                }
+            },
+            Array.Empty<string>() // Escopos (não utilizados aqui, pois JWT já contém as permissões)
+        }
+    });
+
+    // Carrega automaticamente os comentários XML do código (summary, param, returns etc.)
+    // Isso gera uma documentação mais detalhada no Swagger UI
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"; // Nome do arquivo XML baseado no nome do assembly
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile); // Caminho completo até o arquivo XML
+    c.IncludeXmlComments(xmlPath); // Inclui os comentários XML na documentação do Swagger
 });
 
 // Configura a conexão com o banco de dados usando a string de conexão obtida das variáveis de ambiente ou do arquivo de configuração

@@ -50,13 +50,9 @@ namespace Ape.Controllers
         {
             if (login.TipoUsuario == "aluno")
             {
-                LoginDto dto = new LoginDto();
-                dto.Usuario = login.Usuario;
-                List<Aluno> aluno = _alunoBll.PesquisarAluno(dto);
+                var aluno = _alunoBll.PesquisarAlunoLogin(login.Usuario, login.Senha);
 
-                if (aluno != null && aluno.Count > 0 &&
-                   (aluno[0].Usuario.ToUpper() == login.Usuario.ToUpper() && 
-                    aluno[0].Senha == login.Senha))
+                if (aluno != null)
                 {
                     // Cria um manipulador de token JWT
                     var tokenHandler = new JwtSecurityTokenHandler();
@@ -69,8 +65,8 @@ namespace Ape.Controllers
                     {
                         Subject = new ClaimsIdentity(new Claim[]
                         {
-                                new Claim(ClaimTypes.NameIdentifier, aluno[0].Id), // ID do usuário wsfsd
-                                new Claim(ClaimTypes.Name, aluno[0].Usuario) // Login do usuário
+                                new Claim(ClaimTypes.NameIdentifier, aluno.Id), // ID do usuário wsfsd
+                                new Claim(ClaimTypes.Name, aluno.Usuario) // Login do usuário
                         }),
                         Expires = DateTime.UtcNow.AddHours(2), // Define a expiração do token para 2 horas
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature) // Configura a assinatura com a chave secreta
@@ -81,7 +77,7 @@ namespace Ape.Controllers
                     var tokenString = tokenHandler.WriteToken(token); // Converte o token para string
 
                     // Retorna o Id do Usuário e o token JWT gerado como resposta
-                    return Ok(new { idUser = aluno[0].Id, token = tokenString });
+                    return Ok(new { idUser = aluno.Id, token = tokenString });
                 }
                 else
                 {
@@ -90,15 +86,10 @@ namespace Ape.Controllers
             }
             else if (login.TipoUsuario == "personal")
             {
-                LoginDto dto = new LoginDto();
-                dto.Usuario = login.Usuario;
-                List<Aluno> aluno = _alunoBll.PesquisarAluno(dto);
-
-                if (aluno != null)
-                    return Ok();
-                else
-                    return Unauthorized(new { message = "Usuário ou senha inválidos." });
+                // TODO: fazer lógica parecida para personal
+                return Unauthorized(new { message = "Login de personal ainda não implementado." });
             }
+
             return Unauthorized(new { message = "Usuário ou senha inválidos." });
         }
 

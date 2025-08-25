@@ -24,6 +24,12 @@ namespace Ape.Entity
         [BsonElement("CPF")]
         public string CPF { get; set; }
 
+        [BsonElement("Estado")]
+        public string Estado { get; set; }
+
+        [BsonElement("Cidade")]
+        public string Cidade { get; set; }
+
         [BsonElement("Personal")]
         public string IdPersonal { get; set; }
     }
