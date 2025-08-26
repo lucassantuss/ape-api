@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Ape.Controllers
 {
     [Route("[controller]")]
-    [ApiController]
-    [Authorize]
+    [ApiController]    
     public class AlunoController : ControllerBase
     {
         private readonly AlunoBll _alunoBll;
@@ -46,6 +45,7 @@ namespace Ape.Controllers
         /// <response code="200">Senha redefinida com sucesso.</response>
         /// <response code="400">Erro ao redefinir senha.</response>
         [HttpPut("{usuario}/senha")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult RedefinirSenha(string usuario, [FromQuery] string novaSenha)
@@ -65,6 +65,7 @@ namespace Ape.Controllers
         /// <response code="200">Aluno encontrado.</response>
         /// <response code="404">Aluno não encontrado.</response>
         [HttpGet("usuario/{usuario}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorUsuario(string usuario)
@@ -84,6 +85,7 @@ namespace Ape.Controllers
         /// <response code="200">Aluno encontrado.</response>
         /// <response code="404">Aluno não encontrado.</response>
         [HttpGet("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorId(string id)
@@ -104,6 +106,7 @@ namespace Ape.Controllers
         /// <response code="200">Aluno atualizado com sucesso.</response>
         /// <response code="400">Erro ao atualizar aluno.</response>
         [HttpPut("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Alterar(string id, [FromBody] AlterarAlunoDto dto)
@@ -123,6 +126,7 @@ namespace Ape.Controllers
         /// <response code="200">Aluno excluído com sucesso.</response>
         /// <response code="400">Erro ao excluir aluno.</response>
         [HttpDelete("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Excluir(string id)

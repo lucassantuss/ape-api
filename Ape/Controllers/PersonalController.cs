@@ -8,8 +8,7 @@ using MongoDB.Driver;
 namespace Ape.Controllers
 {
     [Route("[controller]")]
-    [ApiController]
-    [Authorize]
+    [ApiController]    
     public class PersonalController : ControllerBase
     {
         private readonly PersonalBll _personalBll;
@@ -43,6 +42,7 @@ namespace Ape.Controllers
         /// <returns>Lista de personais.</returns>
         /// <response code="200">Lista retornada com sucesso.</response>
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Listar()
         {
@@ -58,6 +58,7 @@ namespace Ape.Controllers
         /// <response code="200">Personal encontrado.</response>
         /// <response code="404">Personal não encontrado.</response>
         [HttpGet("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorId(string id)
@@ -76,6 +77,7 @@ namespace Ape.Controllers
         /// <response code="200">Personal encontrado.</response>
         /// <response code="404">Personal não encontrado.</response>
         [HttpGet("usuario/{usuario}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorUsuario(string usuario)
@@ -95,6 +97,7 @@ namespace Ape.Controllers
         /// <response code="200">Personal alterado com sucesso.</response>
         /// <response code="400">Erro ao alterar personal.</response>
         [HttpPut("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Alterar(string id, [FromBody] AlterarPersonalDto dto)
@@ -111,6 +114,7 @@ namespace Ape.Controllers
         /// <response code="200">Personal excluído com sucesso.</response>
         /// <response code="400">Erro ao excluir personal.</response>
         [HttpDelete("{id}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Excluir(string id)
@@ -128,6 +132,7 @@ namespace Ape.Controllers
         /// <response code="200">Senha redefinida com sucesso.</response>
         /// <response code="400">Erro ao redefinir senha.</response>
         [HttpPut("{usuario}/senha")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult RedefinirSenha(string usuario, [FromQuery] string novaSenha)
@@ -143,6 +148,7 @@ namespace Ape.Controllers
         /// <returns>Lista de alunos do personal.</returns>
         /// <response code="200">Lista retornada com sucesso.</response>
         [HttpGet("{idPersonal}/alunos")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult ListarAlunos(string idPersonal)
         {
@@ -158,6 +164,7 @@ namespace Ape.Controllers
         /// <response code="200">Personal encontrado.</response>
         /// <response code="404">Nenhum personal vinculado a este aluno.</response>
         [HttpGet("aluno/{idAluno}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorAluno(string idAluno)
