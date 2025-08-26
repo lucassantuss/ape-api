@@ -68,6 +68,34 @@ namespace Ape.Bll
                 }).ToList();
         }
 
+        // Pesquisa Personal para Login (Usuário + Senha)
+        public PersonalPesquisaDto PesquisarPersonalLogin(string usuario, string senha)
+        {
+            try
+            {
+                return _database
+                    .Find(f => f.Usuario.ToUpper() == usuario.ToUpper() && f.Senha == senha)
+                    .Project(xs => new PersonalPesquisaDto
+                    {
+                        Id = xs.Id,
+                        Usuario = xs.Usuario,
+                        Nome = xs.Nome,
+                        Email = xs.Email,
+                        CPF = xs.CPF,
+                        Estado = xs.Estado,
+                        Cidade = xs.Cidade,
+
+                        //CategoriaProfissional = "",
+                        CREF = xs.CREF,
+                    })
+                    .FirstOrDefault();
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
+        }
+
         // Pesquisar por usuário
         public PersonalDto PesquisarPersonalPorUsuario(string usuario)
         {
