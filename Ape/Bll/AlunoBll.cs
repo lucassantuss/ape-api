@@ -1,7 +1,7 @@
 using MongoDB.Driver;
 using Ape.Entity;
-using Ape.Dtos;
 using Ape.Bll.Conversores;
+using Ape.Dtos.Aluno;
 
 namespace Ape.Bll
 {

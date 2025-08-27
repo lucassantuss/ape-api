@@ -1,5 +1,5 @@
 ﻿using Ape.Bll;
-using Ape.Dtos;
+using Ape.Dtos.Personal;
 using Ape.Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +42,6 @@ namespace Ape.Controllers
         /// <returns>Lista de personais.</returns>
         /// <response code="200">Lista retornada com sucesso.</response>
         [HttpGet]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Listar()
         {

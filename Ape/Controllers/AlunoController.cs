@@ -1,5 +1,5 @@
 ﻿using Ape.Bll;
-using Ape.Dtos;
+using Ape.Dtos.Aluno;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

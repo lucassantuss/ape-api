@@ -1,4 +1,4 @@
-﻿namespace Ape.Dtos
+﻿namespace Ape.Dtos.Aluno
 {
     public class AlterarAlunoDto
     {

@@ -1,4 +1,4 @@
-﻿using Ape.Dtos;
+﻿using Ape.Dtos.Personal;
 using Ape.Entity;
 using MongoDB.Driver;
 
@@ -51,20 +51,13 @@ namespace Ape.Bll
         }
 
         // Listar todos
-        public List<PersonalDto> ListarPersonais()
+        public List<PersonalSimplesDto> ListarPersonais()
         {
             return _database.AsQueryable()
-                .Select(p => new PersonalDto
+                .Select(p => new PersonalSimplesDto
                 {
                     Id = p.Id,
                     Nome = p.Nome,
-                    Usuario = p.Usuario,
-                    Email = p.Email,
-                    Senha = p.Senha,
-                    CPF = p.CPF,
-                    CREF = p.CREF,
-                    Estado = p.Estado,
-                    Cidade = p.Cidade
                 }).ToList();
         }
 

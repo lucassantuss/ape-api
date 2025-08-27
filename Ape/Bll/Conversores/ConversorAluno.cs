@@ -1,4 +1,4 @@
-﻿using Ape.Dtos;
+﻿using Ape.Dtos.Aluno;
 using Ape.Entity;
 
 namespace Ape.Bll.Conversores
