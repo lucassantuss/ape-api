@@ -34,7 +34,6 @@ namespace Ape.Bll
                         Cidade = xs.Cidade,
 
                         IdPersonal = xs.IdPersonal,
-                        //NomePersonal = xs.NomePersonal
                     })
                     .ToList();
             }
@@ -62,7 +61,6 @@ namespace Ape.Bll
                         Cidade = xs.Cidade,
 
                         IdPersonal = xs.IdPersonal,
-                        //NomePersonal = xs.NomePersonal
                     })
                     .FirstOrDefault();
             }
@@ -90,7 +88,6 @@ namespace Ape.Bll
                         Cidade = xs.Cidade,
 
                         IdPersonal = xs.IdPersonal,
-                        //NomePersonal = xs.NomePersonal
                     })
                     .FirstOrDefault();
             }
@@ -211,7 +208,7 @@ namespace Ape.Bll
                     .Set(a => a.Usuario, alunoDto.Usuario)
                     .Set(a => a.Email, alunoDto.Email)
                     .Set(a => a.CPF, alunoDto.CPF)
-                    .Set(a => a.IdPersonal, alunoDto.IdPersonal.ToString());
+                    .Set(a => a.IdPersonal, alunoDto.IdPersonal);
 
                 _database.UpdateOne(a => a.Id == alunoExistente.Id, update);
 

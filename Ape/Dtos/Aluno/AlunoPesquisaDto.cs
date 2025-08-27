@@ -11,6 +11,5 @@
         public string Cidade { get; set; }
 
         public string IdPersonal {  get; set; }
-        public string NomePersonal { get; set; }
     }
 }
