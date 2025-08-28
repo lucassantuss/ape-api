@@ -27,7 +27,7 @@ namespace Ape.Controllers
         /// <returns>Resultado da operação (sucesso ou erro).</returns>
         /// <response code="200">Personal criado com sucesso.</response>
         /// <response code="400">Erro ao criar personal.</response>
-        [HttpPost("Criar")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Criar([FromBody] PersonalDto dto)
@@ -41,7 +41,7 @@ namespace Ape.Controllers
         /// </summary>
         /// <returns>Lista de personais.</returns>
         /// <response code="200">Lista retornada com sucesso.</response>
-        [HttpGet("Listar")]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Listar()
         {

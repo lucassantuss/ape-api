@@ -30,12 +30,13 @@ namespace Ape.Controllers
         /// <returns>Retorna sucesso ou erro com mensagem.</returns>
         /// <response code="200">Aluno criado com sucesso.</response>
         /// <response code="400">Erro ao criar aluno (ex: usuário já existe).</response>
-        [HttpPost("Criar")]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Criar([FromBody] AlunoDto dto)
         {
             RetornoAcaoDto resultado = new RetornoAcaoDto();
+
             if(dto != null)
                 resultado = _alunoBll.CriarAluno(dto);
 
