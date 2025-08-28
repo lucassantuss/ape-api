@@ -1,7 +1,8 @@
-using MongoDB.Driver;
-using Ape.Entity;
 using Ape.Bll.Conversores;
 using Ape.Dtos.Aluno;
+using Ape.Dtos.Login;
+using Ape.Entity;
+using MongoDB.Driver;
 
 namespace Ape.Bll
 {
@@ -65,22 +66,27 @@ namespace Ape.Bll
         }
 
         // Pesquisa Aluno para Login (Usuário + Senha)
-        public AlunoPesquisaDto PesquisarAlunoLogin(string usuario, string senha)
+        public RetornoLoginDto PesquisarAlunoLogin(string usuario, string senha)
         {
             try
             {
-                return _database
-                    .Find(f => f.Usuario.ToUpper() == usuario.ToUpper() && f.Senha == senha)
-                    .Project(xs => new AlunoPesquisaDto
-                    {
-                        Id = xs.Id,
-                        Usuario = xs.Usuario,
-                        Nome = xs.Nome,
-                        Email = xs.Email,
-                        CPF = xs.CPF,
-                        IdPersonal = xs.IdPersonal,
-                    })
+                var aluno = _database
+                    .Find(f => f.Usuario.ToUpper() == usuario.ToUpper())
                     .FirstOrDefault();
+
+                if (aluno == null)
+                    return null;
+
+                // Verifica a senha criptografada com BCrypt
+                bool senhaValida = BCrypt.Net.BCrypt.Verify(senha, aluno.Senha);
+                if (!senhaValida)
+                    return null;
+
+                return new RetornoLoginDto
+                {
+                    Id = aluno.Id,
+                    Usuario = aluno.Usuario,
+                };
             }
             catch (Exception erro)
             {
@@ -100,6 +106,9 @@ namespace Ape.Bll
 
                 if (validaCadastro.Resultado)
                 {
+                    // Senha criptografada
+                    aluno.Senha = BCrypt.Net.BCrypt.HashPassword(alunoDto.Senha);
+
                     _database.InsertOne(aluno);
                 }
                 retorno.Mensagem = validaCadastro.Mensagem;

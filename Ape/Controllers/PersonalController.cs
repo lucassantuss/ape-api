@@ -32,8 +32,15 @@ namespace Ape.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Criar([FromBody] PersonalDto dto)
         {
-            var resultado = _personalBll.CriarPersonal(dto);
-            return resultado.Resultado ? Ok(resultado) : BadRequest(resultado);
+            RetornoAcaoDto resultado = new RetornoAcaoDto();
+
+            if (dto != null)
+                resultado = _personalBll.CriarPersonal(dto);
+
+            if (resultado.Resultado)
+                return Ok(resultado);
+
+            return BadRequest(resultado);
         }
 
         /// <summary>

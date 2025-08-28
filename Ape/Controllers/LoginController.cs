@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Ape.Dtos;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Ape.Bll;
+using Ape.Dtos.Login;
 
 namespace Ape.Controllers
 {
@@ -48,6 +48,7 @@ namespace Ape.Controllers
         public IActionResult LoginAluno([FromBody] LoginDto login)
         {
             var aluno = _alunoBll.PesquisarAlunoLogin(login.Usuario, login.Senha);
+
             if (aluno == null)
                 return Unauthorized(new { message = "Usuário ou senha inválidos." });
 
@@ -70,6 +71,7 @@ namespace Ape.Controllers
         public IActionResult LoginPersonal([FromBody] LoginDto login)
         {
             var personal = _personalBll.PesquisarPersonalLogin(login.Usuario, login.Senha);
+
             if (personal == null)
                 return Unauthorized(new { message = "Usuário ou senha inválidos." });
 

@@ -1,4 +1,4 @@
-﻿namespace Ape.Dtos
+﻿namespace Ape.Dtos.Login
 {
     public class LoginDto
     {

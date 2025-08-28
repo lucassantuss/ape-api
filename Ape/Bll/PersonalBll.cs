@@ -1,4 +1,5 @@
-﻿using Ape.Dtos.Personal;
+﻿using Ape.Dtos.Login;
+using Ape.Dtos.Personal;
 using Ape.Entity;
 using MongoDB.Driver;
 
@@ -26,12 +27,15 @@ namespace Ape.Bll
                     return retorno;
                 }
 
+                // Senha criptografada
+                string senhaHash = BCrypt.Net.BCrypt.HashPassword(dto.Senha);
+
                 _database.InsertOne(new Personal
                 {
                     Nome = dto.Nome,
                     Usuario = dto.Usuario,
                     Email = dto.Email,
-                    Senha = dto.Senha,
+                    Senha = senhaHash,
                     CPF = dto.CPF,
                     CREF = dto.CREF,
                     Estado = dto.Estado,
@@ -62,26 +66,27 @@ namespace Ape.Bll
         }
 
         // Pesquisa Personal para Login (Usuário + Senha)
-        public PersonalPesquisaDto PesquisarPersonalLogin(string usuario, string senha)
+        public RetornoLoginDto PesquisarPersonalLogin(string usuario, string senha)
         {
             try
             {
-                return _database
-                    .Find(f => f.Usuario.ToUpper() == usuario.ToUpper() && f.Senha == senha)
-                    .Project(xs => new PersonalPesquisaDto
-                    {
-                        Id = xs.Id,
-                        Usuario = xs.Usuario,
-                        Nome = xs.Nome,
-                        Email = xs.Email,
-                        CPF = xs.CPF,
-                        Estado = xs.Estado,
-                        Cidade = xs.Cidade,
-
-                        //CategoriaProfissional = "",
-                        CREF = xs.CREF,
-                    })
+                var personal = _database
+                    .Find(f => f.Usuario.ToUpper() == usuario.ToUpper())
                     .FirstOrDefault();
+
+                if (personal == null)
+                    return null;
+
+                // Verifica a senha criptografada com BCrypt
+                bool senhaValida = BCrypt.Net.BCrypt.Verify(senha, personal.Senha);
+                if (!senhaValida)
+                    return null;
+
+                return new RetornoLoginDto
+                {
+                    Id = personal.Id,
+                    Usuario = personal.Usuario,
+                };
             }
             catch (Exception erro)
             {
