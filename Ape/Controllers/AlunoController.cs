@@ -28,7 +28,9 @@ namespace Ape.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Criar([FromBody] AlunoDto dto)
         {
-            var resultado = _alunoBll.CriarAluno(dto);
+            RetornoAcaoDto resultado = new RetornoAcaoDto();
+            if(dto != null)
+                resultado = _alunoBll.CriarAluno(dto);
 
             if (resultado.Resultado)
                 return Ok(resultado);
