@@ -5,12 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ape.Controllers
 {
+    /// <summary>
+    /// Controller de Alunos
+    /// </summary>
     [Route("[controller]")]
     [ApiController]    
     public class AlunoController : ControllerBase
     {
         private readonly AlunoBll _alunoBll;
 
+        /// <summary>
+        /// Construtor para instanciar a Bll
+        /// </summary>
+        /// <param name="alunoBll"></param>
         public AlunoController(AlunoBll alunoBll)
         {
             _alunoBll = alunoBll;
@@ -23,7 +30,7 @@ namespace Ape.Controllers
         /// <returns>Retorna sucesso ou erro com mensagem.</returns>
         /// <response code="200">Aluno criado com sucesso.</response>
         /// <response code="400">Erro ao criar aluno (ex: usuário já existe).</response>
-        [HttpPost]
+        [HttpPost("Criar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult Criar([FromBody] AlunoDto dto)

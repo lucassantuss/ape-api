@@ -30,9 +30,6 @@ namespace Ape.Bll
                         Nome = xs.Nome,
                         Email = xs.Email,
                         CPF = xs.CPF,                        
-                        Estado = xs.Estado,
-                        Cidade = xs.Cidade,
-
                         IdPersonal = xs.IdPersonal,
                     })
                     .ToList();
@@ -57,9 +54,6 @@ namespace Ape.Bll
                         Nome = xs.Nome,
                         Email = xs.Email,
                         CPF = xs.CPF,
-                        Estado = xs.Estado,
-                        Cidade = xs.Cidade,
-
                         IdPersonal = xs.IdPersonal,
                     })
                     .FirstOrDefault();
@@ -84,9 +78,6 @@ namespace Ape.Bll
                         Nome = xs.Nome,
                         Email = xs.Email,
                         CPF = xs.CPF,
-                        Estado = xs.Estado,
-                        Cidade = xs.Cidade,
-
                         IdPersonal = xs.IdPersonal,
                     })
                     .FirstOrDefault();
