@@ -95,7 +95,6 @@ namespace Ape.Controllers
         /// <response code="200">Aluno encontrado.</response>
         /// <response code="404">Aluno não encontrado.</response>
         [HttpGet("{id}")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult PesquisarPorId(string id)
