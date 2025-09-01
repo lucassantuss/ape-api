@@ -153,7 +153,6 @@ namespace Ape.Controllers
         /// <returns>Lista de alunos do personal.</returns>
         /// <response code="200">Lista retornada com sucesso.</response>
         [HttpGet("{idPersonal}/alunos")]
-        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult ListarAlunos(string idPersonal)
         {

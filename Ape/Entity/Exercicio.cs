@@ -9,11 +9,20 @@ namespace Ape.Entity
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        [BsonElement("Data")]
-        public string Data { get; set; }
+        [BsonElement("Nome")]
+        public string Nome { get; set; }
 
-        [BsonElement("Repeticoes")]
-        public string Repeticoes { get; set; }
+        [BsonElement("DataExecucao")]
+        public string DataExecucao { get; set; }
+
+        [BsonElement("QuantidadeRepeticoes")]
+        public string QuantidadeRepeticoes { get; set; }
+
+        [BsonElement("PorcentagemAcertos")]
+        public string PorcentagemAcertos { get; set; }
+
+        [BsonElement("TempoExecutado")]
+        public string TempoExecutado { get; set; }
 
         [BsonElement("ObservacoesAluno")]
         public string ObservacoesAluno { get; set; }
@@ -22,6 +31,6 @@ namespace Ape.Entity
         public string ObservacoesPersonal { get; set; }
 
         [BsonElement("Aluno")]
-        public Aluno Aluno { get; set; }
+        public string IdAluno { get; set; }
     }
 }

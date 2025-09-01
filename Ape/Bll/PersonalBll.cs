@@ -1,4 +1,5 @@
-﻿using Ape.Dtos.Login;
+﻿using Ape.Dtos.Aluno;
+using Ape.Dtos.Login;
 using Ape.Dtos.Personal;
 using Ape.Entity;
 using MongoDB.Driver;
@@ -118,9 +119,15 @@ namespace Ape.Bll
         }
 
         // Listar alunos do personal
-        public List<Aluno> PesquisarAlunosDoPersonal(string idPersonal, IMongoCollection<Aluno> alunosCollection)
+        public List<AlunoSimplesDto> PesquisarAlunosDoPersonal(string idPersonal, IMongoCollection<Aluno> alunosCollection)
         {
-            return alunosCollection.Find(f => f.IdPersonal == idPersonal).ToList();
+            return alunosCollection.Find(f => f.IdPersonal == idPersonal)
+                .Project(xs => new AlunoSimplesDto
+                {
+                    Id = xs.Id,
+                    Nome = xs.Nome,
+                    Email = xs.Email,
+                }).ToList();
         }
 
         // Alterar Personal
