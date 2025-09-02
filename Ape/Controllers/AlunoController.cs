@@ -146,5 +146,24 @@ namespace Ape.Controllers
 
             return BadRequest(resultado);
         }
+
+        /// <summary>
+        /// Remove o vínculo do Personal de um aluno.
+        /// </summary>
+        /// <param name="id">ID do aluno.</param>
+        /// <returns>Retorna sucesso ou erro.</returns>
+        /// <response code="200">Personal desvinculado com sucesso.</response>
+        /// <response code="400">Erro ao remover vínculo.</response>
+        [HttpPut("{id}/remover-personal")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult RemoverPersonal(string id)
+        {
+            var resultado = _alunoBll.RemoverPersonal(id);
+            if (resultado.Resultado)
+                return Ok(resultado);
+
+            return BadRequest(resultado);
+        }
     }
 }

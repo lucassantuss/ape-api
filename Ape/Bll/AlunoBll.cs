@@ -247,5 +247,36 @@ namespace Ape.Bll
                 throw new Exception(ex.Message);
             }
         }
+
+        // Remover vínculo de Personal do Aluno
+        public RetornoAcaoDto RemoverPersonal(string idAluno)
+        {
+            RetornoAcaoDto retorno = new RetornoAcaoDto();
+
+            try
+            {
+                var aluno = _database.Find(f => f.Id == idAluno).FirstOrDefault();
+                if (aluno == null)
+                {
+                    retorno.Mensagem = "Aluno não encontrado.";
+                    retorno.Resultado = false;
+                    return retorno;
+                }
+
+                // Atualiza apenas o campo IdPersonal para null ou vazio
+                var update = Builders<Aluno>.Update.Set(a => a.IdPersonal, null);
+                _database.UpdateOne(a => a.Id == aluno.Id, update);
+
+                retorno.Mensagem = "Personal desvinculado com sucesso.";
+                retorno.Resultado = true;
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = $"Erro ao remover vínculo do personal: {ex.Message}";
+                retorno.Resultado = false;
+                return retorno;
+            }
+        }
     }
 }
