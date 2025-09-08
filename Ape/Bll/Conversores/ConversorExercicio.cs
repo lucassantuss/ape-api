@@ -11,7 +11,7 @@ namespace Ape.Bll.Conversores
             Exercicio entidade = new Exercicio();
 
             entidade.Nome = dto.Nome;
-            entidade.DataExecucao = DateTime.Now.ToString();
+            entidade.DataExecucao = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
             entidade.QuantidadeRepeticoes = dto.QuantidadeRepeticoes;
             entidade.PorcentagemAcertos = dto.PorcentagemAcertos;
             entidade.TempoExecutado = dto.TempoExecutado;
