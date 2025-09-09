@@ -38,9 +38,14 @@ namespace Ape.Bll
                     Email = dto.Email,
                     Senha = senhaHash,
                     CPF = dto.CPF,
-                    CREF = dto.CREF,
                     Estado = dto.Estado,
-                    Cidade = dto.Cidade
+                    Cidade = dto.Cidade,
+                    NumeroCREF = dto.NumeroCREF,
+                    CategoriaCREF = dto.CategoriaCREF,
+                    SiglaCREF = dto.SiglaCREF,
+
+                    AceiteTermoLGPD = dto.AceiteTermoLGPD,
+                    DataAceiteTermoLGPD = dto.DataAceiteTermoLGPD,
                 });
 
                 retorno.Mensagem = "Personal criado com sucesso.";
@@ -149,7 +154,9 @@ namespace Ape.Bll
                     .Set(p => p.Usuario, dto.Usuario)
                     .Set(p => p.Email, dto.Email)
                     .Set(p => p.CPF, dto.CPF)
-                    .Set(p => p.CREF, dto.CREF)
+                    .Set(p => p.NumeroCREF, dto.NumeroCREF)
+                    .Set(p => p.CategoriaCREF, dto.CategoriaCREF)
+                    .Set(p => p.SiglaCREF, dto.SiglaCREF)
                     .Set(p => p.Estado, dto.Estado)
                     .Set(p => p.Cidade, dto.Cidade);
 
@@ -233,9 +240,11 @@ namespace Ape.Bll
                 Email = p.Email,
                 Senha = p.Senha,
                 CPF = p.CPF,
-                CREF = p.CREF,
                 Estado = p.Estado,
-                Cidade = p.Cidade
+                Cidade = p.Cidade,
+                NumeroCREF = p.NumeroCREF,
+                CategoriaCREF = p.CategoriaCREF,
+                SiglaCREF = p.SiglaCREF,
             };
         }
     }

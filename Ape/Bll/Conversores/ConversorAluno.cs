@@ -16,6 +16,9 @@ namespace Ape.Bll.Conversores
             entidade.CPF = dto.CPF;
             entidade.Senha = dto.Senha;
             entidade.IdPersonal = dto.IdPersonal.ToString();
+            entidade.AceiteTermoLGPD = dto.AceiteTermoLGPD;
+            entidade.DataAceiteTermoLGPD = dto.DataAceiteTermoLGPD;
+            
             return entidade;
         }
 
@@ -30,6 +33,9 @@ namespace Ape.Bll.Conversores
             dto.CPF = entidade.CPF;
             dto.Senha = entidade.Senha;
             dto.IdPersonal = entidade.IdPersonal;
+            dto.AceiteTermoLGPD = entidade.AceiteTermoLGPD;
+            dto.DataAceiteTermoLGPD = entidade.DataAceiteTermoLGPD;
+
             return dto;
         }
     }

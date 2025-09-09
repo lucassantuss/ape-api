@@ -24,13 +24,25 @@ namespace Ape.Entity
         [BsonElement("CPF")]
         public string CPF { get; set; }
 
-        [BsonElement("CREF")]
-        public string CREF { get; set; }
+        [BsonElement("NumeroCREF")]
+        public string NumeroCREF { get; set; }
+
+        [BsonElement("CategoriaCREF")]
+        public string CategoriaCREF { get; set; }
+
+        [BsonElement("SiglaCREF")]
+        public string SiglaCREF { get; set; }
 
         [BsonElement("Estado")]
         public string Estado { get; set; }
 
         [BsonElement("Cidade")]
         public string Cidade { get; set; }
+
+        [BsonElement("AceiteTermoLGPD")]
+        public bool AceiteTermoLGPD { get; set; }
+
+        [BsonElement("DataAceiteTermoLGPD")]
+        public string DataAceiteTermoLGPD { get; set; }
     }
 }

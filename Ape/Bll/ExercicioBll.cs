@@ -140,5 +140,37 @@ namespace Ape.Bll
                 return retorno;
             }
         }
+
+        /// <summary>
+        /// Exclui um exercício pelo Id.
+        /// </summary>
+        public RetornoAcaoDto ExcluirExercicio(string idExercicio)
+        {
+            RetornoAcaoDto retorno = new RetornoAcaoDto();
+
+            try
+            {
+                var result = _database.DeleteOne(e => e.Id == idExercicio);
+
+                if (result.DeletedCount == 0)
+                {
+                    retorno.Mensagem = "Exercício não encontrado para exclusão.";
+                    retorno.Resultado = false;
+                }
+                else
+                {
+                    retorno.Mensagem = "Exercício excluído com sucesso.";
+                    retorno.Resultado = true;
+                }
+
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = $"Erro ao excluir exercício: {ex.Message}";
+                retorno.Resultado = false;
+                return retorno;
+            }
+        }
     }
 }

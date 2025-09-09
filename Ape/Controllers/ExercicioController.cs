@@ -91,5 +91,21 @@ namespace Ape.Controllers
 
             return BadRequest(resultado);
         }
+
+        /// <summary>
+        /// Exclui um exercício do histórico.
+        /// </summary>
+        [HttpDelete("{idExercicio}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult ExcluirExercicio(string idExercicio)
+        {
+            var resultado = _exercicioBll.ExcluirExercicio(idExercicio);
+
+            if (resultado.Resultado)
+                return Ok(resultado);
+
+            return BadRequest(resultado);
+        }
     }
 }

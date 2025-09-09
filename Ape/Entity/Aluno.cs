@@ -26,5 +26,11 @@ namespace Ape.Entity
 
         [BsonElement("Personal")]
         public string IdPersonal { get; set; }
+
+        [BsonElement("AceiteTermoLGPD")]
+        public bool AceiteTermoLGPD { get; set; }
+
+        [BsonElement("DataAceiteTermoLGPD")]
+        public string DataAceiteTermoLGPD { get; set; }
     }
 }

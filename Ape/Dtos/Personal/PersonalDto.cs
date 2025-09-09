@@ -6,7 +6,12 @@
     public string Email { get; set; }
     public string Senha { get; set; }
     public string CPF { get; set; }
-    public string CREF { get; set; }
+    public string NumeroCREF { get; set; }
+    public string CategoriaCREF { get; set; }
+    public string SiglaCREF { get; set; }
     public string Estado { get; set; }
     public string Cidade { get; set; }
+
+    public bool AceiteTermoLGPD { get; set; }
+    public string DataAceiteTermoLGPD { get; set; }
 }
