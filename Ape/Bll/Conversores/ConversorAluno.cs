@@ -16,27 +16,10 @@ namespace Ape.Bll.Conversores
             entidade.CPF = dto.CPF;
             entidade.Senha = dto.Senha;
             entidade.IdPersonal = dto.IdPersonal.ToString();
-            entidade.AceiteTermoLGPD = dto.AceiteTermoLGPD;
-            entidade.DataAceiteTermoLGPD = dto.DataAceiteTermoLGPD;
+            entidade.AceiteTermoLGPD = true;
+            entidade.DataAceiteTermoLGPD = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
             
             return entidade;
-        }
-
-        public AlunoDto ConverterAluno(Aluno entidade)
-        {
-            AlunoDto dto = new AlunoDto();
-            //dto.Id = int.Parse(entidade.Id);
-            dto.Usuario = entidade.Usuario;
-            dto.Nome = entidade.Nome;
-            dto.Usuario = entidade.Usuario;
-            dto.Email = entidade.Email;
-            dto.CPF = entidade.CPF;
-            dto.Senha = entidade.Senha;
-            dto.IdPersonal = entidade.IdPersonal;
-            dto.AceiteTermoLGPD = entidade.AceiteTermoLGPD;
-            dto.DataAceiteTermoLGPD = entidade.DataAceiteTermoLGPD;
-
-            return dto;
         }
     }
 }
