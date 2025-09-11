@@ -11,7 +11,4 @@
     public string NumeroCREF { get; set; }
     public string CategoriaCREF { get; set; }
     public string SiglaCREF { get; set; }
-
-    public bool AceiteTermoLGPD { get; set; }
-    public string DataAceiteTermoLGPD { get; set; }
 }

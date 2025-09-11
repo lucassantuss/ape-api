@@ -44,8 +44,8 @@ namespace Ape.Bll
                     CategoriaCREF = dto.CategoriaCREF,
                     SiglaCREF = dto.SiglaCREF,
 
-                    AceiteTermoLGPD = dto.AceiteTermoLGPD,
-                    DataAceiteTermoLGPD = dto.DataAceiteTermoLGPD,
+                    AceiteTermoLGPD = true,
+                    DataAceiteTermoLGPD = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss"),
                 });
 
                 retorno.Mensagem = "Personal criado com sucesso.";
