@@ -15,9 +15,9 @@ namespace Ape.Bll.Conversores
             entidade.CPF = dto.CPF;
             entidade.Estado = dto.Estado;
             entidade.Cidade = dto.Cidade;
-            entidade.NumeroCREF = dto.NumeroCREF;
-            entidade.CategoriaCREF = dto.CategoriaCREF;
-            entidade.SiglaCREF = dto.SiglaCREF;
+            entidade.NumeroCref = dto.NumeroCref;
+            entidade.CategoriaCref = dto.CategoriaCref;
+            entidade.SiglaCref = dto.SiglaCref;
 
             entidade.AceiteTermoLGPD = true;
             entidade.DataAceiteTermoLGPD = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");

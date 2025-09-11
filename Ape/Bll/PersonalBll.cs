@@ -180,11 +180,11 @@ namespace Ape.Bll
                     .Set(p => p.Usuario, dto.Usuario)
                     .Set(p => p.Email, dto.Email)
                     .Set(p => p.CPF, dto.CPF)
-                    .Set(p => p.NumeroCREF, dto.NumeroCREF)
-                    .Set(p => p.CategoriaCREF, dto.CategoriaCREF)
-                    .Set(p => p.SiglaCREF, dto.SiglaCREF)
                     .Set(p => p.Estado, dto.Estado)
-                    .Set(p => p.Cidade, dto.Cidade);
+                    .Set(p => p.Cidade, dto.Cidade)
+                    .Set(p => p.NumeroCref, dto.NumeroCref)
+                    .Set(p => p.CategoriaCref, dto.CategoriaCref)
+                    .Set(p => p.SiglaCref, dto.SiglaCref);
 
                 _database.UpdateOne(p => p.Id == id, update);
 
@@ -268,9 +268,10 @@ namespace Ape.Bll
                 CPF = p.CPF,
                 Estado = p.Estado,
                 Cidade = p.Cidade,
-                NumeroCREF = p.NumeroCREF,
-                CategoriaCREF = p.CategoriaCREF,
-                SiglaCREF = p.SiglaCREF,
+
+                NumeroCref = p.NumeroCref,
+                CategoriaCref = p.CategoriaCref,
+                SiglaCref = p.SiglaCref,
             };
         }
     }
