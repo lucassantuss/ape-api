@@ -1,4 +1,5 @@
-﻿using Ape.Dtos.Aluno;
+﻿using Ape.Bll.Conversores;
+using Ape.Dtos.Aluno;
 using Ape.Dtos.Login;
 using Ape.Dtos.Personal;
 using Ape.Entity;
@@ -16,37 +17,21 @@ namespace Ape.Bll
         }
 
         // Criar Personal
-        public RetornoAcaoDto CriarPersonal(PersonalDto dto)
+        public RetornoAcaoDto CriarPersonal(PersonalDto personalDto)
         {
             var retorno = new RetornoAcaoDto();
             try
             {
-                if (_database.Find(f => f.Usuario == dto.Usuario).FirstOrDefault() != null)
+                Personal personal = new ConversorPersonal().ConverterPersonalDto(personalDto);
+                RetornoAcaoDto validaCadastro = ValidarCadastro(personal);
+
+                if (validaCadastro.Resultado)
                 {
-                    retorno.Mensagem = "Usuário já cadastrado.";
-                    retorno.Resultado = false;
-                    return retorno;
+                    // Senha criptografada
+                    personal.Senha = BCrypt.Net.BCrypt.HashPassword(personalDto.Senha);
+
+                    _database.InsertOne(personal);
                 }
-
-                // Senha criptografada
-                string senhaHash = BCrypt.Net.BCrypt.HashPassword(dto.Senha);
-
-                _database.InsertOne(new Personal
-                {
-                    Nome = dto.Nome,
-                    Usuario = dto.Usuario,
-                    Email = dto.Email,
-                    Senha = senhaHash,
-                    CPF = dto.CPF,
-                    Estado = dto.Estado,
-                    Cidade = dto.Cidade,
-                    NumeroCREF = dto.NumeroCREF,
-                    CategoriaCREF = dto.CategoriaCREF,
-                    SiglaCREF = dto.SiglaCREF,
-
-                    AceiteTermoLGPD = true,
-                    DataAceiteTermoLGPD = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss"),
-                });
 
                 retorno.Mensagem = "Personal criado com sucesso.";
                 retorno.Resultado = true;
@@ -133,6 +118,47 @@ namespace Ape.Bll
                     Nome = xs.Nome,
                     Email = xs.Email,
                 }).ToList();
+        }
+
+        // Validar Cadastro
+        private RetornoAcaoDto ValidarCadastro(Personal personal)
+        {
+            try
+            {
+                RetornoAcaoDto retorno = new RetornoAcaoDto();
+
+                bool validaUsuario = _database.Find(f => f.Usuario == personal.Usuario).Any();
+                bool validaEmail = _database.Find(f => f.Email == personal.Email).Any();
+                bool validaCpf = _database.Find(f => f.CPF == personal.CPF).Any();
+
+                if (validaUsuario)
+                {
+                    retorno.Mensagem = "Usuário já cadastrado no sistema";
+                    retorno.Resultado = false;
+                    return retorno;
+                }
+                else if (validaEmail)
+                {
+                    retorno.Mensagem = "Email já cadastrado no sistema";
+                    retorno.Resultado = false;
+                    return retorno;
+                }
+                else if (validaCpf)
+                {
+                    retorno.Mensagem = "CPF já cadastrado no sistema";
+                    retorno.Resultado = false;
+                    return retorno;
+                }
+
+                retorno.Mensagem = "Usuário válido";
+                retorno.Resultado = true;
+
+                return retorno;
+            }
+            catch (Exception erro)
+            {
+                throw new Exception(erro.Message);
+            }
         }
 
         // Alterar Personal
