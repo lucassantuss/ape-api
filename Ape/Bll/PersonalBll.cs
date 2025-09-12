@@ -86,21 +86,21 @@ namespace Ape.Bll
         }
 
         // Pesquisar por usuário
-        public PersonalDto PesquisarPersonalPorUsuario(string usuario)
+        public PersonalPesquisaDto PesquisarPersonalPorUsuario(string usuario)
         {
             var personal = _database.Find(f => f.Usuario == usuario).FirstOrDefault();
             return personal == null ? null : MapToDto(personal);
         }
 
         // Pesquisar por ID
-        public PersonalDto PesquisarPersonalPorId(string id)
+        public PersonalPesquisaDto PesquisarPersonalPorId(string id)
         {
             var personal = _database.Find(f => f.Id == id).FirstOrDefault();
             return personal == null ? null : MapToDto(personal);
         }
 
         // Pesquisar por aluno
-        public PersonalDto PesquisarPersonalPorAluno(string idAluno, IMongoCollection<Aluno> alunosCollection)
+        public PersonalPesquisaDto PesquisarPersonalPorAluno(string idAluno, IMongoCollection<Aluno> alunosCollection)
         {
             var aluno = alunosCollection.Find(f => f.Id == idAluno).FirstOrDefault();
             if (aluno == null) return null;
@@ -256,15 +256,13 @@ namespace Ape.Bll
         }
 
         // Mapper auxiliar
-        private PersonalDto MapToDto(Personal p)
+        private PersonalPesquisaDto MapToDto(Personal p)
         {
-            return new PersonalDto
+            return new PersonalPesquisaDto
             {
-                Id = p.Id,
                 Nome = p.Nome,
                 Usuario = p.Usuario,
                 Email = p.Email,
-                Senha = p.Senha,
                 CPF = p.CPF,
                 Estado = p.Estado,
                 Cidade = p.Cidade,
