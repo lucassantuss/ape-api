@@ -109,6 +109,9 @@ namespace Ape.Bll
                     // Senha criptografada
                     aluno.Senha = BCrypt.Net.BCrypt.HashPassword(alunoDto.Senha);
 
+                    aluno.AceitePersonal = false;
+                    aluno.DataAceitePersonal = "";
+
                     _database.InsertOne(aluno);
                 }
                 retorno.Mensagem = validaCadastro.Mensagem;
