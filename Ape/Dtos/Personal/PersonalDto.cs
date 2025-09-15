@@ -11,4 +11,6 @@
     public string NumeroCref { get; set; }
     public string CategoriaCref { get; set; }
     public string SiglaCref { get; set; }
+
+    public bool AceiteTermos { get; set; }
 }

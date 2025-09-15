@@ -23,7 +23,7 @@ namespace Ape.Bll.Conversores
             entidade.CategoriaCref = dto.CategoriaCref;
             entidade.SiglaCref = dto.SiglaCref;
 
-            entidade.AceiteTermoLGPD = true;
+            entidade.AceiteTermoLGPD = dto.AceiteTermos;
             entidade.DataAceiteTermoLGPD = dataBrasilia.ToString("dd/MM/yyyy - HH:mm:ss");
 
             return entidade;

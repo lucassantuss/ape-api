@@ -207,6 +207,13 @@ namespace Ape.Bll
                     return retorno;
                 }
 
+                if (aluno.AceiteTermoLGPD == false)
+                {
+                    retorno.Mensagem = "É necessário aceitar os Termos de Uso e Política de Privacidade.";
+                    retorno.Resultado = false;
+                    return retorno;
+                }
+
                 retorno.Mensagem = "Usuário válido";
                 retorno.Resultado = true;
 

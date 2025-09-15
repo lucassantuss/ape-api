@@ -8,5 +8,6 @@ namespace Ape.Dtos.Aluno
         public string CPF { get; set; }
         public string Senha { get; set; }
         public string IdPersonal { get; set; }
+        public bool AceiteTermos { get; set; }
     }
 }
