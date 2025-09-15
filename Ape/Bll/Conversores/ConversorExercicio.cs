@@ -1,7 +1,6 @@
 ﻿using Ape.Dtos.Aluno;
 using Ape.Dtos.Exercicio;
 using Ape.Entity;
-using System.Runtime.InteropServices;
 
 namespace Ape.Bll.Conversores
 {
@@ -12,11 +11,7 @@ namespace Ape.Bll.Conversores
             Exercicio entidade = new Exercicio();
 
             // Converte UTC para Brasília (UTC-3)
-            var tz = TimeZoneInfo.FindSystemTimeZoneById(
-                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
-                    ? "E. South America Standard Time" 
-                    : "America/Sao_Paulo"
-            );
+            var tz = TimeZoneInfo.FindSystemTimeZoneById("America/Sao_Paulo");
             var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
 
             entidade.Nome = dto.Nome;

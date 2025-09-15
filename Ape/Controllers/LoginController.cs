@@ -5,7 +5,6 @@ using System.Security.Claims;
 using System.Text;
 using Ape.Bll;
 using Ape.Dtos.Login;
-using System.Runtime.InteropServices;
 
 namespace Ape.Controllers
 {
@@ -92,11 +91,7 @@ namespace Ape.Controllers
             var key = Encoding.ASCII.GetBytes(jwtSecretKey);
 
             // Converte UTC para Brasília (UTC-3)
-            var tz = TimeZoneInfo.FindSystemTimeZoneById(
-                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
-                    ? "E. South America Standard Time" 
-                    : "America/Sao_Paulo"
-            );
+            var tz = TimeZoneInfo.FindSystemTimeZoneById("America/Sao_Paulo");
             var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
 
             // Configura os dados do token (claims, expiração e credenciais)

@@ -3,7 +3,6 @@ using Ape.Dtos.Aluno;
 using Ape.Dtos.Login;
 using Ape.Entity;
 using MongoDB.Driver;
-using System.Runtime.InteropServices;
 
 namespace Ape.Bll
 {
@@ -332,13 +331,9 @@ namespace Ape.Bll
                 }
 
                 // Converte UTC para Brasília (UTC-3)
-                var tz = TimeZoneInfo.FindSystemTimeZoneById(
-                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
-                        ? "E. South America Standard Time" 
-                        : "America/Sao_Paulo"
-                );
+                var tz = TimeZoneInfo.FindSystemTimeZoneById("America/Sao_Paulo");
                 var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
-
+                
                 // Atualiza apenas o campo IdPersonal para null ou vazio
                 var update = Builders<Aluno>.Update
                     .Set(a => a.IdPersonal, null)
@@ -367,11 +362,7 @@ namespace Ape.Bll
             try
             {
                 // Converte UTC para Brasília (UTC-3)
-                var tz = TimeZoneInfo.FindSystemTimeZoneById(
-                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
-                        ? "E. South America Standard Time" 
-                        : "America/Sao_Paulo"
-                );
+                var tz = TimeZoneInfo.FindSystemTimeZoneById("America/Sao_Paulo");
                 var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
 
                 var update = Builders<Aluno>.Update
@@ -409,11 +400,7 @@ namespace Ape.Bll
             try
             {
                 // Converte UTC para Brasília (UTC-3)
-                var tz = TimeZoneInfo.FindSystemTimeZoneById(
-                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
-                        ? "E. South America Standard Time" 
-                        : "America/Sao_Paulo"
-                );
+                var tz = TimeZoneInfo.FindSystemTimeZoneById("America/Sao_Paulo");
                 var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
 
                 var update = Builders<Aluno>.Update
