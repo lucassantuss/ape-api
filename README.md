@@ -19,8 +19,8 @@ API REST desenvolvida para o Trabalho de Conclusão de Curso (TCC) de Engenharia
 ## Sobre
 
 Este projeto consiste em uma API REST que serve como backend do TCC, com foco em **operações CRUD**, validações, autenticação e persistência de dados.  
-A API está hospedada em:  
-[Swagger da API](https://ape-api.azurewebsites.net/swagger)  
+
+A API está hospedada em: [Swagger da API](https://ape-api.azurewebsites.net/swagger)  
 
 ---
 
@@ -49,8 +49,6 @@ Estrutura típica de projeto:
 
 ├── Entity/ # Modelos de dados
 
-├── Data/ # Configurações de contexto ou inicialização do banco
-
 └── Properties/ Config # Arquivos de configuração (appsettings, conexão com BD etc.)
 
 ├── Program # Configuração da aplicação (middleware, rotas etc.)
@@ -61,7 +59,7 @@ Estrutura típica de projeto:
 
 ### Pré-requisitos
 
-- [.NET SDK](https://dotnet.microsoft.com/) (versão usada no projeto)  
+- [.NET SDK](https://dotnet.microsoft.com/) (net6.0)  
 - MongoDB em execução (local ou remoto)  
 - Variáveis de ambiente e configurações de conexão definidas (string de conexão com o MongoDB etc.)
 
