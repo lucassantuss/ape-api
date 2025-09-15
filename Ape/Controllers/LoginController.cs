@@ -90,10 +90,6 @@ namespace Ape.Controllers
             var jwtSecretKey = _configuration["Jwt_SecretKey"];
             var key = Encoding.ASCII.GetBytes(jwtSecretKey);
 
-            // Converte UTC para Brasília (UTC-3)
-            var tz = TimeZoneInfo.FindSystemTimeZoneById("America/Sao_Paulo");
-            var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
-
             // Configura os dados do token (claims, expiração e credenciais)
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -102,7 +98,7 @@ namespace Ape.Controllers
                     new Claim(ClaimTypes.NameIdentifier, id), // ID do usuário
                     new Claim(ClaimTypes.Name, usuario) // Login do usuário
                 }),
-                Expires = dataBrasilia.AddHours(2), // Define a expiração do token
+                Expires = DateTime.Now.AddHours(2), // Define a expiração do token
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature) // Configura a assinatura com a chave secreta
