@@ -99,13 +99,48 @@ namespace Ape.Bll
         {
             try
             {
-                return _database
+                var alunoStatus = _database
                     .Find(f => f.Id == id)
-                    .Project(xs => new RetornoAcaoDto
+                    .Project(xs => new RetornoAceitePersonalDto
                     {
-                        Resultado = xs.AceitePersonal
+                        AceitePersonal = xs.AceitePersonal,
+                        DataAceitePersonal = xs.DataAceitePersonal,
                     })
                     .FirstOrDefault();
+
+                if (alunoStatus == null)
+                {
+                    return new RetornoAcaoDto
+                    {
+                        Resultado = false,
+                        Mensagem = "Aluno não encontrado."
+                    };
+                }
+
+                if (string.IsNullOrEmpty(alunoStatus.DataAceitePersonal))
+                {
+                    return new RetornoAcaoDto
+                    {
+                        Resultado = false,
+                        Mensagem = "O personal ainda não analisou seu vínculo. Pendente de aprovação."
+                    };
+                }
+                else if (alunoStatus.AceitePersonal)
+                {
+                    return new RetornoAcaoDto
+                    {
+                        Resultado = true,
+                        Mensagem = $"O personal aceitou seu vínculo em {alunoStatus.DataAceitePersonal}."
+                    };
+                }
+                else
+                {
+                    return new RetornoAcaoDto
+                    {
+                        Resultado = false,
+                        Mensagem = $"O personal recusou seu vínculo em {alunoStatus.DataAceitePersonal}."
+                    };
+                }
             }
             catch (Exception ex)
             {
@@ -224,12 +259,23 @@ namespace Ape.Bll
                     return retorno;
                 }
 
+                // Verifica se o IdPersonal foi alterado
+                bool personalAlterado = alunoExistente.IdPersonal != alunoDto.IdPersonal;
+
                 var update = Builders<Aluno>.Update
                     .Set(a => a.Nome, alunoDto.Nome)
                     .Set(a => a.Usuario, alunoDto.Usuario)
                     .Set(a => a.Email, alunoDto.Email)
                     .Set(a => a.CPF, alunoDto.CPF)
                     .Set(a => a.IdPersonal, alunoDto.IdPersonal);
+
+                // Se o personal mudou, resetar AceitePersonal e DataAceitePersonal
+                if (personalAlterado)
+                {
+                    update = update
+                        .Set(a => a.AceitePersonal, false)
+                        .Set(a => a.DataAceitePersonal, "");
+                }
 
                 _database.UpdateOne(a => a.Id == alunoExistente.Id, update);
 
@@ -285,10 +331,13 @@ namespace Ape.Bll
                 }
 
                 // Atualiza apenas o campo IdPersonal para null ou vazio
-                var update = Builders<Aluno>.Update.Set(a => a.IdPersonal, null);
+                var update = Builders<Aluno>.Update
+                    .Set(a => a.IdPersonal, null)
+                    .Set(a => a.AceitePersonal, false)
+                    .Set(a => a.DataAceitePersonal, DateTime.UtcNow.ToString("dd/MM/yyyy HH:mm:ss"));
                 _database.UpdateOne(a => a.Id == aluno.Id, update);
 
-                retorno.Mensagem = "Personal desvinculado com sucesso.";
+                retorno.Mensagem = "Aluno desvinculado com sucesso.";
                 retorno.Resultado = true;
                 return retorno;
             }
@@ -298,6 +347,74 @@ namespace Ape.Bll
                 retorno.Resultado = false;
                 return retorno;
             }
+        }
+
+        /// <summary>
+        /// Aceita a solicitação do aluno.
+        /// </summary>
+        public RetornoAcaoDto AceitarAluno(string idAluno)
+        {
+            var retorno = new RetornoAcaoDto();
+            try
+            {
+                var update = Builders<Aluno>.Update
+                    .Set(a => a.AceitePersonal, true)
+                    .Set(a => a.DataAceitePersonal, DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                var result = _database.UpdateOne(a => a.Id == idAluno, update);
+
+                if (result.ModifiedCount == 0)
+                {
+                    retorno.Resultado = false;
+                    retorno.Mensagem = "Aluno não encontrado ou já aceito.";
+                }
+                else
+                {
+                    retorno.Resultado = true;
+                    retorno.Mensagem = "Aluno aceito com sucesso.";
+                }
+            }
+            catch (Exception ex)
+            {
+                retorno.Resultado = false;
+                retorno.Mensagem = $"Erro ao aceitar aluno: {ex.Message}";
+            }
+
+            return retorno;
+        }
+
+        /// <summary>
+        /// Recusa a solicitação do aluno.
+        /// </summary>
+        public RetornoAcaoDto RecusarAluno(string idAluno)
+        {
+            var retorno = new RetornoAcaoDto();
+            try
+            {
+                var update = Builders<Aluno>.Update
+                    .Set(a => a.AceitePersonal, false)
+                    .Set(a => a.DataAceitePersonal, DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss"));
+
+                var result = _database.UpdateOne(a => a.Id == idAluno, update);
+
+                if (result.ModifiedCount == 0)
+                {
+                    retorno.Resultado = false;
+                    retorno.Mensagem = "Aluno não encontrado ou já recusado.";
+                }
+                else
+                {
+                    retorno.Resultado = false;
+                    retorno.Mensagem = "Aluno recusado com sucesso.";
+                }
+            }
+            catch (Exception ex)
+            {
+                retorno.Resultado = false;
+                retorno.Mensagem = $"Erro ao recusar aluno: {ex.Message}";
+            }
+
+            return retorno;
         }
     }
 }

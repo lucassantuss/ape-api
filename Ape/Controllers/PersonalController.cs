@@ -12,10 +12,12 @@ namespace Ape.Controllers
     public class PersonalController : ControllerBase
     {
         private readonly PersonalBll _personalBll;
+        private readonly AlunoBll _alunoBll;
         private readonly IMongoCollection<Aluno> _alunosCollection;
 
-        public PersonalController(PersonalBll personalBll, IMongoCollection<Aluno> alunosCollection)
+        public PersonalController(AlunoBll alunoBll, PersonalBll personalBll, IMongoCollection<Aluno> alunosCollection)
         {
+            _alunoBll = alunoBll;
             _personalBll = personalBll;
             _alunosCollection = alunosCollection;
         }
@@ -177,6 +179,36 @@ namespace Ape.Controllers
             return personal == null
                 ? NotFound(new { mensagem = "Personal não encontrado para este aluno" })
                 : Ok(personal);
+        }
+
+        /// <summary>
+        /// Aceita a solicitação de vínculo do aluno pelo personal.
+        /// </summary>
+        [HttpPost("aceitar/{idAluno}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult AceitarAluno(string idAluno)
+        {
+            var resultado = _alunoBll.AceitarAluno(idAluno);
+            if (resultado.Resultado)
+                return Ok(resultado);
+
+            return NotFound(resultado);
+        }
+
+        /// <summary>
+        /// Recusa a solicitação de vínculo do aluno pelo personal.
+        /// </summary>
+        [HttpPost("recusar/{idAluno}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult RecusarAluno(string idAluno)
+        {
+            var resultado = _alunoBll.RecusarAluno(idAluno);
+            if (resultado.Resultado == false)
+                return Ok(resultado);
+
+            return NotFound(resultado);
         }
     }
 }

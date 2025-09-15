@@ -117,6 +117,9 @@ namespace Ape.Bll
                     Id = xs.Id,
                     Nome = xs.Nome,
                     Email = xs.Email,
+
+                    AceitePersonal = xs.AceitePersonal,
+                    DataAceitePersonal = xs.DataAceitePersonal,
                 }).ToList();
         }
 
