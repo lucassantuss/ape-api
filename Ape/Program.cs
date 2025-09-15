@@ -12,70 +12,74 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ConfiguraÁıes do JWT - Define a chave secreta para o token JWT, que pode ser obtida das vari·veis de ambiente ou do arquivo de configuraÁ„o.
+// Configura√ß√µes do JWT - Define a chave secreta para o token JWT, que pode ser obtida das vari√°veis de ambiente ou do arquivo de configura√ß√£o.
 var jwtSecretKey = Environment.GetEnvironmentVariable("Jwt_SecretKey")
     ?? builder.Configuration["Jwt_SecretKey"];
 
-// Verifica se a chave secreta do JWT est· definida; se n„o estiver, lanÁa uma exceÁ„o.
+// Verifica se a chave secreta do JWT est√° definida; se n√£o estiver, lan√ßa uma exce√ß√£o.
 if (string.IsNullOrEmpty(jwtSecretKey))
 {
-    throw new InvalidOperationException("A chave secreta JWT n„o est· definida.");
+    throw new InvalidOperationException("A chave secreta JWT n√£o est√° definida.");
 }
 
-// Converte a chave secreta para um array de bytes para ser utilizada na configuraÁ„o do token.
+// Converte a chave secreta para um array de bytes para ser utilizada na configura√ß√£o do token.
 var key = Encoding.ASCII.GetBytes(jwtSecretKey);
 
-// Configura o serviÁo de autenticaÁ„o JWT
+// Configura o servi√ßo de autentica√ß√£o JWT
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // Define o esquema padr„o para autenticaÁ„o
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;    // Define o esquema padr„o para desafios de autenticaÁ„o
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // Define o esquema padr√£o para autentica√ß√£o
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;    // Define o esquema padr√£o para desafios de autentica√ß√£o
 })
 .AddJwtBearer(options =>
 {
-    options.RequireHttpsMetadata = false; // Desativa o requisito de HTTPS para obter tokens (˙til para desenvolvimento)
-    options.SaveToken = true;             // Salva o token JWT no contexto da autenticaÁ„o
+    options.RequireHttpsMetadata = false; // Desativa o requisito de HTTPS para obter tokens (√∫til para desenvolvimento)
+    options.SaveToken = true;             // Salva o token JWT no contexto da autentica√ß√£o
     options.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuer = false,           // Desabilita a validaÁ„o do emissor do token
-        ValidateAudience = false,         // Desabilita a validaÁ„o da audiÍncia do token
-        ValidateLifetime = true,          // Habilita a validaÁ„o do tempo de vida do token
-        ValidateIssuerSigningKey = true,  // Habilita a validaÁ„o da chave de assinatura do emissor
+        ValidateIssuer = false,           // Desabilita a valida√ß√£o do emissor do token
+        ValidateAudience = false,         // Desabilita a valida√ß√£o da audi√™ncia do token
+        ValidateLifetime = true,          // Habilita a valida√ß√£o do tempo de vida do token
+        ValidateIssuerSigningKey = true,  // Habilita a valida√ß√£o da chave de assinatura do emissor
         IssuerSigningKey = new SymmetricSecurityKey(key), // Define a chave de assinatura usada para validar o token
-        ClockSkew = TimeSpan.Zero         // Remove a margem de erro padr„o para o tempo de expiraÁ„o do token
+        ClockSkew = TimeSpan.Zero         // Remove a margem de erro padr√£o para o tempo de expira√ß√£o do token
     };
 });
 
-// Adiciona serviÁos ao contÍiner da aplicaÁ„o
-builder.Services.AddControllers(); // Adiciona suporte para controllers
+// Adiciona servi√ßos ao container da aplica√ß√£o
+builder.Services.AddControllers() // Adiciona suporte para controllers
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+    });
 
-builder.Services.AddEndpointsApiExplorer(); // Adiciona o serviÁo para geraÁ„o autom·tica de endpoints para a documentaÁ„o
+builder.Services.AddEndpointsApiExplorer(); // Adiciona o servi√ßo para gera√ß√£o automÔøΩtica de endpoints para a documentaÔøΩÔøΩo
 
-// ConfiguraÁ„o do Swagger para gerar a documentaÁ„o da API
+// Configura√ß√£o do Swagger para gerar a documenta√ß√£o da API
 builder.Services.AddSwaggerGen(c =>
 {
-    // Cria um documento Swagger (OpenAPI) com informaÁıes b·sicas da API
+    // Cria um documento Swagger (OpenAPI) com informa√ß√µes b√°sicas da API
     c.SwaggerDoc("v1.0",
         new OpenApiInfo
         {
-            Title = "APE WebAPI", // TÌtulo da API que aparecer· na UI do Swagger
-            Description = "API utilizada no sistema APE", // DescriÁ„o da API
-            Version = "v1.0" // Vers„o da API
+            Title = "APE WebAPI", // T√≠tulo da API que aparecer√° na UI do Swagger
+            Description = "API utilizada no sistema APE", // Descri√ß√£o da API
+            Version = "v1.0" // Vers√£o da API
         }
     );
 
-    // Configura o esquema de seguranÁa para autenticaÁ„o via JWT
+    // Configura o esquema de seguran√ßa para autentica√ß√£o via JWT
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Name = "Authorization", // Nome do cabeÁalho onde o token ser· enviado
-        Type = SecuritySchemeType.ApiKey, // Tipo ApiKey indica que ser· passado via header
-        Scheme = "Bearer", // Esquema de autenticaÁ„o: Bearer Token
+        Name = "Authorization", // Nome do cabe√ßalho onde o token ser√° enviado
+        Type = SecuritySchemeType.ApiKey, // Tipo ApiKey indica que ser√° passado via header
+        Scheme = "Bearer", // Esquema de autentica√ß√£o: Bearer Token
         BearerFormat = "JWT", // Formato esperado do token
-        In = ParameterLocation.Header, // Define que o token vir· no cabeÁalho da requisiÁ„o
-        Description = "Insira o token JWT no campo abaixo:\n\nExemplo: Bearer {seu token}" // InstruÁ„o que aparecer· no Swagger UI
+        In = ParameterLocation.Header, // Define que o token vir√° no cabe√ßalho da requisi√ß√£o
+        Description = "Insira o token JWT no campo abaixo:\n\nExemplo: Bearer {seu token}" // Instru√ß√£o que aparecer√° no Swagger UI
     });
 
-    // Exige que todas as operaÁıes utilizem o esquema de seguranÁa configurado acima
+    // Exige que todas as opera√ß√µes utilizem o esquema de seguran√ßa configurado acima
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -83,22 +87,22 @@ builder.Services.AddSwaggerGen(c =>
             {
                 Reference = new OpenApiReference
                 {
-                    Type = ReferenceType.SecurityScheme, // Informa que È um esquema de seguranÁa definido
+                    Type = ReferenceType.SecurityScheme, // Informa que √© um esquema de seguran√ßa definido
                     Id = "Bearer" // Nome do esquema (mesmo definido acima)
                 }
             },
-            Array.Empty<string>() // Escopos (n„o utilizados aqui, pois JWT j· contÈm as permissıes)
+            Array.Empty<string>() // Escopos (n√£o utilizados aqui, pois JWT j√° cont√©m as permiss√µes)
         }
     });
 
-    // Carrega automaticamente os coment·rios XML do cÛdigo (summary, param, returns etc.)
-    // Isso gera uma documentaÁ„o mais detalhada no Swagger UI
+    // Carrega automaticamente os coment√°rios XML do c√≥digo (summary, param, returns etc.)
+    // Isso gera uma documenta√ß√£o mais detalhada no Swagger UI
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"; // Nome do arquivo XML baseado no nome do assembly
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile); // Caminho completo atÈ o arquivo XML
-    c.IncludeXmlComments(xmlPath); // Inclui os coment·rios XML na documentaÁ„o do Swagger
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile); // Caminho completo at√© o arquivo XML
+    c.IncludeXmlComments(xmlPath); // Inclui os coment√°rios XML na documenta√ß√£o do Swagger
 });
 
-// Configura a conex„o com o banco de dados usando a string de conex„o obtida das vari·veis de ambiente ou do arquivo de configuraÁ„o
+// Configura a conex√£o com o banco de dados usando a string de conex√£o obtida das vari√°veis de ambiente ou do arquivo de configura√ß√£o
 var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings_Ape")
     ?? builder.Configuration.GetConnectionString("Ape");
 
@@ -114,7 +118,7 @@ if (builder.Environment.IsDevelopment())
     builder.Configuration.AddUserSecrets<Program>();
 }
 
-// Carregar configuraÁıes do appsettings.json // vari·veis de ambiente
+// Carregar configur√ß√µes do appsettings.json // vari√°veis de ambiente
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
 
 // MongoClient singleton
@@ -132,7 +136,7 @@ builder.Services.AddSingleton(sp =>
     return client.GetDatabase(settings.Database);
 });
 
-// InjeÁ„o das ColeÁıes
+// Inje√ß√£o das Cole√ß√µes
 builder.Services.AddSingleton<IMongoCollection<Personal>>(sp =>
     sp.GetRequiredService<IMongoDatabase>().GetCollection<Personal>("collection_personal"));
 
@@ -142,12 +146,12 @@ builder.Services.AddSingleton<IMongoCollection<Aluno>>(sp =>
 builder.Services.AddSingleton<IMongoCollection<Exercicio>>(sp =>
     sp.GetRequiredService<IMongoDatabase>().GetCollection<Exercicio>("collection_exercicio"));
 
-// ServiÁos
+// Servi√ßos
 builder.Services.AddSingleton<AlunoBll>();
 builder.Services.AddSingleton<ExercicioBll>();
 builder.Services.AddSingleton<PersonalBll>();
 
-// ConfiguraÁ„o do CORS (Cross-Origin Resource Sharing) para permitir requisiÁıes de qualquer origem
+// Configura√ß√£o do CORS (Cross-Origin Resource Sharing) para permitir requisi√ß√µes de qualquer origem
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins",
@@ -164,16 +168,22 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Ativando o CORS usando a polÌtica definida anteriormente
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Content-Type", "application/json; charset=utf-8");
+    await next();
+});
+
+// Ativando o CORS usando a pol√≠tica definida anteriormente
 app.UseCors("AllowSpecificOrigins");
 
-// Configura o pipeline de requisiÁıes HTTP
-app.UseSwagger(); // Habilita a geraÁ„o da documentaÁ„o Swagger
+// Configura o pipeline de requisi√ß√µes HTTP
+app.UseSwagger(); // Habilita a gera√ß√£o da documenta√ß√£o Swagger
 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "API V1.0")); // Define o endpoint para a interface do Swagger
 
-app.UseAuthentication(); // Habilita o middleware de autenticaÁ„o para validar tokens JWT
-app.UseAuthorization();  // Habilita o middleware de autorizaÁ„o
+app.UseAuthentication(); // Habilita o middleware de autentica√ß√£o para validar tokens JWT
+app.UseAuthorization();  // Habilita o middleware de autoriza√ß√£o
 
 app.MapControllers(); // Mapeia os controladores para os endpoints definidos
 
-app.Run(); // Executa a aplicaÁ„o
+app.Run(); // Executa a aplica√ß√£o

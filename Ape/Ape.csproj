@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <UserSecretsId>c39af7e2-c87f-4032-82fe-2f96f0061827</UserSecretsId>
+    <CodePage>65001</CodePage>
+    <ConsoleOutputEncoding>utf-8</ConsoleOutputEncoding>
   </PropertyGroup>
 
   <ItemGroup>

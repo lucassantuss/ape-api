@@ -17,7 +17,7 @@ namespace Ape.Bll
             _client = new HttpClient();
         }
 
-        // Pesquisar Aluno por Usu·rio
+        // Pesquisar Aluno por Usu√°rio
         public List<AlunoPesquisaDto> PesquisarAlunoPorUsuario(string usuario)
         {
             try
@@ -37,7 +37,7 @@ namespace Ape.Bll
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao pesquisar aluno por usu·rio: " + ex.Message, ex);
+                throw new Exception("Erro ao pesquisar aluno por usu√°rio: " + ex.Message, ex);
             }
         }
 
@@ -65,7 +65,7 @@ namespace Ape.Bll
             }
         }
 
-        // Pesquisa Aluno para Login (Usu·rio + Senha)
+        // Pesquisa Aluno para Login (Usu√°rio + Senha)
         public RetornoLoginDto PesquisarAlunoLogin(string usuario, string senha)
         {
             try
@@ -113,7 +113,7 @@ namespace Ape.Bll
                     return new RetornoAcaoDto
                     {
                         Resultado = false,
-                        Mensagem = "Aluno n„o encontrado."
+                        Mensagem = "Aluno n√£o encontrado."
                     };
                 }
 
@@ -122,7 +122,7 @@ namespace Ape.Bll
                     return new RetornoAcaoDto
                     {
                         Resultado = false,
-                        Mensagem = "O personal ainda n„o analisou seu vÌnculo. Pendente de aprovaÁ„o."
+                        Mensagem = "O personal ainda n√£o analisou seu v√≠nculo. Pendente de aprova√ß√£o."
                     };
                 }
                 else if (alunoStatus.AceitePersonal)
@@ -130,7 +130,7 @@ namespace Ape.Bll
                     return new RetornoAcaoDto
                     {
                         Resultado = true,
-                        Mensagem = $"O personal aceitou seu vÌnculo em {alunoStatus.DataAceitePersonal}."
+                        Mensagem = $"O personal aceitou seu v√≠nculo em {alunoStatus.DataAceitePersonal}."
                     };
                 }
                 else
@@ -138,7 +138,7 @@ namespace Ape.Bll
                     return new RetornoAcaoDto
                     {
                         Resultado = false,
-                        Mensagem = $"O personal recusou seu vÌnculo em {alunoStatus.DataAceitePersonal}."
+                        Mensagem = $"O personal recusou seu v√≠nculo em {alunoStatus.DataAceitePersonal}."
                     };
                 }
             }
@@ -190,24 +190,24 @@ namespace Ape.Bll
 
                 if (validaUsuario)
                 {
-                    retorno.Mensagem = "Usu·rio j· cadastrado no sistema";
+                    retorno.Mensagem = "Usu√°rio j√° cadastrado no sistema";
                     retorno.Resultado = false;
                     return retorno;
                 }
                 else if (validaEmail)
                 {
-                    retorno.Mensagem = "Email j· cadastrado no sistema";
+                    retorno.Mensagem = "Email j√° cadastrado no sistema";
                     retorno.Resultado = false;
                     return retorno;
                 }
                 else if (validaCpf)
                 {
-                    retorno.Mensagem = "CPF j· cadastrado no sistema";
+                    retorno.Mensagem = "CPF j√° cadastrado no sistema";
                     retorno.Resultado = false;
                     return retorno;
                 }
 
-                retorno.Mensagem = "Usu·rio v·lido";
+                retorno.Mensagem = "Usu√°rio v√°lido";
                 retorno.Resultado = true;
 
                 return retorno;
@@ -227,7 +227,7 @@ namespace Ape.Bll
                 var aluno = _database.Find(f => f.Usuario == usuario).FirstOrDefault();
                 if (aluno == null)
                 {
-                    retorno.Mensagem = "Aluno n„o encontrado.";
+                    retorno.Mensagem = "Aluno n√£o encontrado.";
                     retorno.Resultado = false;
                     return retorno;
                 }
@@ -254,7 +254,7 @@ namespace Ape.Bll
                 var alunoExistente = _database.Find(f => f.Id == id).FirstOrDefault();
                 if (alunoExistente == null)
                 {
-                    retorno.Mensagem = "Aluno n„o encontrado para alteraÁ„o.";
+                    retorno.Mensagem = "Aluno n√£o encontrado para altera√ß√£o.";
                     retorno.Resultado = false;
                     return retorno;
                 }
@@ -300,12 +300,12 @@ namespace Ape.Bll
                 var result = _database.DeleteOne(f => f.Id == id);
                 if (result.DeletedCount == 0)
                 {
-                    retorno.Mensagem = "Aluno n„o encontrado para exclus„o.";
+                    retorno.Mensagem = "Aluno n√£o encontrado para exclus√£o.";
                     retorno.Resultado = false;
                     return retorno;
                 }
 
-                retorno.Mensagem = "Aluno excluÌdo com sucesso.";
+                retorno.Mensagem = "Aluno exclu√≠do com sucesso.";
                 retorno.Resultado = true;
                 return retorno;
             }
@@ -315,7 +315,7 @@ namespace Ape.Bll
             }
         }
 
-        // Remover vÌnculo de Personal do Aluno
+        // Remover v√≠nculo de Personal do Aluno
         public RetornoAcaoDto RemoverPersonal(string idAluno)
         {
             RetornoAcaoDto retorno = new RetornoAcaoDto();
@@ -325,7 +325,7 @@ namespace Ape.Bll
                 var aluno = _database.Find(f => f.Id == idAluno).FirstOrDefault();
                 if (aluno == null)
                 {
-                    retorno.Mensagem = "Aluno n„o encontrado.";
+                    retorno.Mensagem = "Aluno n√£o encontrado.";
                     retorno.Resultado = false;
                     return retorno;
                 }
@@ -343,14 +343,14 @@ namespace Ape.Bll
             }
             catch (Exception ex)
             {
-                retorno.Mensagem = $"Erro ao remover vÌnculo do personal: {ex.Message}";
+                retorno.Mensagem = $"Erro ao remover v√≠nculo do personal: {ex.Message}";
                 retorno.Resultado = false;
                 return retorno;
             }
         }
 
         /// <summary>
-        /// Aceita a solicitaÁ„o do aluno.
+        /// Aceita a solicita√ß√£o do aluno.
         /// </summary>
         public RetornoAcaoDto AceitarAluno(string idAluno)
         {
@@ -366,7 +366,7 @@ namespace Ape.Bll
                 if (result.ModifiedCount == 0)
                 {
                     retorno.Resultado = false;
-                    retorno.Mensagem = "Aluno n„o encontrado ou j· aceito.";
+                    retorno.Mensagem = "Aluno n√£o encontrado ou j√° aceito.";
                 }
                 else
                 {
@@ -384,7 +384,7 @@ namespace Ape.Bll
         }
 
         /// <summary>
-        /// Recusa a solicitaÁ„o do aluno.
+        /// Recusa a solicita√ß√£o do aluno.
         /// </summary>
         public RetornoAcaoDto RecusarAluno(string idAluno)
         {
@@ -400,7 +400,7 @@ namespace Ape.Bll
                 if (result.ModifiedCount == 0)
                 {
                     retorno.Resultado = false;
-                    retorno.Mensagem = "Aluno n„o encontrado ou j· recusado.";
+                    retorno.Mensagem = "Aluno n√£o encontrado ou j√° recusado.";
                 }
                 else
                 {
