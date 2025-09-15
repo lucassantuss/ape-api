@@ -330,11 +330,19 @@ namespace Ape.Bll
                     return retorno;
                 }
 
+                // Converte UTC para Brasília (UTC-3)
+                var tz = TimeZoneInfo.FindSystemTimeZoneById(
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
+                        ? "E. South America Standard Time" 
+                        : "America/Sao_Paulo"
+                );
+                var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
+
                 // Atualiza apenas o campo IdPersonal para null ou vazio
                 var update = Builders<Aluno>.Update
                     .Set(a => a.IdPersonal, null)
                     .Set(a => a.AceitePersonal, false)
-                    .Set(a => a.DataAceitePersonal, DateTime.UtcNow.AddHours(-3).ToString("dd/MM/yyyy HH:mm:ss"));
+                    .Set(a => a.DataAceitePersonal, dataBrasilia.ToString("dd/MM/yyyy HH:mm:ss"));
                 _database.UpdateOne(a => a.Id == aluno.Id, update);
 
                 retorno.Mensagem = "Aluno desvinculado com sucesso.";
@@ -357,9 +365,17 @@ namespace Ape.Bll
             var retorno = new RetornoAcaoDto();
             try
             {
+                // Converte UTC para Brasília (UTC-3)
+                var tz = TimeZoneInfo.FindSystemTimeZoneById(
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
+                        ? "E. South America Standard Time" 
+                        : "America/Sao_Paulo"
+                );
+                var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
+
                 var update = Builders<Aluno>.Update
                     .Set(a => a.AceitePersonal, true)
-                    .Set(a => a.DataAceitePersonal, DateTime.UtcNow.AddHours(-3).ToString("dd/MM/yyyy HH:mm:ss"));
+                    .Set(a => a.DataAceitePersonal, dataBrasilia.ToString("dd/MM/yyyy HH:mm:ss"));
 
                 var result = _database.UpdateOne(a => a.Id == idAluno, update);
 
@@ -391,9 +407,17 @@ namespace Ape.Bll
             var retorno = new RetornoAcaoDto();
             try
             {
+                // Converte UTC para Brasília (UTC-3)
+                var tz = TimeZoneInfo.FindSystemTimeZoneById(
+                    RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
+                        ? "E. South America Standard Time" 
+                        : "America/Sao_Paulo"
+                );
+                var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
+
                 var update = Builders<Aluno>.Update
                     .Set(a => a.AceitePersonal, false)
-                    .Set(a => a.DataAceitePersonal, DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss"));
+                    .Set(a => a.DataAceitePersonal, dataBrasilia.ToString("dd/MM/yyyy - HH:mm:ss"));
 
                 var result = _database.UpdateOne(a => a.Id == idAluno, update);
 

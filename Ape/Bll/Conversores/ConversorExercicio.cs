@@ -10,8 +10,16 @@ namespace Ape.Bll.Conversores
         {
             Exercicio entidade = new Exercicio();
 
+            // Converte UTC para Brasília (UTC-3)
+            var tz = TimeZoneInfo.FindSystemTimeZoneById(
+                RuntimeInformation.IsOSPlatform(OSPlatform.Windows) 
+                    ? "E. South America Standard Time" 
+                    : "America/Sao_Paulo"
+            );
+            var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
+
             entidade.Nome = dto.Nome;
-            entidade.DataExecucao = DateTime.UtcNow.AddHours(-3).ToString("dd/MM/yyyy HH:mm:ss");
+            entidade.DataExecucao = dataBrasilia.ToString("dd/MM/yyyy HH:mm:ss");
             entidade.QuantidadeRepeticoes = dto.QuantidadeRepeticoes;
             entidade.PorcentagemAcertos = dto.PorcentagemAcertos;
             entidade.TempoExecutado = dto.TempoExecutado;
