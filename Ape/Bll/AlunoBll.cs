@@ -3,6 +3,7 @@ using Ape.Dtos.Aluno;
 using Ape.Dtos.Login;
 using Ape.Entity;
 using MongoDB.Driver;
+using System.Runtime.InteropServices;
 
 namespace Ape.Bll
 {

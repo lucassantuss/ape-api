@@ -1,5 +1,6 @@
 ﻿using Ape.Dtos.Aluno;
 using Ape.Entity;
+using System.Runtime.InteropServices;
 
 namespace Ape.Bll.Conversores
 {

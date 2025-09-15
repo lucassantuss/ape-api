@@ -1,4 +1,5 @@
 ﻿using Ape.Entity;
+using System.Runtime.InteropServices;
 
 namespace Ape.Bll.Conversores
 {
