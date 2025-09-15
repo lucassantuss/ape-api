@@ -38,13 +38,21 @@ A API está hospedada em:
 Estrutura típica de projeto:
 
 /Ape.API
+
 ├── Bll/ # Lógica de negócio
+
 ├── Controllers/ # Definição dos endpoints API
+
 ├── Database/ # Acesso aos dados / banco
+
 ├── DTOs/ # Objetos de transferência
+
 ├── Entity/ # Modelos de dados
+
 ├── Data/ # Configurações de contexto ou inicialização do banco
+
 └── Properties/ Config # Arquivos de configuração (appsettings, conexão com BD etc.)
+
 ├── Program # Configuração da aplicação (middleware, rotas etc.)
 
 ---
@@ -75,7 +83,7 @@ Estrutura típica de projeto:
     dotnet run
 
 5. Acessar Swagger para testar os endpoints:
-    ``bash
+    ```bash
     http://localhost:<porta>/swagger
 
 ---
@@ -102,4 +110,5 @@ Contribuições são bem-vindas! Para colaborar:
 ## Licença
 
 Este projeto está licenciado sob a licença MIT.
+
 Veja o arquivo [MIT](LICENSE) para mais detalhes.
