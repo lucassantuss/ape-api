@@ -20,7 +20,7 @@ namespace Ape.Bll.Conversores
             entidade.SiglaCref = dto.SiglaCref;
 
             entidade.AceiteTermoLGPD = true;
-            entidade.DataAceiteTermoLGPD = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
+            entidade.DataAceiteTermoLGPD = DateTime.UtcNow.AddHours(-3).ToString("dd/MM/yyyy HH:mm:ss");
 
             return entidade;
         }
