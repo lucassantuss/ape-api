@@ -47,14 +47,7 @@ builder.Services.AddAuthentication(options =>
 });
 
 // Adiciona serviços ao container da aplicação
-builder.Services.AddControllers(options => // Adiciona suporte para controllers
-{
-    options.ReturnHttpNotAcceptable = false;
-})
-.AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
-});
+builder.Services.AddControllers(); // Adiciona suporte para controllers
 
 builder.Services.AddEndpointsApiExplorer(); // Adiciona o serviço para geração autom�tica de endpoints para a documenta��o
 
