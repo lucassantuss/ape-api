@@ -107,6 +107,22 @@ namespace Ape.Controllers
         }
 
         /// <summary>
+        /// Pesquisar se o personal aceitou o aluno.
+        /// </summary>
+        /// <param name="id">ID do aluno.</param>
+        /// <returns>Retorna os dados do aluno.</returns>
+        /// <response code="200">Aluno encontrado.</response>
+        /// <response code="404">Aluno não encontrado.</response>
+        [HttpGet("/Aluno/personal/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult PesquisarAceitePersonalPorIdAluno(string id)
+        {
+            var retorno = _alunoBll.PesquisarAceitePersonalPorIdAluno(id);
+            return Ok(retorno);
+        }
+
+        /// <summary>
         /// Altera os dados de um aluno.
         /// </summary>
         /// <param name="id">ID do aluno.</param>

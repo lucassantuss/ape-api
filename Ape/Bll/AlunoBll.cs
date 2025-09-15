@@ -94,6 +94,25 @@ namespace Ape.Bll
             }
         }
 
+        // Pesquisar Aceite Personal Por Id Aluno
+        public RetornoAcaoDto PesquisarAceitePersonalPorIdAluno(string id)
+        {
+            try
+            {
+                return _database
+                    .Find(f => f.Id == id)
+                    .Project(xs => new RetornoAcaoDto
+                    {
+                        Resultado = xs.AceitePersonal
+                    })
+                    .FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         // Criar Aluno
         public RetornoAcaoDto CriarAluno(AlunoDto alunoDto)
         {
@@ -109,13 +128,12 @@ namespace Ape.Bll
                     // Senha criptografada
                     aluno.Senha = BCrypt.Net.BCrypt.HashPassword(alunoDto.Senha);
 
-                    aluno.AceitePersonal = false;
-                    aluno.DataAceitePersonal = "";
-
                     _database.InsertOne(aluno);
                 }
+
                 retorno.Mensagem = validaCadastro.Mensagem;
                 retorno.Resultado = validaCadastro.Resultado;
+
                 return retorno;
             }
             catch(Exception ex)

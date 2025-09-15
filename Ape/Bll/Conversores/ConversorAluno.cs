@@ -16,6 +16,9 @@ namespace Ape.Bll.Conversores
             entidade.Senha = dto.Senha;
             entidade.IdPersonal = dto.IdPersonal.ToString();
 
+            entidade.AceitePersonal = false;
+            entidade.DataAceitePersonal = "";
+
             entidade.AceiteTermoLGPD = true;
             entidade.DataAceiteTermoLGPD = DateTime.Now.ToString("dd/MM/yyyy - HH:mm:ss");
             
