@@ -115,6 +115,7 @@ namespace Ape.Bll
                 .Project(xs => new AlunoSimplesDto
                 {
                     Id = xs.Id,
+                    Usuario = xs.Usuario,
                     Nome = xs.Nome,
                     Email = xs.Email,
 
