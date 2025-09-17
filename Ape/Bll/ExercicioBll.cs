@@ -46,12 +46,26 @@ namespace Ape.Bll
         /// <summary>
         /// Pesquisa exercício pelo Id do exercício.
         /// </summary>
-        public Exercicio PesquisarPorId(string idExercicio)
+        public ExercicioPesquisaDto PesquisarPorId(string idExercicio)
         {
             try
             {
                 return _database
                     .Find(f => f.Id == idExercicio)
+                    .Project(xs => new ExercicioPesquisaDto
+                    {
+                        Id = xs.Id,
+                        Nome = xs.Nome,
+                        DataExecucao = xs.DataExecucao.HasValue 
+                            ? xs.DataExecucao.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
+                            : "",
+                        QuantidadeRepeticoes = xs.QuantidadeRepeticoes,
+                        PorcentagemAcertos = xs.PorcentagemAcertos,
+                        TempoExecutado = xs.TempoExecutado,
+                        ObservacoesAluno = xs.ObservacoesAluno,
+                        ObservacoesPersonal = xs.ObservacoesPersonal,
+                        IdAluno = xs.IdAluno,
+                    })
                     .FirstOrDefault();
             }
             catch (Exception ex)
@@ -63,13 +77,27 @@ namespace Ape.Bll
         /// <summary>
         /// Lista todos os exercícios de um aluno específico.
         /// </summary>
-        public List<Exercicio> ListarPorIdUser(string idUser)
+        public List<ExercicioPesquisaDto> ListarPorIdUser(string idUser)
         {
             try
             {
                 return _database
                     .Find(f => f.IdAluno == idUser)
                     .SortByDescending(f => f.DataExecucao)
+                    .Project(xs => new ExercicioPesquisaDto
+                    {
+                        Id = xs.Id,
+                        Nome = xs.Nome,
+                        DataExecucao = xs.DataExecucao.HasValue 
+                            ? xs.DataExecucao.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
+                            : "",
+                        QuantidadeRepeticoes = xs.QuantidadeRepeticoes,
+                        PorcentagemAcertos = xs.PorcentagemAcertos,
+                        TempoExecutado = xs.TempoExecutado,
+                        ObservacoesAluno = xs.ObservacoesAluno,
+                        ObservacoesPersonal = xs.ObservacoesPersonal,
+                        IdAluno = xs.IdAluno,
+                    })
                     .ToList();
             }
             catch (Exception ex)
