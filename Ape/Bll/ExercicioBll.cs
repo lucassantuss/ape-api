@@ -54,21 +54,28 @@ namespace Ape.Bll
                     .Find(f => f.Id == idExercicio)
                     .FirstOrDefault();
 
-                return exercicio.Select(xs => new ExercicioPesquisaDto
-                    {
-                        Id = xs.Id,
-                        Nome = xs.Nome,
-                        DataExecucao = xs.DataExecucao.HasValue 
-                            ? xs.DataExecucao.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
-                            : "",
-                        QuantidadeRepeticoes = xs.QuantidadeRepeticoes,
-                        PorcentagemAcertos = xs.PorcentagemAcertos,
-                        TempoExecutado = xs.TempoExecutado,
-                        ObservacoesAluno = xs.ObservacoesAluno,
-                        ObservacoesPersonal = xs.ObservacoesPersonal,
-                        IdAluno = xs.IdAluno,
-                    })
-                    .FirstOrDefault();
+                if (exercicio == null)
+                    return null;
+
+                string dataExecucaoFormatada = exercicio.DataExecucao.HasValue
+                    ? TimeZoneInfo.ConvertTimeFromUtc(
+                        exercicio.DataExecucao.Value,
+                        TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time")
+                    ).ToString("dd/MM/yyyy - HH:mm:ss")
+                    : "";
+
+                return new ExercicioPesquisaDto
+                {
+                    Id = exercicio.Id,
+                    Nome = exercicio.Nome,
+                    DataExecucao = dataExecucaoFormatada,
+                    QuantidadeRepeticoes = exercicio.QuantidadeRepeticoes,
+                    PorcentagemAcertos = exercicio.PorcentagemAcertos,
+                    TempoExecutado = exercicio.TempoExecutado,
+                    ObservacoesAluno = exercicio.ObservacoesAluno,
+                    ObservacoesPersonal = exercicio.ObservacoesPersonal,
+                    IdAluno = exercicio.IdAluno,
+                };
             }
             catch (Exception ex)
             {
@@ -88,21 +95,23 @@ namespace Ape.Bll
                     .SortByDescending(f => f.DataExecucao)
                     .ToList();
 
+                var brasiliaTZ = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
+
                 return exercicios.Select(xs => new ExercicioPesquisaDto
-                    {
-                        Id = xs.Id,
-                        Nome = xs.Nome,
-                        DataExecucao = xs.DataExecucao.HasValue 
-                            ? xs.DataExecucao.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
-                            : "",
-                        QuantidadeRepeticoes = xs.QuantidadeRepeticoes,
-                        PorcentagemAcertos = xs.PorcentagemAcertos,
-                        TempoExecutado = xs.TempoExecutado,
-                        ObservacoesAluno = xs.ObservacoesAluno,
-                        ObservacoesPersonal = xs.ObservacoesPersonal,
-                        IdAluno = xs.IdAluno,
-                    })
-                    .ToList();
+                {
+                    Id = xs.Id,
+                    Nome = xs.Nome,
+                    DataExecucao = xs.DataExecucao.HasValue
+                        ? TimeZoneInfo.ConvertTimeFromUtc(xs.DataExecucao.Value, brasiliaTZ)
+                            .ToString("dd/MM/yyyy - HH:mm:ss")
+                        : "",
+                    QuantidadeRepeticoes = xs.QuantidadeRepeticoes,
+                    PorcentagemAcertos = xs.PorcentagemAcertos,
+                    TempoExecutado = xs.TempoExecutado,
+                    ObservacoesAluno = xs.ObservacoesAluno,
+                    ObservacoesPersonal = xs.ObservacoesPersonal,
+                    IdAluno = xs.IdAluno,
+                }).ToList();
             }
             catch (Exception ex)
             {

@@ -116,6 +116,8 @@ namespace Ape.Bll
                 .SortByDescending(f => f.Nome)
                 .ToList();
 
+            var brasiliaTZ = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time");
+
             return alunos
                 .Select(xs => new AlunoSimplesDto
                 {
@@ -123,12 +125,13 @@ namespace Ape.Bll
                     Usuario = xs.Usuario,
                     Nome = xs.Nome,
                     Email = xs.Email,
-
                     AceitePersonal = xs.AceitePersonal,
-                    DataAceitePersonal = xs.DataAceitePersonal.HasValue 
-                        ? xs.DataAceitePersonal.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
+                    DataAceitePersonal = xs.DataAceitePersonal.HasValue
+                        ? TimeZoneInfo.ConvertTimeFromUtc(xs.DataAceitePersonal.Value, brasiliaTZ)
+                            .ToString("dd/MM/yyyy - HH:mm:ss")
                         : ""
-                }).ToList();
+                })
+                .ToList();
         }
 
         // Validar Cadastro

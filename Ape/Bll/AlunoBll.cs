@@ -99,7 +99,7 @@ namespace Ape.Bll
         {
             try
             {
-                var alunoStatusBd = _database.Find(f => f.Id == id).FirstOrDefault();                
+                var alunoStatusBd = _database.Find(f => f.Id == id).FirstOrDefault();
 
                 if (alunoStatusBd == null)
                 {
@@ -110,17 +110,16 @@ namespace Ape.Bll
                     };
                 }
 
-                var alunoStatus = alunoStatusBd
-                    .Select(xs => new RetornoAceitePersonalDto
-                    {
-                        AceitePersonal = xs.AceitePersonal,
-                        DataAceitePersonal = xs.DataAceitePersonal.HasValue 
-                            ? xs.DataAceitePersonal.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
-                            : ""
-                    })
-                    .FirstOrDefault();
+                string dataAceiteFormatada = alunoStatusBd.DataAceitePersonal.HasValue
+                    ? TimeZoneInfo.ConvertTimeFromUtc(
+                        alunoStatusBd.DataAceitePersonal.Value,
+                        TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time")
+                    ).ToString("dd/MM/yyyy - HH:mm:ss")
+                    : "";
 
-                if (string.IsNullOrEmpty(alunoStatus.DataAceitePersonal))
+                bool aceite = alunoStatusBd.AceitePersonal;
+
+                if (string.IsNullOrEmpty(dataAceiteFormatada))
                 {
                     return new RetornoAcaoDto
                     {
@@ -128,12 +127,12 @@ namespace Ape.Bll
                         Mensagem = "O personal ainda não analisou seu vínculo. Pendente de aprovação."
                     };
                 }
-                else if (alunoStatus.AceitePersonal)
+                else if (aceite)
                 {
                     return new RetornoAcaoDto
                     {
                         Resultado = true,
-                        Mensagem = $"O personal aceitou seu vínculo em {alunoStatus.DataAceitePersonal}."
+                        Mensagem = $"O personal aceitou seu vínculo em {dataAceiteFormatada}."
                     };
                 }
                 else
@@ -141,13 +140,13 @@ namespace Ape.Bll
                     return new RetornoAcaoDto
                     {
                         Resultado = false,
-                        Mensagem = $"O personal recusou seu vínculo em {alunoStatus.DataAceitePersonal}."
+                        Mensagem = $"O personal recusou seu vínculo em {dataAceiteFormatada}."
                     };
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception($"Erro ao pesquisar aceite do personal: {ex.Message}");
             }
         }
 
