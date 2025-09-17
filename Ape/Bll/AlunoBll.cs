@@ -99,18 +99,9 @@ namespace Ape.Bll
         {
             try
             {
-                var alunoStatus = _database
-                    .Find(f => f.Id == id)
-                    .Project(xs => new RetornoAceitePersonalDto
-                    {
-                        AceitePersonal = xs.AceitePersonal,
-                        DataAceitePersonal = xs.DataAceitePersonal.HasValue 
-                            ? xs.DataAceitePersonal.Value.ToLocalTime().ToString("dd/MM/yyyy - HH:mm:ss") 
-                            : ""
-                    })
-                    .FirstOrDefault();
+                var alunoStatusBd = _database.Find(f => f.Id == id).FirstOrDefault();                
 
-                if (alunoStatus == null)
+                if (alunoStatusBd == null)
                 {
                     return new RetornoAcaoDto
                     {
@@ -118,6 +109,16 @@ namespace Ape.Bll
                         Mensagem = "Aluno não encontrado."
                     };
                 }
+
+                var alunoStatus = alunoStatusBd
+                    .Select(xs => new RetornoAceitePersonalDto
+                    {
+                        AceitePersonal = xs.AceitePersonal,
+                        DataAceitePersonal = xs.DataAceitePersonal.HasValue 
+                            ? xs.DataAceitePersonal.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
+                            : ""
+                    })
+                    .FirstOrDefault();
 
                 if (string.IsNullOrEmpty(alunoStatus.DataAceitePersonal))
                 {

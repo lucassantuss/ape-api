@@ -50,14 +50,16 @@ namespace Ape.Bll
         {
             try
             {
-                return _database
+                var exercicio = _database
                     .Find(f => f.Id == idExercicio)
-                    .Project(xs => new ExercicioPesquisaDto
+                    .FirstOrDefault();
+
+                return exercicio.Select(xs => new ExercicioPesquisaDto
                     {
                         Id = xs.Id,
                         Nome = xs.Nome,
                         DataExecucao = xs.DataExecucao.HasValue 
-                            ? xs.DataExecucao.Value.ToLocalTime().ToString("dd/MM/yyyy - HH:mm:ss") 
+                            ? xs.DataExecucao.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
                             : "",
                         QuantidadeRepeticoes = xs.QuantidadeRepeticoes,
                         PorcentagemAcertos = xs.PorcentagemAcertos,
@@ -81,15 +83,17 @@ namespace Ape.Bll
         {
             try
             {
-                return _database
+                var exercicios = _database
                     .Find(f => f.IdAluno == idUser)
                     .SortByDescending(f => f.DataExecucao)
-                    .Project(xs => new ExercicioPesquisaDto
+                    .ToList();
+
+                return exercicios.Select(xs => new ExercicioPesquisaDto
                     {
                         Id = xs.Id,
                         Nome = xs.Nome,
                         DataExecucao = xs.DataExecucao.HasValue 
-                            ? xs.DataExecucao.Value.ToLocalTime().ToString("dd/MM/yyyy - HH:mm:ss") 
+                            ? xs.DataExecucao.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
                             : "",
                         QuantidadeRepeticoes = xs.QuantidadeRepeticoes,
                         PorcentagemAcertos = xs.PorcentagemAcertos,
