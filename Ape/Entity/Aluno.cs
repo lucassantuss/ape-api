@@ -31,12 +31,12 @@ namespace Ape.Entity
         public bool AceitePersonal { get; set; }
 
         [BsonElement("DataAceitePersonal")]
-        public string DataAceitePersonal { get; set; }
+        public DateTime? DataAceitePersonal { get; set; }
 
         [BsonElement("AceiteTermoLGPD")]
         public bool AceiteTermoLGPD { get; set; }
 
         [BsonElement("DataAceiteTermoLGPD")]
-        public string DataAceiteTermoLGPD { get; set; }
+        public DateTime? DataAceiteTermoLGPD { get; set; }
     }
 }

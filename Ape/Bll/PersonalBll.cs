@@ -111,7 +111,9 @@ namespace Ape.Bll
         // Listar alunos do personal
         public List<AlunoSimplesDto> PesquisarAlunosDoPersonal(string idPersonal, IMongoCollection<Aluno> alunosCollection)
         {
-            return alunosCollection.Find(f => f.IdPersonal == idPersonal)
+            return alunosCollection
+                .Find(f => f.IdPersonal == idPersonal)
+                .SortByDescending(f => f.Nome)
                 .Project(xs => new AlunoSimplesDto
                 {
                     Id = xs.Id,
@@ -120,7 +122,9 @@ namespace Ape.Bll
                     Email = xs.Email,
 
                     AceitePersonal = xs.AceitePersonal,
-                    DataAceitePersonal = xs.DataAceitePersonal,
+                    DataAceitePersonal = xs.DataAceitePersonal.HasValue 
+                        ? xs.DataAceitePersonal.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
+                        : ""
                 }).ToList();
         }
 

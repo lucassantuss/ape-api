@@ -15,7 +15,7 @@ namespace Ape.Bll.Conversores
             var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
 
             entidade.Nome = dto.Nome;
-            entidade.DataExecucao = dataBrasilia.ToString("dd/MM/yyyy - HH:mm:ss");
+            entidade.DataExecucao = dataBrasilia;
             entidade.QuantidadeRepeticoes = dto.QuantidadeRepeticoes;
             entidade.PorcentagemAcertos = dto.PorcentagemAcertos;
             entidade.TempoExecutado = dto.TempoExecutado;

@@ -104,7 +104,9 @@ namespace Ape.Bll
                     .Project(xs => new RetornoAceitePersonalDto
                     {
                         AceitePersonal = xs.AceitePersonal,
-                        DataAceitePersonal = xs.DataAceitePersonal,
+                        DataAceitePersonal = xs.DataAceitePersonal.HasValue 
+                            ? xs.DataAceitePersonal.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
+                            : ""
                     })
                     .FirstOrDefault();
 
@@ -281,7 +283,7 @@ namespace Ape.Bll
                 {
                     update = update
                         .Set(a => a.AceitePersonal, false)
-                        .Set(a => a.DataAceitePersonal, "");
+                        .Set(a => a.DataAceitePersonal, null);
                 }
 
                 _database.UpdateOne(a => a.Id == alunoExistente.Id, update);
@@ -345,7 +347,7 @@ namespace Ape.Bll
                 var update = Builders<Aluno>.Update
                     .Set(a => a.IdPersonal, null)
                     .Set(a => a.AceitePersonal, false)
-                    .Set(a => a.DataAceitePersonal, dataBrasilia.ToString("dd/MM/yyyy - HH:mm:ss"));
+                    .Set(a => a.DataAceitePersonal, dataBrasilia));
                 _database.UpdateOne(a => a.Id == aluno.Id, update);
 
                 retorno.Mensagem = "Aluno desvinculado com sucesso.";
@@ -374,7 +376,7 @@ namespace Ape.Bll
 
                 var update = Builders<Aluno>.Update
                     .Set(a => a.AceitePersonal, true)
-                    .Set(a => a.DataAceitePersonal, dataBrasilia.ToString("dd/MM/yyyy - HH:mm:ss"));
+                    .Set(a => a.DataAceitePersonal, dataBrasilia);
 
                 var result = _database.UpdateOne(a => a.Id == idAluno, update);
 
@@ -412,7 +414,7 @@ namespace Ape.Bll
 
                 var update = Builders<Aluno>.Update
                     .Set(a => a.AceitePersonal, false)
-                    .Set(a => a.DataAceitePersonal, dataBrasilia.ToString("dd/MM/yyyy - HH:mm:ss"));
+                    .Set(a => a.DataAceitePersonal, dataBrasilia);
 
                 var result = _database.UpdateOne(a => a.Id == idAluno, update);
 

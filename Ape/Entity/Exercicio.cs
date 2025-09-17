@@ -13,7 +13,7 @@ namespace Ape.Entity
         public string Nome { get; set; }
 
         [BsonElement("DataExecucao")]
-        public string DataExecucao { get; set; }
+        public DateTime? DataExecucao { get; set; }
 
         [BsonElement("QuantidadeRepeticoes")]
         public string QuantidadeRepeticoes { get; set; }

@@ -7,8 +7,8 @@ using MongoDB.Driver;
 namespace Ape.Bll
 {
     /// <summary>
-    /// Classe de regras de negÛcio para a entidade Exercicio.
-    /// Respons·vel por interagir com o banco MongoDB e aplicar regras antes do Controller.
+    /// Classe de regras de neg√≥cio para a entidade Exercicio.
+    /// Respons√°vel por interagir com o banco MongoDB e aplicar regras antes do Controller.
     /// </summary>
     public class ExercicioBll
     {
@@ -20,7 +20,7 @@ namespace Ape.Bll
         }
 
         /// <summary>
-        /// Salva um novo resultado de exercÌcio no banco.
+        /// Salva um novo resultado de exerc√≠cio no banco.
         /// </summary>
         public RetornoAcaoDto SalvarResultados(ExercicioDto exercicioDto)
         {
@@ -44,7 +44,7 @@ namespace Ape.Bll
         }
 
         /// <summary>
-        /// Pesquisa exercÌcio pelo Id do exercÌcio.
+        /// Pesquisa exerc√≠cio pelo Id do exerc√≠cio.
         /// </summary>
         public Exercicio PesquisarPorId(string idExercicio)
         {
@@ -56,12 +56,12 @@ namespace Ape.Bll
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao pesquisar exercÌcio: {ex.Message}");
+                throw new Exception($"Erro ao pesquisar exerc√≠cio: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Lista todos os exercÌcios de um aluno especÌfico.
+        /// Lista todos os exerc√≠cios de um aluno espec√≠fico.
         /// </summary>
         public List<Exercicio> ListarPorIdUser(string idUser)
         {
@@ -69,16 +69,17 @@ namespace Ape.Bll
             {
                 return _database
                     .Find(f => f.IdAluno == idUser)
+                    .SortByDescending(f => f.DataExecucao)
                     .ToList();
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao listar exercÌcios do aluno: {ex.Message}");
+                throw new Exception($"Erro ao listar exerc√≠cios do aluno: {ex.Message}");
             }
         }
 
         /// <summary>
-        /// Adiciona uma observaÁ„o do aluno a um exercÌcio.
+        /// Adiciona uma observa√ß√£o do aluno a um exerc√≠cio.
         /// </summary>
         public RetornoAcaoDto AdicionarObservacaoAluno(string idExercicio, string observacao)
         {
@@ -90,12 +91,12 @@ namespace Ape.Bll
 
                 if (result.ModifiedCount == 0)
                 {
-                    retorno.Mensagem = "ExercÌcio n„o encontrado para adicionar observaÁ„o do aluno.";
+                    retorno.Mensagem = "Exerc√≠cio n√£o encontrado para adicionar observa√ß√£o do aluno.";
                     retorno.Resultado = false;
                 }
                 else
                 {
-                    retorno.Mensagem = "ObservaÁ„o do aluno adicionada com sucesso.";
+                    retorno.Mensagem = "Observa√ß√£o do aluno adicionada com sucesso.";
                     retorno.Resultado = true;
                 }
 
@@ -103,14 +104,14 @@ namespace Ape.Bll
             }
             catch (Exception ex)
             {
-                retorno.Mensagem = $"Erro ao adicionar observaÁ„o do aluno: {ex.Message}";
+                retorno.Mensagem = $"Erro ao adicionar observa√ß√£o do aluno: {ex.Message}";
                 retorno.Resultado = false;
                 return retorno;
             }
         }
 
         /// <summary>
-        /// Adiciona uma observaÁ„o do personal a um exercÌcio.
+        /// Adiciona uma observa√ß√£o do personal a um exerc√≠cio.
         /// </summary>
         public RetornoAcaoDto AdicionarObservacaoPersonal(string idExercicio, string observacao)
         {
@@ -122,12 +123,12 @@ namespace Ape.Bll
 
                 if (result.ModifiedCount == 0)
                 {
-                    retorno.Mensagem = "ExercÌcio n„o encontrado para adicionar observaÁ„o do personal.";
+                    retorno.Mensagem = "Exerc√≠cio n√£o encontrado para adicionar observa√ß√£o do personal.";
                     retorno.Resultado = false;
                 }
                 else
                 {
-                    retorno.Mensagem = "ObservaÁ„o do personal adicionada com sucesso.";
+                    retorno.Mensagem = "Observa√ß√£o do personal adicionada com sucesso.";
                     retorno.Resultado = true;
                 }
 
@@ -135,14 +136,14 @@ namespace Ape.Bll
             }
             catch (Exception ex)
             {
-                retorno.Mensagem = $"Erro ao adicionar observaÁ„o do personal: {ex.Message}";
+                retorno.Mensagem = $"Erro ao adicionar observa√ß√£o do personal: {ex.Message}";
                 retorno.Resultado = false;
                 return retorno;
             }
         }
 
         /// <summary>
-        /// Exclui um exercÌcio pelo Id.
+        /// Exclui um exerc√≠cio pelo Id.
         /// </summary>
         public RetornoAcaoDto ExcluirExercicio(string idExercicio)
         {
@@ -154,12 +155,12 @@ namespace Ape.Bll
 
                 if (result.DeletedCount == 0)
                 {
-                    retorno.Mensagem = "ExercÌcio n„o encontrado para exclus„o.";
+                    retorno.Mensagem = "Exerc√≠cio n√£o encontrado para exclus√£o.";
                     retorno.Resultado = false;
                 }
                 else
                 {
-                    retorno.Mensagem = "ExercÌcio excluÌdo com sucesso.";
+                    retorno.Mensagem = "Exerc√≠cio exclu√≠do com sucesso.";
                     retorno.Resultado = true;
                 }
 
@@ -167,7 +168,7 @@ namespace Ape.Bll
             }
             catch (Exception ex)
             {
-                retorno.Mensagem = $"Erro ao excluir exercÌcio: {ex.Message}";
+                retorno.Mensagem = $"Erro ao excluir exerc√≠cio: {ex.Message}";
                 retorno.Resultado = false;
                 return retorno;
             }

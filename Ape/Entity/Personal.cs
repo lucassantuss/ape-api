@@ -43,6 +43,6 @@ namespace Ape.Entity
         public bool AceiteTermoLGPD { get; set; }
 
         [BsonElement("DataAceiteTermoLGPD")]
-        public string DataAceiteTermoLGPD { get; set; }
+        public DateTime? DataAceiteTermoLGPD { get; set; }
     }
 }
