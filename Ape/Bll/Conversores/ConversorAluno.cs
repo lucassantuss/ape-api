@@ -21,7 +21,7 @@ namespace Ape.Bll.Conversores
             entidade.IdPersonal = dto.IdPersonal.ToString();
 
             entidade.AceitePersonal = false;
-            entidade.DataAceitePersonal = "";
+            entidade.DataAceitePersonal = null;
 
             entidade.AceiteTermoLGPD = dto.AceiteTermos;
             entidade.DataAceiteTermoLGPD = dataBrasilia;
