@@ -123,7 +123,7 @@ namespace Ape.Bll
 
                     AceitePersonal = xs.AceitePersonal,
                     DataAceitePersonal = xs.DataAceitePersonal.HasValue 
-                        ? xs.DataAceitePersonal.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
+                        ? xs.DataAceitePersonal.Value.ToLocalTime().ToString("dd/MM/yyyy - HH:mm:ss") 
                         : ""
                 }).ToList();
         }

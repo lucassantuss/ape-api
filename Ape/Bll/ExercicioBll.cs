@@ -57,7 +57,7 @@ namespace Ape.Bll
                         Id = xs.Id,
                         Nome = xs.Nome,
                         DataExecucao = xs.DataExecucao.HasValue 
-                            ? xs.DataExecucao.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
+                            ? xs.DataExecucao.Value.ToLocalTime().ToString("dd/MM/yyyy - HH:mm:ss") 
                             : "",
                         QuantidadeRepeticoes = xs.QuantidadeRepeticoes,
                         PorcentagemAcertos = xs.PorcentagemAcertos,
@@ -89,7 +89,7 @@ namespace Ape.Bll
                         Id = xs.Id,
                         Nome = xs.Nome,
                         DataExecucao = xs.DataExecucao.HasValue 
-                            ? xs.DataExecucao.Value.ToString("dd/MM/yyyy - HH:mm:ss") 
+                            ? xs.DataExecucao.Value.ToLocalTime().ToString("dd/MM/yyyy - HH:mm:ss") 
                             : "",
                         QuantidadeRepeticoes = xs.QuantidadeRepeticoes,
                         PorcentagemAcertos = xs.PorcentagemAcertos,
