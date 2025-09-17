@@ -347,7 +347,7 @@ namespace Ape.Bll
                 var update = Builders<Aluno>.Update
                     .Set(a => a.IdPersonal, null)
                     .Set(a => a.AceitePersonal, false)
-                    .Set(a => a.DataAceitePersonal, dataBrasilia));
+                    .Set(a => a.DataAceitePersonal, dataBrasilia);
                 _database.UpdateOne(a => a.Id == aluno.Id, update);
 
                 retorno.Mensagem = "Aluno desvinculado com sucesso.";
