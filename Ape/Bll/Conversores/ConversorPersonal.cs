@@ -8,10 +8,6 @@ namespace Ape.Bll.Conversores
         {
             Personal entidade = new Personal();
 
-            // Converte UTC para Brasília (UTC-3)
-            var tz = TimeZoneInfo.FindSystemTimeZoneById("America/Sao_Paulo");
-            var dataBrasilia = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz);
-
             entidade.Nome = dto.Nome;
             entidade.Usuario = dto.Usuario;
             entidade.Email = dto.Email;
@@ -24,7 +20,7 @@ namespace Ape.Bll.Conversores
             entidade.SiglaCref = dto.SiglaCref;
 
             entidade.AceiteTermoLGPD = dto.AceiteTermos;
-            entidade.DataAceiteTermoLGPD = dataBrasilia;
+            entidade.DataAceiteTermoLGPD = DateTime.UtcNow;
 
             return entidade;
         }
