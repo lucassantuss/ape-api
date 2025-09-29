@@ -33,8 +33,8 @@ namespace Ape.Bll
                     _database.InsertOne(personal);
                 }
 
-                retorno.Mensagem = "Personal criado com sucesso.";
-                retorno.Resultado = true;
+                retorno.Mensagem = validaCadastro.Mensagem;
+                retorno.Resultado = validaCadastro.Resultado;
                 return retorno;
             }
             catch (Exception ex)
@@ -144,10 +144,14 @@ namespace Ape.Bll
                 bool validaUsuario = _database.Find(f => f.Usuario == personal.Usuario).Any();
                 bool validaEmail = _database.Find(f => f.Email == personal.Email).Any();
                 bool validaCpf = _database.Find(f => f.CPF == personal.CPF).Any();
+                bool validaCref = _database.Find(f => f.NumeroCref == personal.NumeroCref &
+                                                      f.CategoriaCref == personal.CategoriaCref &
+                                                      f.SiglaCref == personal.SiglaCref
+                                                ).Any();
 
                 if (validaUsuario)
                 {
-                    retorno.Mensagem = "Usuário já cadastrado no sistema";
+                    retorno.Mensagem = "Nome de usuário já cadastrado no sistema";
                     retorno.Resultado = false;
                     return retorno;
                 }
@@ -163,6 +167,12 @@ namespace Ape.Bll
                     retorno.Resultado = false;
                     return retorno;
                 }
+                else if (validaCref)
+                {
+                    retorno.Mensagem = "CREF já cadastrado no sistema";
+                    retorno.Resultado = false;
+                    return retorno;
+                }
 
                 if (personal.AceiteTermoLGPD == false)
                 {
@@ -171,7 +181,7 @@ namespace Ape.Bll
                     return retorno;
                 }
 
-                retorno.Mensagem = "Usuário válido";
+                retorno.Mensagem = "Personal criado com sucesso.";
                 retorno.Resultado = true;
 
                 return retorno;
