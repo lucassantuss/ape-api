@@ -33,8 +33,8 @@ namespace Ape.Bll
                     _database.InsertOne(personal);
                 }
 
-                retorno.Mensagem = "Personal criado com sucesso.";
-                retorno.Resultado = true;
+                retorno.Mensagem = validaCadastro.Mensagem;
+                retorno.Resultado = validaCadastro.Resultado;
                 return retorno;
             }
             catch (Exception ex)
@@ -171,7 +171,7 @@ namespace Ape.Bll
                     return retorno;
                 }
 
-                retorno.Mensagem = "Usuário válido";
+                retorno.Mensagem = "Personal criado com sucesso.";
                 retorno.Resultado = true;
 
                 return retorno;
