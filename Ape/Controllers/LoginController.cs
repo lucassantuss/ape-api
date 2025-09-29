@@ -98,7 +98,7 @@ namespace Ape.Controllers
                     new Claim(ClaimTypes.NameIdentifier, id), // ID do usuário
                     new Claim(ClaimTypes.Name, usuario) // Login do usuário
                 }),
-                Expires = DateTime.Now.AddHours(5), // Define a expiração do token
+                Expires = DateTime.Now.AddHours(6), // Define a expiração do token
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature) // Configura a assinatura com a chave secreta
